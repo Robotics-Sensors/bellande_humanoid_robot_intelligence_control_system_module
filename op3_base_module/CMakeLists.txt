@@ -62,7 +62,17 @@ endif(NOT ${YAML_CPP_VERSION} VERSION_LESS "0.5")
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS roscpp roslib std_msgs geometry_msgs robotis_controller_msgs cmake_modules robotis_framework_common robotis_device robotis_math op3_kinematics_dynamics
+  CATKIN_DEPENDS
+  roscpp
+  roslib
+  std_msgs
+  geometry_msgs
+  robotis_controller_msgs
+  cmake_modules
+  robotis_framework_common
+  robotis_device
+  robotis_math
+  op3_kinematics_dynamics
   DEPENDS Boost EIGEN3
 )
 
