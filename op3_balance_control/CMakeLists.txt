@@ -37,7 +37,10 @@ find_package(Eigen3 REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS roscpp cmake_modules robotis_math
+  CATKIN_DEPENDS
+  roscpp
+  cmake_modules
+  robotis_math
   DEPENDS EIGEN3
 )
 

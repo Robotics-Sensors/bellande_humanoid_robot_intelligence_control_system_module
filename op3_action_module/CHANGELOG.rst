@@ -2,6 +2,11 @@
 Changelog for package op3_action_module
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.0 (2021-05-03)
+------------------
+* Update package.xml and CMakeList.txt for noetic branch
+* Contributors: Ronaldson Bellande
+
 0.2.1 (2018-03-26)
 ------------------
 * none

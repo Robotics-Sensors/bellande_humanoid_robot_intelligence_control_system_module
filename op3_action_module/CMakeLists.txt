@@ -38,7 +38,14 @@ find_package(Boost REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS roscpp roslib std_msgs robotis_controller_msgs op3_action_module_msgs robotis_framework_common robotis_device
+  CATKIN_DEPENDS
+  roscpp
+  roslib
+  std_msgs
+  robotis_controller_msgs
+  op3_action_module_msgs
+  robotis_framework_common
+  robotis_device
   DEPENDS Boost
 )
 
