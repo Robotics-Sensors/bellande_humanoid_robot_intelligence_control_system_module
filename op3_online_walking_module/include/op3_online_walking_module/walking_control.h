@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright 2017 ROBOTIS CO., LTD.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*******************************************************************************/
+ * Copyright 2017 ROBOTIS CO., LTD.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 
 /* Author: SCH */
 
@@ -21,26 +21,22 @@
 
 #pragma once
 
+#include "op3_online_walking_module_msgs/FootStepArray.h"
+#include "op3_online_walking_module_msgs/FootStepCommand.h"
+#include "op3_online_walking_module_msgs/PreviewResponse.h"
+#include "op3_online_walking_module_msgs/Step2D.h"
+#include "op3_online_walking_module_msgs/Step2DArray.h"
+#include <eigen3/Eigen/Eigen>
+#include <geometry_msgs/Pose2D.h>
+#include <map>
 #include <math.h>
 #include <stdint.h>
 #include <string>
 #include <vector>
-#include <map>
-#include <geometry_msgs/Pose2D.h>
-#include <eigen3/Eigen/Eigen>
-#include "op3_online_walking_module_msgs/FootStepCommand.h"
-#include "op3_online_walking_module_msgs/FootStepArray.h"
-#include "op3_online_walking_module_msgs/PreviewResponse.h"
-#include "op3_online_walking_module_msgs/Step2D.h"
-#include "op3_online_walking_module_msgs/Step2DArray.h"
 //#include "op3_kinematics_dynamics/op3_kinematics_dynamics.h"
 #include "robotis_math/robotis_math.h"
 
-enum WALKING_LEG {
-  LEFT_LEG = 0,
-  RIGHT_LEG = 1,
-  LEG_COUNT = 2
-};
+enum WALKING_LEG { LEFT_LEG = 0, RIGHT_LEG = 1, LEG_COUNT = 2 };
 
 enum WALKING_PHASE {
   DSP = 0, // Double Support Phase
@@ -48,23 +44,29 @@ enum WALKING_PHASE {
   PHASE_COUNT = 2
 };
 
-class WalkingControl
-{
+class WalkingControl {
 public:
-  WalkingControl(double control_cycle,
-                 double dsp_ratio, double lipm_height, double foot_height_max, double zmp_offset_x, double zmp_offset_y,
-                 std::vector<double_t> x_lipm, std::vector<double_t> y_lipm,
-                 double foot_distance);
+  WalkingControl(double control_cycle, double dsp_ratio, double lipm_height,
+                 double foot_height_max, double zmp_offset_x,
+                 double zmp_offset_y, std::vector<double_t> x_lipm,
+                 std::vector<double_t> y_lipm, double foot_distance);
   virtual ~WalkingControl();
 
-  void initialize(op3_online_walking_module_msgs::FootStepCommand foot_step_command,
-                  std::vector<double_t> init_body_pos, std::vector<double_t> init_body_Q,
-                  std::vector<double_t> init_r_foot_pos, std::vector<double_t> init_r_foot_Q,
-                  std::vector<double_t> init_l_foot_pos, std::vector<double_t> init_l_foot_Q);
+  void
+  initialize(op3_online_walking_module_msgs::FootStepCommand foot_step_command,
+             std::vector<double_t> init_body_pos,
+             std::vector<double_t> init_body_Q,
+             std::vector<double_t> init_r_foot_pos,
+             std::vector<double_t> init_r_foot_Q,
+             std::vector<double_t> init_l_foot_pos,
+             std::vector<double_t> init_l_foot_Q);
   void initialize(op3_online_walking_module_msgs::Step2DArray foot_step_2d,
-                  std::vector<double_t> init_body_pos, std::vector<double_t> init_body_Q,
-                  std::vector<double_t> init_r_foot_pos, std::vector<double_t> init_r_foot_Q,
-                  std::vector<double_t> init_l_foot_pos, std::vector<double_t> init_l_foot_Q);
+                  std::vector<double_t> init_body_pos,
+                  std::vector<double_t> init_body_Q,
+                  std::vector<double_t> init_r_foot_pos,
+                  std::vector<double_t> init_r_foot_Q,
+                  std::vector<double_t> init_l_foot_pos,
+                  std::vector<double_t> init_l_foot_Q);
   void next();
   void finalize();
   void set(double time, int step, bool foot_step_2d);
@@ -76,7 +78,7 @@ public:
   void transformFootStep2D();
 
   void calcFootTrajectory(int step);
-  void calcFootStepPose(double time,  int step);
+  void calcFootStepPose(double time, int step);
   void calcRefZMP(int step);
   void calcPreviewParam(std::vector<double_t> K, int K_row, int K_col,
                         std::vector<double_t> P, int P_row, int P_col);
@@ -103,7 +105,7 @@ public:
   void getWalkingState(int &walking_leg, int &walking_phase);
 
 protected:
-//  thormang3::KinematicsDynamics *robot_;
+  //  thormang3::KinematicsDynamics *robot_;
 
   robotis_framework::MinimumJerk *body_trajectory_;
   robotis_framework::MinimumJerkViaPoint *r_foot_tra_;
@@ -137,8 +139,8 @@ protected:
   int preview_size_;
   double preview_time_;
   double lipm_height_;
-  double sum_of_zmp_x_, sum_of_zmp_y_ ;
-  double sum_of_cx_, sum_of_cy_ ;
+  double sum_of_zmp_x_, sum_of_zmp_y_;
+  double sum_of_cx_, sum_of_cy_;
   Eigen::MatrixXd A_, b_, c_;
   Eigen::MatrixXd k_x_;
   double k_s_;
@@ -161,17 +163,17 @@ protected:
   std::vector<double_t> init_body_pos_, init_body_vel_, init_body_accel_;
   std::vector<double_t> des_body_pos_, des_body_vel_, des_body_accel_;
   std::vector<double_t> goal_body_pos_, goal_body_vel_, goal_body_accel_;
-  Eigen::Quaterniond    init_body_Q_, des_body_Q_, goal_body_Q_;
+  Eigen::Quaterniond init_body_Q_, des_body_Q_, goal_body_Q_;
 
   std::vector<double_t> init_l_foot_pos_, init_l_foot_vel_, init_l_foot_accel_;
   std::vector<double_t> des_l_foot_pos_, des_l_foot_vel_, des_l_foot_accel_;
   std::vector<double_t> goal_l_foot_pos_, goal_l_foot_vel_, goal_l_foot_accel_;
-  Eigen::Quaterniond    init_l_foot_Q_, des_l_foot_Q_, goal_l_foot_Q_;
+  Eigen::Quaterniond init_l_foot_Q_, des_l_foot_Q_, goal_l_foot_Q_;
 
   std::vector<double_t> init_r_foot_pos_, init_r_foot_vel_, init_r_foot_accel_;
   std::vector<double_t> des_r_foot_pos_, des_r_foot_vel_, des_r_foot_accel_;
   std::vector<double_t> goal_r_foot_pos_, goal_r_foot_vel_, goal_r_foot_accel_;
-  Eigen::Quaterniond    init_r_foot_Q_, des_r_foot_Q_, goal_r_foot_Q_;
+  Eigen::Quaterniond init_r_foot_Q_, des_r_foot_Q_, goal_r_foot_Q_;
 };
 
 #endif

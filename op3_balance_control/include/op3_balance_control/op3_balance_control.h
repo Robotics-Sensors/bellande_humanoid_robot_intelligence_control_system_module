@@ -1,18 +1,18 @@
 /*******************************************************************************
-* Copyright 2018 ROBOTIS CO., LTD.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*******************************************************************************/
+ * Copyright 2018 ROBOTIS CO., LTD.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 
 /* Author: SCH */
 
@@ -23,18 +23,15 @@
 
 #include "robotis_math/robotis_math.h"
 
-namespace robotis_op
-{
+namespace robotis_op {
 
-class BalanceControlError
-{
+class BalanceControlError {
 public:
   static const int NoError = 0;
   static const int BalanceLimit = 2;
 };
 
-class DampingController
-{
+class DampingController {
 public:
   DampingController();
   DampingController(double time_unit_sec);
@@ -54,8 +51,7 @@ private:
   double previous_result_;
 };
 
-class BalancePDController
-{
+class BalancePDController {
 public:
   BalancePDController();
   ~BalancePDController();
@@ -72,8 +68,7 @@ private:
   double prev_err_;
 };
 
-class BalanceLowPassFilter
-{
+class BalanceLowPassFilter {
 public:
   BalanceLowPassFilter();
   BalanceLowPassFilter(double control_cycle_sec, double cut_off_frequency);
@@ -92,8 +87,7 @@ private:
   double prev_output_;
 };
 
-class BalanceControlUsingDampingConroller
-{
+class BalanceControlUsingDampingConroller {
 public:
   BalanceControlUsingDampingConroller();
   ~BalanceControlUsingDampingConroller();
@@ -104,37 +98,53 @@ public:
   void setOrientationBalanceEnable(bool enable);
   void setForceTorqueBalanceEnable(bool enable);
 
-  void process(int *balance_error, Eigen::MatrixXd *robot_to_cob_modified, Eigen::MatrixXd *robot_to_right_foot_modified, Eigen::MatrixXd *robot_to_left_foot_modified);
+  void process(int *balance_error, Eigen::MatrixXd *robot_to_cob_modified,
+               Eigen::MatrixXd *robot_to_right_foot_modified,
+               Eigen::MatrixXd *robot_to_left_foot_modified);
 
-  void setDesiredPose(const Eigen::MatrixXd &robot_to_cob, const Eigen::MatrixXd &robot_to_right_foot, const Eigen::MatrixXd &robot_to_left_foot);
+  void setDesiredPose(const Eigen::MatrixXd &robot_to_cob,
+                      const Eigen::MatrixXd &robot_to_right_foot,
+                      const Eigen::MatrixXd &robot_to_left_foot);
 
   // all arguments are with respect to robot coordinate.
   void setDesiredCOBGyro(double gyro_roll, double gyro_pitch);
-  void setDesiredCOBOrientation(double cob_orientation_roll, double cob_orientation_pitch);
-  void setDesiredFootForceTorque(double r_force_x_N,      double r_force_y_N,       double r_force_z_N,
-                                 double r_torque_roll_Nm, double r_torque_pitch_Nm, double r_torque_yaw_Nm,
-                                 double l_force_x_N,      double l_force_y_N,       double l_force_z_N,
-                                 double l_torque_roll_Nm, double l_torque_pitch_Nm, double l_torque_yaw_Nm);
+  void setDesiredCOBOrientation(double cob_orientation_roll,
+                                double cob_orientation_pitch);
+  void setDesiredFootForceTorque(double r_force_x_N, double r_force_y_N,
+                                 double r_force_z_N, double r_torque_roll_Nm,
+                                 double r_torque_pitch_Nm,
+                                 double r_torque_yaw_Nm, double l_force_x_N,
+                                 double l_force_y_N, double l_force_z_N,
+                                 double l_torque_roll_Nm,
+                                 double l_torque_pitch_Nm,
+                                 double l_torque_yaw_Nm);
 
   // with respect to robot coordinate.
   void setCurrentGyroSensorOutput(double gyro_roll, double gyro_pitch);
-  void setCurrentOrientationSensorOutput(double cob_orientation_roll, double cob_orientation_pitch);
+  void setCurrentOrientationSensorOutput(double cob_orientation_roll,
+                                         double cob_orientation_pitch);
 
   // with respect to robot coordinate.
-  void setCurrentFootForceTorqueSensorOutput(double r_force_x_N,      double r_force_y_N,       double r_force_z_N,
-                                             double r_torque_roll_Nm, double r_torque_pitch_Nm, double r_torque_yaw_Nm,
-                                             double l_force_x_N,      double l_force_y_N,       double l_force_z_N,
-                                             double l_torque_roll_Nm, double l_torque_pitch_Nm, double l_torque_yaw_Nm);
-
+  void setCurrentFootForceTorqueSensorOutput(
+      double r_force_x_N, double r_force_y_N, double r_force_z_N,
+      double r_torque_roll_Nm, double r_torque_pitch_Nm, double r_torque_yaw_Nm,
+      double l_force_x_N, double l_force_y_N, double l_force_z_N,
+      double l_torque_roll_Nm, double l_torque_pitch_Nm,
+      double l_torque_yaw_Nm);
 
   // set maximum adjustment
-  void setMaximumAdjustment(double cob_x_max_adjustment_m,  double cob_y_max_adjustment_m,  double cob_z_max_adjustment_m,
-                            double cob_roll_max_adjustment_rad, double cob_pitch_max_adjustment_rad, double cob_yaw_max_adjustment_rad,
-                            double foot_x_max_adjustment_m, double foot_y_max_adjustment_m, double foot_z_max_adjustment_m,
-                            double foot_roll_max_adjustment_rad, double foot_pitch_max_adjustment_rad, double foot_yaw_max_adjustment_rad);
+  void setMaximumAdjustment(
+      double cob_x_max_adjustment_m, double cob_y_max_adjustment_m,
+      double cob_z_max_adjustment_m, double cob_roll_max_adjustment_rad,
+      double cob_pitch_max_adjustment_rad, double cob_yaw_max_adjustment_rad,
+      double foot_x_max_adjustment_m, double foot_y_max_adjustment_m,
+      double foot_z_max_adjustment_m, double foot_roll_max_adjustment_rad,
+      double foot_pitch_max_adjustment_rad, double foot_yaw_max_adjustment_rad);
 
-  //Manual Adjustment
-  void setCOBManualAdjustment(double cob_x_adjustment_m, double cob_y_adjustment_m, double cob_z_adjustment_m);
+  // Manual Adjustment
+  void setCOBManualAdjustment(double cob_x_adjustment_m,
+                              double cob_y_adjustment_m,
+                              double cob_z_adjustment_m);
   double getCOBManualAdjustmentX();
   double getCOBManualAdjustmentY();
   double getCOBManualAdjustmentZ();
@@ -169,7 +179,6 @@ private:
   double orientation_enable_;
   double ft_enable_;
 
-
   // desired pose
   Eigen::MatrixXd desired_robot_to_cob_;
   Eigen::MatrixXd desired_robot_to_right_foot_;
@@ -189,10 +198,10 @@ private:
 
   double current_orientation_roll_rad_, current_orientation_pitch_rad_;
 
-  double current_right_fx_N_,  current_right_fy_N_,  current_right_fz_N_;
+  double current_right_fx_N_, current_right_fy_N_, current_right_fz_N_;
   double current_right_tx_Nm_, current_right_ty_Nm_, current_right_tz_Nm_;
-  double current_left_fx_N_,   current_left_fy_N_,   current_left_fz_N_;
-  double current_left_tx_Nm_,  current_left_ty_Nm_,  current_left_tz_Nm_;
+  double current_left_fx_N_, current_left_fy_N_, current_left_fz_N_;
+  double current_left_tx_Nm_, current_left_ty_Nm_, current_left_tz_Nm_;
 
   // manual cob adjustment
   double cob_x_manual_adjustment_m_;
@@ -243,11 +252,9 @@ private:
   double foot_roll_adjustment_abs_max_rad_;
   double foot_pitch_adjustment_abs_max_rad_;
   double foot_yaw_adjustment_abs_max_rad_;
-
 };
 
-class BalanceControlUsingPDController
-{
+class BalanceControlUsingPDController {
 public:
   BalanceControlUsingPDController();
   ~BalanceControlUsingPDController();
@@ -258,37 +265,53 @@ public:
   void setOrientationBalanceEnable(bool enable);
   void setForceTorqueBalanceEnable(bool enable);
 
-  void process(int *balance_error, Eigen::MatrixXd *robot_to_cob_modified, Eigen::MatrixXd *robot_to_right_foot_modified, Eigen::MatrixXd *robot_to_left_foot_modified);
+  void process(int *balance_error, Eigen::MatrixXd *robot_to_cob_modified,
+               Eigen::MatrixXd *robot_to_right_foot_modified,
+               Eigen::MatrixXd *robot_to_left_foot_modified);
 
-  void setDesiredPose(const Eigen::MatrixXd &robot_to_cob, const Eigen::MatrixXd &robot_to_right_foot, const Eigen::MatrixXd &robot_to_left_foot);
+  void setDesiredPose(const Eigen::MatrixXd &robot_to_cob,
+                      const Eigen::MatrixXd &robot_to_right_foot,
+                      const Eigen::MatrixXd &robot_to_left_foot);
 
   // all arguments are with respect to robot coordinate.
   void setDesiredCOBGyro(double gyro_roll, double gyro_pitch);
-  void setDesiredCOBOrientation(double cob_orientation_roll, double cob_orientation_pitch);
-  void setDesiredFootForceTorque(double r_force_x_N,      double r_force_y_N,       double r_force_z_N,
-                                 double r_torque_roll_Nm, double r_torque_pitch_Nm, double r_torque_yaw_Nm,
-                                 double l_force_x_N,      double l_force_y_N,       double l_force_z_N,
-                                 double l_torque_roll_Nm, double l_torque_pitch_Nm, double l_torque_yaw_Nm);
+  void setDesiredCOBOrientation(double cob_orientation_roll,
+                                double cob_orientation_pitch);
+  void setDesiredFootForceTorque(double r_force_x_N, double r_force_y_N,
+                                 double r_force_z_N, double r_torque_roll_Nm,
+                                 double r_torque_pitch_Nm,
+                                 double r_torque_yaw_Nm, double l_force_x_N,
+                                 double l_force_y_N, double l_force_z_N,
+                                 double l_torque_roll_Nm,
+                                 double l_torque_pitch_Nm,
+                                 double l_torque_yaw_Nm);
 
   // with respect to robot coordinate.
   void setCurrentGyroSensorOutput(double gyro_roll, double gyro_pitch);
-  void setCurrentOrientationSensorOutput(double cob_orientation_roll, double cob_orientation_pitch);
+  void setCurrentOrientationSensorOutput(double cob_orientation_roll,
+                                         double cob_orientation_pitch);
 
   // with respect to robot coordinate.
-  void setCurrentFootForceTorqueSensorOutput(double r_force_x_N,      double r_force_y_N,       double r_force_z_N,
-                                             double r_torque_roll_Nm, double r_torque_pitch_Nm, double r_torque_yaw_Nm,
-                                             double l_force_x_N,      double l_force_y_N,       double l_force_z_N,
-                                             double l_torque_roll_Nm, double l_torque_pitch_Nm, double l_torque_yaw_Nm);
-
+  void setCurrentFootForceTorqueSensorOutput(
+      double r_force_x_N, double r_force_y_N, double r_force_z_N,
+      double r_torque_roll_Nm, double r_torque_pitch_Nm, double r_torque_yaw_Nm,
+      double l_force_x_N, double l_force_y_N, double l_force_z_N,
+      double l_torque_roll_Nm, double l_torque_pitch_Nm,
+      double l_torque_yaw_Nm);
 
   // set maximum adjustment
-  void setMaximumAdjustment(double cob_x_max_adjustment_m,  double cob_y_max_adjustment_m,  double cob_z_max_adjustment_m,
-                            double cob_roll_max_adjustment_rad, double cob_pitch_max_adjustment_rad, double cob_yaw_max_adjustment_rad,
-                            double foot_x_max_adjustment_m, double foot_y_max_adjustment_m, double foot_z_max_adjustment_m,
-                            double foot_roll_max_adjustment_rad, double foot_pitch_max_adjustment_rad, double foot_yaw_max_adjustment_rad);
+  void setMaximumAdjustment(
+      double cob_x_max_adjustment_m, double cob_y_max_adjustment_m,
+      double cob_z_max_adjustment_m, double cob_roll_max_adjustment_rad,
+      double cob_pitch_max_adjustment_rad, double cob_yaw_max_adjustment_rad,
+      double foot_x_max_adjustment_m, double foot_y_max_adjustment_m,
+      double foot_z_max_adjustment_m, double foot_roll_max_adjustment_rad,
+      double foot_pitch_max_adjustment_rad, double foot_yaw_max_adjustment_rad);
 
-  //Manual Adjustment
-  void setCOBManualAdjustment(double cob_x_adjustment_m, double cob_y_adjustment_m, double cob_z_adjustment_m);
+  // Manual Adjustment
+  void setCOBManualAdjustment(double cob_x_adjustment_m,
+                              double cob_y_adjustment_m,
+                              double cob_z_adjustment_m);
   double getCOBManualAdjustmentX();
   double getCOBManualAdjustmentY();
   double getCOBManualAdjustmentZ();
@@ -349,10 +372,10 @@ private:
 
   double current_orientation_roll_rad_, current_orientation_pitch_rad_;
 
-  double current_right_fx_N_,  current_right_fy_N_,  current_right_fz_N_;
+  double current_right_fx_N_, current_right_fy_N_, current_right_fz_N_;
   double current_right_tx_Nm_, current_right_ty_Nm_, current_right_tz_Nm_;
-  double current_left_fx_N_,   current_left_fy_N_,   current_left_fz_N_;
-  double current_left_tx_Nm_,  current_left_ty_Nm_,  current_left_tz_Nm_;
+  double current_left_fx_N_, current_left_fy_N_, current_left_fz_N_;
+  double current_left_tx_Nm_, current_left_ty_Nm_, current_left_tz_Nm_;
 
   // manual cob adjustment
   double cob_x_manual_adjustment_m_;
@@ -404,6 +427,6 @@ private:
   double foot_yaw_adjustment_abs_max_rad_;
 };
 
-}
+} // namespace robotis_op
 
 #endif
