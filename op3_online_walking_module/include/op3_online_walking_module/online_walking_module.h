@@ -1,44 +1,44 @@
 /*******************************************************************************
-* Copyright 2017 ROBOTIS CO., LTD.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*******************************************************************************/
+ * Copyright 2017 ROBOTIS CO., LTD.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 
 /* Author: SCH */
 
 #ifndef OP3_ONLINE_WALKING_MODULE_ONLINE_WALKING_MODULE_H_
 #define OP3_ONLINE_WALKING_MODULE_ONLINE_WALKING_MODULE_H_
 
-#include <map>
-#include <ros/ros.h>
-#include <ros/callback_queue.h>
-#include <ros/package.h>
-#include <std_msgs/Bool.h>
-#include <std_msgs/Int16.h>
-#include <std_msgs/Float64.h>
-#include <std_msgs/String.h>
-#include <sensor_msgs/Imu.h>
-#include <geometry_msgs/Pose.h>
-#include <geometry_msgs/WrenchStamped.h>
-#include <geometry_msgs/PoseStamped.h>
 #include <boost/thread.hpp>
 #include <eigen3/Eigen/Eigen>
+#include <geometry_msgs/Pose.h>
+#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/WrenchStamped.h>
+#include <map>
+#include <ros/callback_queue.h>
+#include <ros/package.h>
+#include <ros/ros.h>
+#include <sensor_msgs/Imu.h>
+#include <std_msgs/Bool.h>
+#include <std_msgs/Float64.h>
+#include <std_msgs/Int16.h>
+#include <std_msgs/String.h>
 #include <yaml-cpp/yaml.h>
 
 #include "joint_control.h"
-#include "wholebody_control.h"
-#include "walking_control.h"
 #include "op3_kdl.h"
+#include "walking_control.h"
+#include "wholebody_control.h"
 
 #include "robotis_controller_msgs/JointCtrlModule.h"
 #include "robotis_controller_msgs/StatusMsg.h"
@@ -48,9 +48,9 @@
 //#include "op3_kinematics_dynamics/op3_kinematics_dynamics.h"
 #include "op3_balance_control/op3_balance_control.h"
 
+#include "op3_online_walking_module_msgs/FootStepCommand.h"
 #include "op3_online_walking_module_msgs/JointPose.h"
 #include "op3_online_walking_module_msgs/KinematicsPose.h"
-#include "op3_online_walking_module_msgs/FootStepCommand.h"
 #include "op3_online_walking_module_msgs/PreviewRequest.h"
 #include "op3_online_walking_module_msgs/PreviewResponse.h"
 #include "op3_online_walking_module_msgs/WalkingParam.h"
@@ -62,8 +62,7 @@
 #include "op3_online_walking_module_msgs/Step2D.h"
 #include "op3_online_walking_module_msgs/Step2DArray.h"
 
-namespace robotis_op
-{
+namespace robotis_op {
 
 enum CONTROL_TYPE {
   JOINT_CONTROL,
@@ -73,46 +72,54 @@ enum CONTROL_TYPE {
   NONE
 };
 
-enum BALANCE_TYPE {
-  ON,
-  OFF
-};
+enum BALANCE_TYPE { ON, OFF };
 
-class OnlineWalkingModule: public robotis_framework::MotionModule,
-                       public robotis_framework::Singleton<OnlineWalkingModule>
-{
+class OnlineWalkingModule
+    : public robotis_framework::MotionModule,
+      public robotis_framework::Singleton<OnlineWalkingModule> {
 public:
   OnlineWalkingModule();
   virtual ~OnlineWalkingModule();
 
   /* ROS Topic Callback Functions */
-  void setResetBodyCallback(const std_msgs::Bool::ConstPtr& msg);
-  void setWholebodyBalanceMsgCallback(const std_msgs::String::ConstPtr& msg);
-  void setBodyOffsetCallback(const geometry_msgs::Pose::ConstPtr& msg);
-  void setFootDistanceCallback(const std_msgs::Float64::ConstPtr& msg);
+  void setResetBodyCallback(const std_msgs::Bool::ConstPtr &msg);
+  void setWholebodyBalanceMsgCallback(const std_msgs::String::ConstPtr &msg);
+  void setBodyOffsetCallback(const geometry_msgs::Pose::ConstPtr &msg);
+  void setFootDistanceCallback(const std_msgs::Float64::ConstPtr &msg);
 
-  void goalJointPoseCallback(const op3_online_walking_module_msgs::JointPose &msg);
-  void goalKinematicsPoseCallback(const op3_online_walking_module_msgs::KinematicsPose& msg);
-  void footStepCommandCallback(const op3_online_walking_module_msgs::FootStepCommand& msg);
-  void walkingParamCallback(const op3_online_walking_module_msgs::WalkingParam& msg);
+  void
+  goalJointPoseCallback(const op3_online_walking_module_msgs::JointPose &msg);
+  void goalKinematicsPoseCallback(
+      const op3_online_walking_module_msgs::KinematicsPose &msg);
+  void footStepCommandCallback(
+      const op3_online_walking_module_msgs::FootStepCommand &msg);
+  void
+  walkingParamCallback(const op3_online_walking_module_msgs::WalkingParam &msg);
 
-  void footStep2DCallback(const op3_online_walking_module_msgs::Step2DArray& msg);
+  void
+  footStep2DCallback(const op3_online_walking_module_msgs::Step2DArray &msg);
 
-  void imuDataCallback(const sensor_msgs::Imu::ConstPtr& msg);
-  void leftFootForceTorqueOutputCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg);
-  void rightFootForceTorqueOutputCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg);
+  void imuDataCallback(const sensor_msgs::Imu::ConstPtr &msg);
+  void leftFootForceTorqueOutputCallback(
+      const geometry_msgs::WrenchStamped::ConstPtr &msg);
+  void rightFootForceTorqueOutputCallback(
+      const geometry_msgs::WrenchStamped::ConstPtr &msg);
 
   /* ROS Service Functions */
-  bool getJointPoseCallback(op3_online_walking_module_msgs::GetJointPose::Request &req,
-                            op3_online_walking_module_msgs::GetJointPose::Response &res);
-  bool getKinematicsPoseCallback(op3_online_walking_module_msgs::GetKinematicsPose::Request &req,
-                                 op3_online_walking_module_msgs::GetKinematicsPose::Response &res);
+  bool getJointPoseCallback(
+      op3_online_walking_module_msgs::GetJointPose::Request &req,
+      op3_online_walking_module_msgs::GetJointPose::Response &res);
+  bool getKinematicsPoseCallback(
+      op3_online_walking_module_msgs::GetKinematicsPose::Request &req,
+      op3_online_walking_module_msgs::GetKinematicsPose::Response &res);
   bool getPreviewMatrix(op3_online_walking_module_msgs::PreviewRequest msg);
   bool definePreviewMatrix();
 
   /* ROS Framework Functions */
-  void initialize(const int control_cycle_msec, robotis_framework::Robot *robot);
-  void process(std::map<std::string, robotis_framework::Dynamixel *> dxls, std::map<std::string, double> sensors);
+  void initialize(const int control_cycle_msec,
+                  robotis_framework::Robot *robot);
+  void process(std::map<std::string, robotis_framework::Dynamixel *> dxls,
+               std::map<std::string, double> sensors);
   void stop();
   bool isRunning();
 
@@ -125,8 +132,8 @@ public:
   void publishStatusMsg(unsigned int type, std::string msg);
 
   /* Parameter */
-  WholebodyControl  *wholebody_control_;
-  WalkingControl    *walking_control_;
+  WholebodyControl *wholebody_control_;
+  WalkingControl *walking_control_;
 
   OP3Kinematics *op3_kdl_;
 
@@ -147,7 +154,8 @@ private:
   void initFeedforwardControl();
   void setFeedforwardControl();
 
-  void sensoryFeedback(const double &rlGyroErr, const double &fbGyroErr, double *balance_angle);
+  void sensoryFeedback(const double &rlGyroErr, const double &fbGyroErr,
+                       double *balance_angle);
 
   void calcRobotPose();
 
@@ -159,25 +167,25 @@ private:
 
   std::map<std::string, int> joint_name_to_id_;
 
-  double          control_cycle_sec_;
-  boost::thread   queue_thread_;
-  boost::mutex    queue_mutex_;
-  boost::mutex    imu_data_mutex_lock_;
+  double control_cycle_sec_;
+  boost::thread queue_thread_;
+  boost::mutex queue_mutex_;
+  boost::mutex imu_data_mutex_lock_;
 
   std_msgs::String movement_done_msg_;
 
-  ros::Publisher  status_msg_pub_;
-  ros::Publisher  movement_done_pub_;
-  ros::Publisher  goal_joint_state_pub_;
-  ros::Publisher  pelvis_pose_pub_;
+  ros::Publisher status_msg_pub_;
+  ros::Publisher movement_done_pub_;
+  ros::Publisher goal_joint_state_pub_;
+  ros::Publisher pelvis_pose_pub_;
 
-//  ros::ServiceClient get_preview_matrix_client_;
+  //  ros::ServiceClient get_preview_matrix_client_;
 
   CONTROL_TYPE control_type_;
 
-  bool    is_moving_;
-  int     mov_size_, mov_step_;
-  double  mov_time_;
+  bool is_moving_;
+  int mov_size_, mov_step_;
+  double mov_time_;
 
   bool goal_initialize_;
   bool joint_control_initialize_;
@@ -200,18 +208,23 @@ private:
 
   // Joint Command
   std::vector<double_t> curr_joint_accel_, curr_joint_vel_, curr_joint_pos_;
-  std::vector<double_t> des_joint_accel_,  des_joint_vel_,  des_joint_pos_;
+  std::vector<double_t> des_joint_accel_, des_joint_vel_, des_joint_pos_;
   std::vector<double_t> goal_joint_accel_, goal_joint_vel_, goal_joint_pos_;
 
   std::vector<double_t> des_joint_feedback_;
   std::vector<double_t> des_joint_feedforward_;
   std::vector<double_t> des_joint_pos_to_robot_;
 
-  std::vector<double_t> des_l_arm_pos_, des_l_arm_vel_, des_l_arm_accel_, des_l_arm_Q_;
-  std::vector<double_t> des_r_arm_pos_, des_r_arm_vel_, des_r_arm_accel_, des_r_arm_Q_;
-  std::vector<double_t> des_l_leg_pos_, des_l_leg_vel_, des_l_leg_accel_, des_l_leg_Q_;
-  std::vector<double_t> des_r_leg_pos_, des_r_leg_vel_, des_r_leg_accel_, des_r_leg_Q_;
-  std::vector<double_t> des_body_pos_,  des_body_vel_,  des_body_accel_,  des_body_Q_;
+  std::vector<double_t> des_l_arm_pos_, des_l_arm_vel_, des_l_arm_accel_,
+      des_l_arm_Q_;
+  std::vector<double_t> des_r_arm_pos_, des_r_arm_vel_, des_r_arm_accel_,
+      des_r_arm_Q_;
+  std::vector<double_t> des_l_leg_pos_, des_l_leg_vel_, des_l_leg_accel_,
+      des_l_leg_Q_;
+  std::vector<double_t> des_r_leg_pos_, des_r_leg_vel_, des_r_leg_accel_,
+      des_r_leg_Q_;
+  std::vector<double_t> des_body_pos_, des_body_vel_, des_body_accel_,
+      des_body_Q_;
 
   // Walking Control
   std::vector<double_t> x_lipm_, y_lipm_;
@@ -236,8 +249,8 @@ private:
   // Balance Control
   BALANCE_TYPE balance_type_;
 
-  bool  is_balancing_;
-  int   balance_step_, balance_size_;
+  bool is_balancing_;
+  int balance_step_, balance_size_;
 
   BalanceControlUsingPDController balance_control_;
   BalancePDController joint_feedback_[12];
@@ -251,8 +264,8 @@ private:
   std::vector<double_t> des_body_offset_;
   std::vector<double_t> goal_body_offset_;
 
-  bool  is_offset_updating_;
-  int   body_offset_step_, body_offset_size_;
+  bool is_offset_updating_;
+  int body_offset_step_, body_offset_size_;
 
   //
   double foot_distance_;
@@ -323,6 +336,6 @@ private:
   double total_mass_;
 };
 
-}
+} // namespace robotis_op
 
 #endif
