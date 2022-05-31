@@ -2,9 +2,9 @@
 <img src="https://github.com/ROBOTIS-GIT/emanual/blob/master/assets/images/platform/op3/default_op3.jpg" width="40%" />  
 
 ## ROS Packages for ROBOTIS OP3 Messages
-|Version|Kinetic + Ubuntu Xenial|Melodic + Ubuntu Bionic|
+|Version|Kinetic + Ubuntu Xenial|Noetic + Ubuntu Focal|
 |:---:|:---:|:---:|
-|[![GitHub version](https://badge.fury.io/gh/ROBOTIS-GIT%2FROBOTIS-OP3-msgs.svg)](https://badge.fury.io/gh/ROBOTIS-GIT%2FROBOTIS-OP3-msgs)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs.svg?branch=kinetic-devel)](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs)|-|
+|[![GitHub version](https://badge.fury.io/gh/Robotics-Sensors%2FROBOTIS-OP3.svg)](https://badge.fury.io/gh/Robotics-Sensors%2FROBOTIS-OP3)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs.svg?branch=kinetic-devel)](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs.svg?branch=kinetic-devel)](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs)|-|
 
 ## ROBOTIS e-Manual for ROBOTIS OP3
 - [ROBOTIS e-Manual for ROBOTIS OP3](http://emanual.robotis.com/docs/en/platform/op3/introduction/)
