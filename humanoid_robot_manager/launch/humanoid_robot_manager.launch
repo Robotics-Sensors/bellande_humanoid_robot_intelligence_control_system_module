@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<launch>    
+    <param name="gazebo"                   value="false"    type="bool"/>
+    <param name="gazebo_robot_name"        value="robotis_humanoid_robot"/>
+    
+    <param name="offset_file_path"         value="$(find humanoid_robot_tuning_module)/data/offset.yaml"/>
+    <param name="robot_file_path"          value="$(find humanoid_robot_manager)/config/OP3.robot"/>
+    <param name="init_file_path"           value="$(find humanoid_robot_manager)/config/dxl_init_OP3.yaml"/>
+    <param name="device_name"              value="/dev/ttyUSB0"/>
+    
+    <!-- OP3 Manager -->
+    <node pkg="humanoid_robot_manager" type="humanoid_robot_manager" name="humanoid_robot_manager" output="screen">
+	  <param name="angle_unit" value="30" />
+	</node>
+
+    <!-- OP3 Localization -->
+    <node pkg="humanoid_robot_localization" type="humanoid_robot_localization" name="humanoid_robot_localization" output="screen"/>
+</launch>

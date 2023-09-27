@@ -1,3 +1,0 @@
-- git: {local-name: robotis_op3_msgs, uri: 'https://github.com/Robotics-Sensors/ROBOTIS-OP3-msgs.git', version: noetic}
-- git: {local-name: robotis_framework, uri: 'https://github.com/Robotics-Sensors/ROBOTIS-Framework.git', version: noetic}
-- git: {local-name: robotis_controller_msgs , uri: 'https://github.com/Robotics-Sensors/ROBOTIS-Framework-msgs.git', version: noetic}
