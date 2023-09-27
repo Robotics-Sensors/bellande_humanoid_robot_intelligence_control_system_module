@@ -4,13 +4,8 @@
   <version>0.3.0</version>
   <description>The humanoid_robot_balance_control package</description>
   <license>Apache 2.0</license>
-  <author email="sch@robotis.com">SCH</author>
-  <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande</maintainer>
 
-  <url type="website">http://wiki.ros.org/humanoid_robot_balance_control</url>
-  <url type="emanual">http://emanual.robotis.com/docs/en/platform/humanoid_robot/introduction/</url>
-  <url type="repository">https://github.com/ROBOTIS-GIT/ROBOTIS-HUMANOID_ROBOT</url>
-  <url type="bugtracker">https://github.com/ROBOTIS-GIT/ROBOTIS-HUMANOID_ROBOT/issues</url>
+  <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande</maintainer>
 
   <buildtool_depend>catkin</buildtool_depend>
 
