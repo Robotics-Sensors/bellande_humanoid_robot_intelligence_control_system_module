@@ -40,7 +40,7 @@ DirectControlModule::~DirectControlModule() { queue_thread_.join(); }
 
 void DirectControlModule::initialize(const int control_cycle_msec,
                                      robotis_framework::Robot *robot) {
-  humanoid_robot_kinematics_ = new OP3KinematicsDynamics(WholeBody);
+  humanoid_robot_kinematics_ = new HUMANOID_ROBOTKinematicsDynamics(WholeBody);
 
   // init result, joint_id_table
   int joint_index = 0;
@@ -178,8 +178,8 @@ void DirectControlModule::setJointCallback(
   if (check_collision_ == true) {
     // check collision of target angle
     will_be_collision_ = false;
-    OP3KinematicsDynamics *humanoid_robot_kinematics_for_target =
-        new OP3KinematicsDynamics(WholeBody);
+    HUMANOID_ROBOTKinematicsDynamics *humanoid_robot_kinematics_for_target =
+        new HUMANOID_ROBOTKinematicsDynamics(WholeBody);
     // set goal angle and run forward kinematics
     for (std::map<std::string, int>::iterator joint_index_it =
              using_joint_name_.begin();
@@ -518,7 +518,7 @@ bool DirectControlModule::checkSelfCollision() {
   return collision_result;
 }
 
-bool DirectControlModule::getDiff(OP3KinematicsDynamics *kinematics,
+bool DirectControlModule::getDiff(HUMANOID_ROBOTKinematicsDynamics *kinematics,
                                   int end_index, int base_index, double &diff) {
   if (kinematics->humanoid_robot_link_data_[end_index] == NULL |
       kinematics->humanoid_robot_link_data_[base_index] == NULL)

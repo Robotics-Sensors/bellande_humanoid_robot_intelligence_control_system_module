@@ -19,16 +19,16 @@
 #include "humanoid_robot_online_walking_module/humanoid_robot_kdl.h"
 #include <stdio.h>
 
-OP3Kinematics::OP3Kinematics() {
+HUMANOID_ROBOTKinematics::HUMANOID_ROBOTKinematics() {
   rleg_joint_position_.resize(LEG_JOINT_NUM);
 
   for (int i = 0; i < LEG_JOINT_NUM; i++)
     rleg_joint_position_(i) = 0.0;
 }
 
-OP3Kinematics::~OP3Kinematics() {}
+HUMANOID_ROBOTKinematics::~HUMANOID_ROBOTKinematics() {}
 
-void OP3Kinematics::initialize(Eigen::MatrixXd pelvis_position,
+void HUMANOID_ROBOTKinematics::initialize(Eigen::MatrixXd pelvis_position,
                                Eigen::MatrixXd pelvis_orientation) {
   KDL::Chain rleg_chain, lleg_chain;
 
@@ -234,7 +234,7 @@ void OP3Kinematics::initialize(Eigen::MatrixXd pelvis_position,
       *lleg_fk_solver_, *lleg_ik_vel_solver_);
 }
 
-void OP3Kinematics::setJointPosition(Eigen::VectorXd rleg_joint_position,
+void HUMANOID_ROBOTKinematics::setJointPosition(Eigen::VectorXd rleg_joint_position,
                                      Eigen::VectorXd lleg_joint_position) {
   rleg_joint_position_ = rleg_joint_position;
   lleg_joint_position_ = lleg_joint_position;
@@ -246,7 +246,7 @@ void OP3Kinematics::setJointPosition(Eigen::VectorXd rleg_joint_position,
   //    ROS_INFO("lleg_joint_position_(%d): %f", i, lleg_joint_position_(i));
 }
 
-void OP3Kinematics::solveForwardKinematics(
+void HUMANOID_ROBOTKinematics::solveForwardKinematics(
     std::vector<double_t> &rleg_position,
     std::vector<double_t> &rleg_orientation,
     std::vector<double_t> &lleg_position,
@@ -308,7 +308,7 @@ void OP3Kinematics::solveForwardKinematics(
   lleg_orientation[3] = lleg_pose_.orientation.w;
 }
 
-bool OP3Kinematics::solveInverseKinematics(
+bool HUMANOID_ROBOTKinematics::solveInverseKinematics(
     std::vector<double_t> &rleg_output, Eigen::MatrixXd rleg_target_position,
     Eigen::Quaterniond rleg_target_orientation,
     std::vector<double_t> &lleg_output, Eigen::MatrixXd lleg_target_position,
@@ -378,7 +378,7 @@ bool OP3Kinematics::solveInverseKinematics(
   return true;
 }
 
-void OP3Kinematics::finalize() {
+void HUMANOID_ROBOTKinematics::finalize() {
   //  delete rleg_chain_;
   //  delete rleg_dyn_param_;
   //  delete rleg_jacobian_solver_;

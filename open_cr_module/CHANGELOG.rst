@@ -25,7 +25,7 @@ Changelog for package open_cr_module
 
 0.1.0 (2017-10-27)
 ------------------
-* added new metapackage for ROBOTIS OP3
+* added new metapackage for ROBOTIS HUMANOID_ROBOT
 * added the function of recovery after reset
 * added function of reset dxl power
 * Contributors: Kayman

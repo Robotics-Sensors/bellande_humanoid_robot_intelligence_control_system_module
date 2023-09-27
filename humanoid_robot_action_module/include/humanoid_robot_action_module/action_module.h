@@ -131,4 +131,4 @@ private:
 
 } // namespace robotis_op
 
-#endif /* OP3_ACTION_MOTION_MODULE_H_ */
+#endif /* HUMANOID_ROBOT_ACTION_MOTION_MODULE_H_ */

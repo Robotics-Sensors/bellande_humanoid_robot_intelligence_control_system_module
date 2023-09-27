@@ -25,7 +25,7 @@ Changelog for package humanoid_robot_walking_module
 * fixed missing dependence
 * fixed action_module bug
 * changed License from BSD to Apache 2.0
-* Merge branch 'feature_direct_control' of https://github.com/ROBOTIS-GIT/ROBOTIS-OP3 into feature_direct_control
+* Merge branch 'feature_direct_control' of https://github.com/ROBOTIS-GIT/ROBOTIS-HUMANOID_ROBOT into feature_direct_control
 * Contributors: Kayman, Yoshimaru Tanaka, Pyo
 
 0.1.0 (2017-10-27)

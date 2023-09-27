@@ -21,10 +21,10 @@
 
 namespace robotis_op {
 
-OP3KinematicsDynamics::OP3KinematicsDynamics() {}
-OP3KinematicsDynamics::~OP3KinematicsDynamics() {}
+HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics() {}
+HUMANOID_ROBOTKinematicsDynamics::~HUMANOID_ROBOTKinematicsDynamics() {}
 
-OP3KinematicsDynamics::OP3KinematicsDynamics(TreeSelect tree) {
+HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tree) {
   for (int id = 0; id <= ALL_JOINT_ID; id++)
     humanoid_robot_link_data_[id] = new LinkData();
 
@@ -592,7 +592,7 @@ OP3KinematicsDynamics::OP3KinematicsDynamics(TreeSelect tree) {
                 1, 0)));
 }
 
-std::vector<int> OP3KinematicsDynamics::findRoute(int to) {
+std::vector<int> HUMANOID_ROBOTKinematicsDynamics::findRoute(int to) {
   int id = humanoid_robot_link_data_[to]->parent_;
 
   std::vector<int> idx;
@@ -608,7 +608,7 @@ std::vector<int> OP3KinematicsDynamics::findRoute(int to) {
   return idx;
 }
 
-std::vector<int> OP3KinematicsDynamics::findRoute(int from, int to) {
+std::vector<int> HUMANOID_ROBOTKinematicsDynamics::findRoute(int from, int to) {
   int id = humanoid_robot_link_data_[to]->parent_;
 
   std::vector<int> idx;
@@ -624,7 +624,7 @@ std::vector<int> OP3KinematicsDynamics::findRoute(int from, int to) {
   return idx;
 }
 
-double OP3KinematicsDynamics::calcTotalMass(int joint_id) {
+double HUMANOID_ROBOTKinematicsDynamics::calcTotalMass(int joint_id) {
   double mass;
 
   if (joint_id == -1)
@@ -637,7 +637,7 @@ double OP3KinematicsDynamics::calcTotalMass(int joint_id) {
   return mass;
 }
 
-Eigen::MatrixXd OP3KinematicsDynamics::calcMC(int joint_id) {
+Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcMC(int joint_id) {
   Eigen::MatrixXd mc(3, 1);
 
   if (joint_id == -1)
@@ -654,7 +654,7 @@ Eigen::MatrixXd OP3KinematicsDynamics::calcMC(int joint_id) {
   return mc;
 }
 
-Eigen::MatrixXd OP3KinematicsDynamics::calcCOM(Eigen::MatrixXd mc) {
+Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcCOM(Eigen::MatrixXd mc) {
   double mass;
   Eigen::MatrixXd COM(3, 1);
 
@@ -664,7 +664,7 @@ Eigen::MatrixXd OP3KinematicsDynamics::calcCOM(Eigen::MatrixXd mc) {
   return COM;
 }
 
-void OP3KinematicsDynamics::calcForwardKinematics(int joint_id) {
+void HUMANOID_ROBOTKinematicsDynamics::calcForwardKinematics(int joint_id) {
   if (joint_id == -1)
     return;
 
@@ -698,7 +698,7 @@ void OP3KinematicsDynamics::calcForwardKinematics(int joint_id) {
   calcForwardKinematics(humanoid_robot_link_data_[joint_id]->child_);
 }
 
-Eigen::MatrixXd OP3KinematicsDynamics::calcJacobian(std::vector<int> idx) {
+Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcJacobian(std::vector<int> idx) {
   int idx_size = idx.size();
   int end = idx_size - 1;
 
@@ -719,7 +719,7 @@ Eigen::MatrixXd OP3KinematicsDynamics::calcJacobian(std::vector<int> idx) {
   return jacobian;
 }
 
-Eigen::MatrixXd OP3KinematicsDynamics::calcJacobianCOM(std::vector<int> idx) {
+Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcJacobianCOM(std::vector<int> idx) {
   int idx_size = idx.size();
   int end = idx_size - 1;
 
@@ -743,7 +743,7 @@ Eigen::MatrixXd OP3KinematicsDynamics::calcJacobianCOM(std::vector<int> idx) {
   return jacobian_com;
 }
 
-Eigen::MatrixXd OP3KinematicsDynamics::calcVWerr(
+Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcVWerr(
     Eigen::MatrixXd tar_position, Eigen::MatrixXd curr_position,
     Eigen::MatrixXd tar_orientation, Eigen::MatrixXd curr_orientation) {
   Eigen::MatrixXd pos_err = tar_position - curr_position;
@@ -758,7 +758,7 @@ Eigen::MatrixXd OP3KinematicsDynamics::calcVWerr(
   return err;
 }
 
-bool OP3KinematicsDynamics::calcInverseKinematics(
+bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematics(
     int to, Eigen::MatrixXd tar_position, Eigen::MatrixXd tar_orientation,
     int max_iter, double ik_err) {
   bool ik_success = false;
@@ -818,7 +818,7 @@ bool OP3KinematicsDynamics::calcInverseKinematics(
     return false;
 }
 
-bool OP3KinematicsDynamics::calcInverseKinematics(
+bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematics(
     int from, int to, Eigen::MatrixXd tar_position,
     Eigen::MatrixXd tar_orientation, int max_iter, double ik_err) {
   bool ik_success = false;
@@ -878,7 +878,7 @@ bool OP3KinematicsDynamics::calcInverseKinematics(
     return false;
 }
 
-bool OP3KinematicsDynamics::calcInverseKinematics(
+bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematics(
     int to, Eigen::MatrixXd tar_position, Eigen::MatrixXd tar_orientation,
     int max_iter, double ik_err, Eigen::MatrixXd weight) {
   bool ik_success = false;
@@ -959,7 +959,7 @@ bool OP3KinematicsDynamics::calcInverseKinematics(
     return false;
 }
 
-bool OP3KinematicsDynamics::calcInverseKinematics(
+bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematics(
     int from, int to, Eigen::MatrixXd tar_position,
     Eigen::MatrixXd tar_orientation, int max_iter, double ik_err,
     Eigen::MatrixXd weight) {
@@ -1036,7 +1036,7 @@ bool OP3KinematicsDynamics::calcInverseKinematics(
     return false;
 }
 
-bool OP3KinematicsDynamics::calcInverseKinematicsForLeg(double *out, double x,
+bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematicsForLeg(double *out, double x,
                                                         double y, double z,
                                                         double roll,
                                                         double pitch,
@@ -1136,7 +1136,7 @@ bool OP3KinematicsDynamics::calcInverseKinematicsForLeg(double *out, double x,
   return true;
 }
 
-bool OP3KinematicsDynamics::calcInverseKinematicsForRightLeg(
+bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematicsForRightLeg(
     double *out, double x, double y, double z, double roll, double pitch,
     double yaw) {
   if (calcInverseKinematicsForLeg(out, x, y, z, roll, pitch, yaw) == true) {
@@ -1148,7 +1148,7 @@ bool OP3KinematicsDynamics::calcInverseKinematicsForRightLeg(
     return false;
 }
 
-bool OP3KinematicsDynamics::calcInverseKinematicsForLeftLeg(
+bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematicsForLeftLeg(
     double *out, double x, double y, double z, double roll, double pitch,
     double yaw) {
   if (calcInverseKinematicsForLeg(out, x, y, z, roll, pitch, yaw) == true) {
@@ -1160,7 +1160,7 @@ bool OP3KinematicsDynamics::calcInverseKinematicsForLeftLeg(
     return false;
 }
 
-LinkData *OP3KinematicsDynamics::getLinkData(const std::string link_name) {
+LinkData *HUMANOID_ROBOTKinematicsDynamics::getLinkData(const std::string link_name) {
   for (int ix = 0; ix <= ALL_JOINT_ID; ix++) {
     if (humanoid_robot_link_data_[ix]->name_ == link_name) {
       return humanoid_robot_link_data_[ix];
@@ -1170,7 +1170,7 @@ LinkData *OP3KinematicsDynamics::getLinkData(const std::string link_name) {
   return NULL;
 }
 
-LinkData *OP3KinematicsDynamics::getLinkData(const int link_id) {
+LinkData *HUMANOID_ROBOTKinematicsDynamics::getLinkData(const int link_id) {
   if (humanoid_robot_link_data_[link_id] != NULL) {
     return humanoid_robot_link_data_[link_id];
   }
@@ -1179,7 +1179,7 @@ LinkData *OP3KinematicsDynamics::getLinkData(const int link_id) {
 }
 
 Eigen::MatrixXd
-OP3KinematicsDynamics::getJointAxis(const std::string link_name) {
+HUMANOID_ROBOTKinematicsDynamics::getJointAxis(const std::string link_name) {
   Eigen::MatrixXd joint_axis;
 
   LinkData *link_data = getLinkData(link_name);
@@ -1191,7 +1191,7 @@ OP3KinematicsDynamics::getJointAxis(const std::string link_name) {
   return joint_axis;
 }
 
-double OP3KinematicsDynamics::getJointDirection(const std::string link_name) {
+double HUMANOID_ROBOTKinematicsDynamics::getJointDirection(const std::string link_name) {
   double joint_direction = 0.0;
   LinkData *link_data = getLinkData(link_name);
 
@@ -1204,7 +1204,7 @@ double OP3KinematicsDynamics::getJointDirection(const std::string link_name) {
   return joint_direction;
 }
 
-double OP3KinematicsDynamics::getJointDirection(const int link_id) {
+double HUMANOID_ROBOTKinematicsDynamics::getJointDirection(const int link_id) {
   double joint_direction = 0.0;
   LinkData *link_data = getLinkData(link_id);
 
@@ -1217,7 +1217,7 @@ double OP3KinematicsDynamics::getJointDirection(const int link_id) {
   return joint_direction;
 }
 
-Eigen::MatrixXd OP3KinematicsDynamics::calcPreviewParam(double preview_time,
+Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcPreviewParam(double preview_time,
                                                         double control_cycle,
                                                         double lipm_height,
                                                         Eigen::MatrixXd K,

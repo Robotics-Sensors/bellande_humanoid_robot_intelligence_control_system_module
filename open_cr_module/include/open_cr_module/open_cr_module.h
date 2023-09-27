@@ -16,8 +16,8 @@
 
 /* Author: Kayman */
 
-#ifndef OP3_OPEN_CR_MODULE_H_
-#define OP3_OPEN_CR_MODULE_H_
+#ifndef HUMANOID_ROBOT_OPEN_CR_MODULE_H_
+#define HUMANOID_ROBOT_OPEN_CR_MODULE_H_
 
 #include <boost/thread.hpp>
 #include <eigen3/Eigen/Eigen>
@@ -86,4 +86,4 @@ private:
 
 } // namespace robotis_op
 
-#endif /* OP3_OPEN_CR_MODULE_H_ */
+#endif /* HUMANOID_ROBOT_OPEN_CR_MODULE_H_ */

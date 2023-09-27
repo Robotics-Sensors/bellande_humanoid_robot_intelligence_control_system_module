@@ -33,7 +33,7 @@ OnlineWalkingModule::OnlineWalkingModule()
   control_type_ = NONE;
   balance_type_ = OFF;
 
-  humanoid_robot_kdl_ = new OP3Kinematics();
+  humanoid_robot_kdl_ = new HUMANOID_ROBOTKinematics();
 
   /* leg */
   result_["r_hip_yaw"] = new robotis_framework::DynamixelState();

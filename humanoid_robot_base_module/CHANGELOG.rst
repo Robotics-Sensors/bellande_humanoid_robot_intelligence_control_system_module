@@ -35,6 +35,6 @@ Changelog for package humanoid_robot_base_module
 * changed setting for walking and dxl
 * change directory structure
 * change package name : op2 -> humanoid_robot
-* splited the repository of ROBOTIS-OP3
+* splited the repository of ROBOTIS-HUMANOID_ROBOT
 * cleaned up the code
 * Contributors: Kayman

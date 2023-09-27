@@ -29,7 +29,7 @@ WalkingModule::WalkingModule() : control_cycle_msec_(8), DEBUG(false) {
   walking_state_ = WalkingReady;
   previous_x_move_amplitude_ = 0.0;
 
-  humanoid_robot_kd_ = new OP3KinematicsDynamics(WholeBody);
+  humanoid_robot_kd_ = new HUMANOID_ROBOTKinematicsDynamics(WholeBody);
 
   // result
   result_["r_hip_yaw"] = new robotis_framework::DynamixelState();

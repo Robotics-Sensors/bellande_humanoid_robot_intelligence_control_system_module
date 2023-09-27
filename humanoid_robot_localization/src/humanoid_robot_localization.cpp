@@ -20,7 +20,7 @@
 
 namespace robotis_op {
 
-OP3Localization::OP3Localization()
+HUMANOID_ROBOTLocalization::HUMANOID_ROBOTLocalization()
     : ros_node_(), transform_tolerance_(0.0), err_tol_(0.2),
       is_moving_walking_(false) {
   initialize();
@@ -52,23 +52,23 @@ OP3Localization::OP3Localization()
   update();
 }
 
-OP3Localization::~OP3Localization() {}
+HUMANOID_ROBOTLocalization::~HUMANOID_ROBOTLocalization() {}
 
-void OP3Localization::initialize() {
+void HUMANOID_ROBOTLocalization::initialize() {
   // subscriber
   pelvis_pose_msg_sub_ = ros_node_.subscribe(
-      "/robotis/pelvis_pose", 5, &OP3Localization::pelvisPoseCallback, this);
+      "/robotis/pelvis_pose", 5, &HUMANOID_ROBOTLocalization::pelvisPoseCallback, this);
   //  pelvis_base_walking_msg_sub_ =
   //  ros_node_.subscribe("/robotis/pelvis_pose_base_walking", 5,
-  //                                                               &OP3Localization::pelvisPoseBaseWalkingCallback,
+  //                                                               &HUMANOID_ROBOTLocalization::pelvisPoseBaseWalkingCallback,
   //                                                               this);
 
   pelvis_reset_msg_sub_ =
       ros_node_.subscribe("/robotis/pelvis_pose_reset", 5,
-                          &OP3Localization::pelvisPoseResetCallback, this);
+                          &HUMANOID_ROBOTLocalization::pelvisPoseResetCallback, this);
 }
 
-void OP3Localization::pelvisPoseCallback(
+void HUMANOID_ROBOTLocalization::pelvisPoseCallback(
     const geometry_msgs::PoseStamped::ConstPtr &msg) {
   mutex_.lock();
 
@@ -78,7 +78,7 @@ void OP3Localization::pelvisPoseCallback(
   mutex_.unlock();
 }
 
-// void OP3Localization::pelvisPoseBaseWalkingCallback(const
+// void HUMANOID_ROBOTLocalization::pelvisPoseBaseWalkingCallback(const
 // geometry_msgs::PoseStamped::ConstPtr& msg)
 //{
 //   mutex_.lock();
@@ -130,7 +130,7 @@ void OP3Localization::pelvisPoseCallback(
 //  mutex_.unlock();
 //}
 
-void OP3Localization::pelvisPoseResetCallback(
+void HUMANOID_ROBOTLocalization::pelvisPoseResetCallback(
     const std_msgs::String::ConstPtr &msg) {
   if (msg->data == "reset") {
     ROS_INFO("Pelvis Pose Reset");
@@ -144,7 +144,7 @@ void OP3Localization::pelvisPoseResetCallback(
   }
 }
 
-void OP3Localization::process() {
+void HUMANOID_ROBOTLocalization::process() {
   update();
 
   pelvis_trans_.setOrigin(tf::Vector3(pelvis_pose_.pose.position.x,
@@ -167,7 +167,7 @@ void OP3Localization::process() {
   broadcaster_.sendTransform(tmp_tf_stamped);
 }
 
-void OP3Localization::update() {
+void HUMANOID_ROBOTLocalization::update() {
   mutex_.lock();
 
   Eigen::Quaterniond pose_old_quaternion(

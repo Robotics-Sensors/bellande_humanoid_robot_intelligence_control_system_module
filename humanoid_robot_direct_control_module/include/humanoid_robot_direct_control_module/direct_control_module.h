@@ -84,7 +84,7 @@ private:
   std::map<std::string, bool> collision_;
 
   bool checkSelfCollision();
-  bool getDiff(OP3KinematicsDynamics *kinematics, int end_index, int base_index,
+  bool getDiff(HUMANOID_ROBOTKinematicsDynamics *kinematics, int end_index, int base_index,
                double &diff);
 
   double default_moving_time_;
@@ -122,7 +122,7 @@ private:
   ros::Time last_msg_time_;
   std::string last_msg_;
 
-  OP3KinematicsDynamics *humanoid_robot_kinematics_;
+  HUMANOID_ROBOTKinematicsDynamics *humanoid_robot_kinematics_;
 };
 
 } // namespace robotis_op

@@ -50,7 +50,7 @@ Changelog for package humanoid_robot_manager
 * applying framework
 * clear offset file
 * modified start button function : restart -> restart or go init pose [humanoid_robot_manager]
-* modified the OP3.robot
+* modified the HUMANOID_ROBOT.robot
 * modified gain
 * updated for humanoid 2016
 * changed control cycle to 8ms

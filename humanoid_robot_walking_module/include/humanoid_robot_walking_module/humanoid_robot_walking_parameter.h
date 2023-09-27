@@ -16,8 +16,8 @@
 
 /* Author: Kayman */
 
-#ifndef OP3_WALKING_PARAMETER_H_
-#define OP3_WALKING_PARAMETER_H_
+#ifndef HUMANOID_ROBOT_WALKING_PARAMETER_H_
+#define HUMANOID_ROBOT_WALKING_PARAMETER_H_
 
 class WalkingTimeParameter {
 public:
@@ -50,4 +50,4 @@ private:
 
 class WalkingBalanceParameter {};
 
-#endif /* OP3_WALKING_PARAMETER_H_ */
+#endif /* HUMANOID_ROBOT_WALKING_PARAMETER_H_ */

@@ -16,8 +16,8 @@
 
 /* Author: SCH */
 
-#ifndef OP3_LOCALIZATION_H_
-#define OP3_LOCALIZATION_H_
+#ifndef HUMANOID_ROBOT_LOCALIZATION_H_
+#define HUMANOID_ROBOT_LOCALIZATION_H_
 
 // std
 #include <string>
@@ -42,7 +42,7 @@
 
 namespace robotis_op {
 
-class OP3Localization {
+class HUMANOID_ROBOTLocalization {
 
 private:
   // ros node handle
@@ -83,9 +83,9 @@ public:
                             Eigen::MatrixXd curr_orientation);
 
   // constructor
-  OP3Localization();
+  HUMANOID_ROBOTLocalization();
   // destructor
-  ~OP3Localization();
+  ~HUMANOID_ROBOTLocalization();
 
   void update();
   void process();

@@ -16,8 +16,8 @@
 
 /* Author: SCH */
 
-#ifndef OP3_ONLINE_WALKING_MODULE_OP3_KDL_
-#define OP3_ONLINE_WALKING_MODULE_OP3_KDL_
+#ifndef HUMANOID_ROBOT_ONLINE_WALKING_MODULE_HUMANOID_ROBOT_KDL_
+#define HUMANOID_ROBOT_ONLINE_WALKING_MODULE_HUMANOID_ROBOT_KDL_
 
 #pragma once
 
@@ -44,10 +44,10 @@
 #define LEG_JOINT_NUM (6)
 #define D2R (M_PI / 180.0)
 
-class OP3Kinematics {
+class HUMANOID_ROBOTKinematics {
 public:
-  OP3Kinematics();
-  virtual ~OP3Kinematics();
+  HUMANOID_ROBOTKinematics();
+  virtual ~HUMANOID_ROBOTKinematics();
 
   //  void initialize(std::vector<double_t> pelvis_position,
   //  std::vector<double_t> pelvis_orientation);

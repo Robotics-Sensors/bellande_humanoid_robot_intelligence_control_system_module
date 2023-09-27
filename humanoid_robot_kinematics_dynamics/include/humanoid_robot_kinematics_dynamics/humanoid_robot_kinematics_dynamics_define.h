@@ -16,8 +16,8 @@
 
 /* Author: SCH */
 
-#ifndef OP3_KINEMATICS_DYNAMICS_DEFINE_H_
-#define OP3_KINEMATICS_DYNAMICS_DEFINE_H_
+#ifndef HUMANOID_ROBOT_KINEMATICS_DYNAMICS_DEFINE_H_
+#define HUMANOID_ROBOT_KINEMATICS_DYNAMICS_DEFINE_H_
 
 namespace robotis_op {
 #define MAX_JOINT_ID (20)
@@ -44,4 +44,4 @@ namespace robotis_op {
 #define GRAVITY_ACCELERATION (9.8)
 } // namespace robotis_op
 
-#endif /* OP3_KINEMATICS_DYNAMICS_DEFINE_H_ */
+#endif /* HUMANOID_ROBOT_KINEMATICS_DYNAMICS_DEFINE_H_ */

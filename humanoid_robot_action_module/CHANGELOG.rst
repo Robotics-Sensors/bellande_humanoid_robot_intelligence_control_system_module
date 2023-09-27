@@ -33,6 +33,6 @@ Changelog for package humanoid_robot_action_module
 * modified action file
 * modified parameter for release
 * cleanup the code
-* splited the repository of ROBOTIS-OP3
+* splited the repository of ROBOTIS-HUMANOID_ROBOT
 * change package name : op2 -> humanoid_robot
 * Contributors: Kayman

@@ -16,8 +16,8 @@
 
 /* Authors: SCH, Jay Song, Kayman */
 
-#ifndef OP3_KINEMATICS_DYNAMICS_H_
-#define OP3_KINEMATICS_DYNAMICS_H_
+#ifndef HUMANOID_ROBOT_KINEMATICS_DYNAMICS_H_
+#define HUMANOID_ROBOT_KINEMATICS_DYNAMICS_H_
 
 #include <eigen3/Eigen/Eigen>
 #include <vector>
@@ -29,12 +29,12 @@ namespace robotis_op {
 
 enum TreeSelect { Manipulation, Walking, WholeBody };
 
-class OP3KinematicsDynamics {
+class HUMANOID_ROBOTKinematicsDynamics {
 
 public:
-  OP3KinematicsDynamics();
-  ~OP3KinematicsDynamics();
-  OP3KinematicsDynamics(TreeSelect tree);
+  HUMANOID_ROBOTKinematicsDynamics();
+  ~HUMANOID_ROBOTKinematicsDynamics();
+  HUMANOID_ROBOTKinematicsDynamics(TreeSelect tree);
 
   std::vector<int> findRoute(int to);
   std::vector<int> findRoute(int from, int to);
@@ -96,4 +96,4 @@ public:
 
 } // namespace robotis_op
 
-#endif /* OP3_KINEMATICS_DYNAMICS_H_ */
+#endif /* HUMANOID_ROBOT_KINEMATICS_DYNAMICS_H_ */

@@ -16,8 +16,8 @@
 
 /* Author: Kayman */
 
-#ifndef OP3_WALKING_MODULE_H_
-#define OP3_WALKING_MODULE_H_
+#ifndef HUMANOID_ROBOT_WALKING_MODULE_H_
+#define HUMANOID_ROBOT_WALKING_MODULE_H_
 
 #include "humanoid_robot_walking_parameter.h"
 
@@ -117,7 +117,7 @@ private:
   void saveWalkingParam(std::string &path);
   void iniPoseTraGene(double mov_time);
 
-  OP3KinematicsDynamics *humanoid_robot_kd_;
+  HUMANOID_ROBOTKinematicsDynamics *humanoid_robot_kd_;
   int control_cycle_msec_;
   std::string param_path_;
   boost::thread queue_thread_;
@@ -204,4 +204,4 @@ private:
 
 } // namespace robotis_op
 
-#endif /* OP3_WALKING_MODULE_H_ */
+#endif /* HUMANOID_ROBOT_WALKING_MODULE_H_ */

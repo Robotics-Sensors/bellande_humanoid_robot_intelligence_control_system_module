@@ -16,8 +16,8 @@
 
 /* Author: SCH */
 
-#ifndef OP3_ONLINE_WALKING_MODULE_ONLINE_WALKING_MODULE_H_
-#define OP3_ONLINE_WALKING_MODULE_ONLINE_WALKING_MODULE_H_
+#ifndef HUMANOID_ROBOT_ONLINE_WALKING_MODULE_ONLINE_WALKING_MODULE_H_
+#define HUMANOID_ROBOT_ONLINE_WALKING_MODULE_ONLINE_WALKING_MODULE_H_
 
 #include <boost/thread.hpp>
 #include <eigen3/Eigen/Eigen>
@@ -135,7 +135,7 @@ public:
   WholebodyControl *wholebody_control_;
   WalkingControl *walking_control_;
 
-  OP3Kinematics *humanoid_robot_kdl_;
+  HUMANOID_ROBOTKinematics *humanoid_robot_kdl_;
 
 private:
   void queueThread();
