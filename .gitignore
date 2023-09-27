@@ -11,3 +11,13 @@ qtcreator-build
 *.autosave
 /humanoid_robot_manager/config/offset.yaml
 .vs
+
+# Scripts
+init_setup.sh
+repository_recal.sh
+push.sh
+publish.sh
+ros_publish.sh
+prerelease_test.sh
+fix_errors.sh
+replace_add_index.sh
