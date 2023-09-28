@@ -1,6 +1,21 @@
-# ROBOTIS OP3
+# ROS/ROS2 Humanoid Robot Module
 
-## ROS Packages for ROBOTIS OP3 Messages
-|Version|Kinetic + Ubuntu Xenial|Noetic + Ubuntu Focal|
-|:---:|:---:|:---:|
-|[![GitHub version](https://badge.fury.io/gh/Robotics-Sensors%2FROBOTIS-OP3.svg)](https://badge.fury.io/gh/Robotics-Sensors%2FROBOTIS-OP3)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs.svg?branch=kinetic-devel)](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs.svg?branch=kinetic-devel)](https://travis-ci.org/ROBOTIS-GIT/ROBOTIS-OP3-msgs)|-|
+--------------------------------------------------------------------------------------------------------
+Updated Version [humanoid_robot_module](https://github.com/Robotics-Sensors/humanoid_robot_module) readme.
+
+Old Version/Previous Used for Different Context [ROBOTIS-OP3](https://github.com/ROBOTIS-GIT/ROBOTIS-OP3) readme.
+
+--------------------------------------------------------------------------------------------------------
+## Important
+The repository has diverged, as the old commits and codes are under the previous License and
+the new commits and codes are under New License
+
+--------------------------------------------------------------------------------------------------------
+Latest versions and Maintainer is on organization https://github.com/Robotics-Sensors
+
+
+### Maintainer
+* Ronaldson Bellande
+
+## License
+This SDK is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0), see [LICENSE](https://github.com/Robotics-Sensors/humanoid_robot_module/blob/main/LICENSE) and [NOTICE](https://github.com/Robotics-Sensors/humanoid_robot_module/blob/main/LICENSE) for more information.
