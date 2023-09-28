@@ -12,10 +12,10 @@ find_package(
   roscpp
   roslib
   std_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   humanoid_robot_action_module_msgs
-  robotis_framework_common
-  robotis_device
+  humanoid_robot_framework_common
+  humanoid_robot_device
 )
 
 find_package(Boost REQUIRED)
@@ -42,10 +42,10 @@ catkin_package(
   roscpp
   roslib
   std_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   humanoid_robot_action_module_msgs
-  robotis_framework_common
-  robotis_device
+  humanoid_robot_framework_common
+  humanoid_robot_device
   DEPENDS Boost
 )
 

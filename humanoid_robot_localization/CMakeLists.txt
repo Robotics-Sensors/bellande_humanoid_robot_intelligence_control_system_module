@@ -16,7 +16,7 @@ find_package(
   cmake_modules
   tf
   eigen_conversions
-  robotis_math
+  humanoid_robot_math
 )
 
 find_package(Boost REQUIRED COMPONENTS thread)
@@ -48,7 +48,7 @@ catkin_package(
   cmake_modules
   tf
   eigen_conversions
-  robotis_math
+  humanoid_robot_math
   DEPENDS Boost EIGEN3
 )
 

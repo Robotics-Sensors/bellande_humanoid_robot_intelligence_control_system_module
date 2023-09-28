@@ -22,9 +22,9 @@
 #include <eigen3/Eigen/Eigen>
 
 #include "humanoid_robot_kinematics_dynamics/humanoid_robot_kinematics_dynamics.h"
-#include "robotis_math/robotis_math.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 class TuningModuleState {
 public:
@@ -55,6 +55,6 @@ public:
   Eigen::MatrixXd via_time_;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* BASE_MODULE_ROBOTISSTATE_H_ */

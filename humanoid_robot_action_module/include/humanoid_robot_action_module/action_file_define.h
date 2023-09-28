@@ -19,7 +19,7 @@
 #ifndef ACTION_FILE_DEFINE_H_
 #define ACTION_FILE_DEFINE_H_
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 namespace action_file_define {
 
 const int MAXNUM_PAGE = 256;
@@ -67,6 +67,6 @@ typedef struct // Page Structure (total 512unsigned char)
 } Page;
 
 } // namespace action_file_define
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* ACTION_FILE_DEFINE_H_ */

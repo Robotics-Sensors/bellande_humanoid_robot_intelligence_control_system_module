@@ -19,14 +19,14 @@
 #include "humanoid_robot_tuning_module/tuning_module.h"
 #include <stdio.h>
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 TuningModule::TuningModule()
     : control_cycle_msec_(0), has_goal_joints_(false), ini_pose_only_(false),
       get_tuning_data_(false) {
   enable_ = false;
   module_name_ = "tuning_module";
-  control_mode_ = robotis_framework::PositionControl;
+  control_mode_ = humanoid_robot_framework::PositionControl;
 
   tuning_module_state_ = new TuningModuleState();
   joint_state_ = new TuneJointState();
@@ -35,19 +35,19 @@ TuningModule::TuningModule()
 TuningModule::~TuningModule() { queue_thread_.join(); }
 
 void TuningModule::initialize(const int control_cycle_msec,
-                              robotis_framework::Robot *robot) {
+                              humanoid_robot_framework::Robot *robot) {
   control_cycle_msec_ = control_cycle_msec;
   queue_thread_ = boost::thread(boost::bind(&TuningModule::queueThread, this));
 
   // init result, joint_id_table
-  for (std::map<std::string, robotis_framework::Dynamixel *>::iterator it =
+  for (std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator it =
            robot->dxls_.begin();
        it != robot->dxls_.end(); it++) {
     std::string joint_name = it->first;
-    robotis_framework::Dynamixel *dxl_info = it->second;
+    humanoid_robot_framework::Dynamixel *dxl_info = it->second;
 
     joint_name_to_id_[joint_name] = dxl_info->id_;
-    result_[joint_name] = new robotis_framework::DynamixelState();
+    result_[joint_name] = new humanoid_robot_framework::DynamixelState();
     result_[joint_name]->goal_position_ = dxl_info->dxl_state_->goal_position_;
 
     // Initialize RobotOffsetData
@@ -58,12 +58,12 @@ void TuningModule::initialize(const int control_cycle_msec,
   ros::NodeHandle ros_node;
 
   /* publish topics */
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>(
-      "/robotis/status", 1);
+  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
+      "/humanoid_robot/status", 1);
   set_ctrl_module_pub_ =
-      ros_node.advertise<std_msgs::String>("/robotis/enable_ctrl_module", 1);
-  sync_write_pub_ = ros_node.advertise<robotis_controller_msgs::SyncWriteItem>(
-      "/robotis/sync_write_item", 1);
+      ros_node.advertise<std_msgs::String>("/humanoid_robot/enable_ctrl_module", 1);
+  sync_write_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::SyncWriteItem>(
+      "/humanoid_robot/sync_write_item", 1);
 
   tune_pose_path_ =
       ros::package::getPath(ROS_PACKAGE_NAME) + "/data/tune_pose.yaml";
@@ -311,32 +311,32 @@ void TuningModule::queueThread() {
 
   /* subscribe topics */
   ros::Subscriber ini_pose_msg_sub =
-      ros_node.subscribe("/robotis/tuning_module/tuning_pose", 5,
+      ros_node.subscribe("/humanoid_robot/tuning_module/tuning_pose", 5,
                          &TuningModule::tunePoseMsgCallback, this);
 
   joint_offset_data_sub_ =
-      ros_node.subscribe("/robotis/tuning_module/joint_offset_data", 10,
+      ros_node.subscribe("/humanoid_robot/tuning_module/joint_offset_data", 10,
                          &TuningModule::jointOffsetDataCallback, this);
   joint_gain_data_sub_ =
-      ros_node.subscribe("/robotis/tuning_module/joint_gain_data", 10,
+      ros_node.subscribe("/humanoid_robot/tuning_module/joint_gain_data", 10,
                          &TuningModule::jointGainDataCallback, this);
   joint_torque_enable_sub_ =
-      ros_node.subscribe("/robotis/tuning_module/torque_enable", 10,
+      ros_node.subscribe("/humanoid_robot/tuning_module/torque_enable", 10,
                          &TuningModule::jointTorqueOnOffCallback, this);
-  command_sub_ = ros_node.subscribe("/robotis/tuning_module/command", 5,
+  command_sub_ = ros_node.subscribe("/humanoid_robot/tuning_module/command", 5,
                                     &TuningModule::commandCallback, this);
   offset_data_server_ = ros_node.advertiseService(
-      "robotis/tuning_module/get_present_joint_offset_data",
+      "humanoid_robot/tuning_module/get_present_joint_offset_data",
       &TuningModule::getPresentJointOffsetDataServiceCallback, this);
 
   set_module_client_ =
-      ros_node.serviceClient<robotis_controller_msgs::SetModule>(
-          "/robotis/set_present_ctrl_modules");
+      ros_node.serviceClient<humanoid_robot_controller_msgs::SetModule>(
+          "/humanoid_robot/set_present_ctrl_modules");
   enable_offset_pub_ =
-      ros_node.advertise<std_msgs::Bool>("/robotis/enable_offset", 1);
+      ros_node.advertise<std_msgs::Bool>("/humanoid_robot/enable_offset", 1);
   load_offset_client_ =
-      ros_node.serviceClient<robotis_controller_msgs::LoadOffset>(
-          "/robotis/load_offset");
+      ros_node.serviceClient<humanoid_robot_controller_msgs::LoadOffset>(
+          "/humanoid_robot/load_offset");
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
   while (ros_node.ok())
@@ -379,7 +379,7 @@ void TuningModule::targetPoseTrajGenerateProc() {
     Eigen::MatrixXd tra;
 
     if (tuning_module_state_->via_num_ == 0) {
-      tra = robotis_framework::calcMinimumJerkTra(
+      tra = humanoid_robot_framework::calcMinimumJerkTra(
           ini_value, 0.0, 0.0, tar_value, 0.0, 0.0,
           tuning_module_state_->smp_time_, tuning_module_state_->mov_time_);
     } else {
@@ -389,7 +389,7 @@ void TuningModule::targetPoseTrajGenerateProc() {
       Eigen::MatrixXd dd_via_value =
           tuning_module_state_->joint_via_ddpose_.col(id);
 
-      tra = robotis_framework::calcMinimumJerkTraWithViaPoints(
+      tra = humanoid_robot_framework::calcMinimumJerkTraWithViaPoints(
           tuning_module_state_->via_num_, ini_value, 0.0, 0.0, via_value,
           d_via_value, dd_via_value, tar_value, 0.0, 0.0,
           tuning_module_state_->smp_time_, tuning_module_state_->via_time_,
@@ -428,7 +428,7 @@ void TuningModule::poseGenerateProc(Eigen::MatrixXd joint_angle_pose) {
     ROS_INFO_STREAM("[ID : " << id << "] ini_value : " << ini_value
                              << "  tar_value : " << tar_value);
 
-    Eigen::MatrixXd tra = robotis_framework::calcMinimumJerkTra(
+    Eigen::MatrixXd tra = humanoid_robot_framework::calcMinimumJerkTra(
         ini_value, 0.0, 0.0, tar_value, 0.0, 0.0,
         tuning_module_state_->smp_time_, tuning_module_state_->mov_time_);
 
@@ -481,7 +481,7 @@ void TuningModule::poseGenerateProc(
     ROS_INFO_STREAM("[ID : " << id << "] ini_value : " << ini_value
                              << "  tar_value : " << tar_value);
 
-    Eigen::MatrixXd tra = robotis_framework::calcMinimumJerkTra(
+    Eigen::MatrixXd tra = humanoid_robot_framework::calcMinimumJerkTra(
         ini_value, 0.0, 0.0, tar_value, 0.0, 0.0,
         tuning_module_state_->smp_time_, tuning_module_state_->mov_time_);
 
@@ -498,19 +498,19 @@ void TuningModule::poseGenerateProc(
 bool TuningModule::isRunning() { return tuning_module_state_->is_moving_; }
 
 void TuningModule::process(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls,
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
     std::map<std::string, double> sensors) {
   if (enable_ == false)
     return;
 
   // get dxl data
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_iter = result_.begin();
        state_iter != result_.end(); state_iter++) {
     std::string joint_name = state_iter->first;
 
-    robotis_framework::Dynamixel *dxl = NULL;
-    std::map<std::string, robotis_framework::Dynamixel *>::iterator dxl_it =
+    humanoid_robot_framework::Dynamixel *dxl = NULL;
+    std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator dxl_it =
         dxls.find(joint_name);
     if (dxl_it != dxls.end())
       dxl = dxl_it->second;
@@ -554,7 +554,7 @@ void TuningModule::process(
   // if moving
   if (tuning_module_state_->is_moving_ == true) {
     if (tuning_module_state_->cnt_ == 1)
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+      publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                        "Start Init Pose");
 
     for (int id = 1; id <= MAX_JOINT_ID; id++)
@@ -595,7 +595,7 @@ void TuningModule::process(
   }
 
   // set goal state to result
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_iter = result_.begin();
        state_iter != result_.end(); state_iter++) {
     std::string joint_name = state_iter->first;
@@ -647,7 +647,7 @@ void TuningModule::process(
       (tuning_module_state_->is_moving_ == true)) {
     ROS_INFO("[end] send trajectory");
 
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                      "Finish Init Pose");
 
     tuning_module_state_->is_moving_ = false;
@@ -689,7 +689,7 @@ void TuningModule::setCtrlModule(std::string module) {
 }
 
 void TuningModule::callServiceSettingModule(const std::string &module_name) {
-  robotis_controller_msgs::SetModule set_module_srv;
+  humanoid_robot_controller_msgs::SetModule set_module_srv;
   set_module_srv.request.module_name = module_name;
 
   if (set_module_client_.call(set_module_srv) == false) {
@@ -701,7 +701,7 @@ void TuningModule::callServiceSettingModule(const std::string &module_name) {
 }
 
 void TuningModule::publishStatusMsg(unsigned int type, std::string msg) {
-  robotis_controller_msgs::StatusMsg status_msg;
+  humanoid_robot_controller_msgs::StatusMsg status_msg;
   status_msg.header.stamp = ros::Time::now();
   status_msg.type = type;
   status_msg.module_name = "Tune";
@@ -716,7 +716,7 @@ void TuningModule::commandCallback(const std_msgs::String::ConstPtr &msg) {
     // save current offset to yaml file
     saveOffsetToYaml(offset_path_);
 
-    // send a command to robotis_controller to load the new offset file
+    // send a command to humanoid_robot_controller to load the new offset file
     loadOffsetToController(offset_path_);
   } else if (msg->data == "save_gain") {
     // save gain to dxl init file
@@ -811,7 +811,7 @@ void TuningModule::jointGainDataCallback(
 
 void TuningModule::jointTorqueOnOffCallback(
     const humanoid_robot_tuning_module_msgs::JointTorqueOnOffArray::ConstPtr &msg) {
-  robotis_controller_msgs::SyncWriteItem syncwrite_msg;
+  humanoid_robot_controller_msgs::SyncWriteItem syncwrite_msg;
   syncwrite_msg.item_name = "torque_enable";
 
   for (unsigned int i = 0; i < msg->torque_enable_data.size(); i++) {
@@ -873,7 +873,7 @@ bool TuningModule::getPresentJointOffsetDataServiceCallback(
 }
 
 bool TuningModule::turnOnOffOffset(bool turn_on) {
-  ROS_WARN("Try to turn on/off offset in robotis_controller");
+  ROS_WARN("Try to turn on/off offset in humanoid_robot_controller");
 
   std_msgs::Bool enable_offset_msg;
   enable_offset_msg.data = turn_on;
@@ -884,14 +884,14 @@ bool TuningModule::turnOnOffOffset(bool turn_on) {
 }
 
 bool TuningModule::loadOffsetToController(const std::string &path) {
-  robotis_controller_msgs::LoadOffset load_offset_srv;
+  humanoid_robot_controller_msgs::LoadOffset load_offset_srv;
   load_offset_srv.request.file_path = path;
 
   if (load_offset_client_.call(load_offset_srv) == true) {
     if (load_offset_srv.response.result == true)
-      ROS_INFO("succeed to let robotis_controller load the offset");
+      ROS_INFO("succeed to let humanoid_robot_controller load the offset");
     else
-      ROS_ERROR("Failed to let robotis_controller load the offset");
+      ROS_ERROR("Failed to let humanoid_robot_controller load the offset");
 
     return load_offset_srv.response.result;
   } else {
@@ -1011,4 +1011,4 @@ void TuningModule::saveDxlInit(const std::string &path) {
   return;
 }
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op

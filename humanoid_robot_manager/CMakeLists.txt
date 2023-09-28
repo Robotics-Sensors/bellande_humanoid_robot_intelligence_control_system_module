@@ -13,17 +13,17 @@ add_compile_options(-std=c++11)
 find_package(
   catkin REQUIRED COMPONENTS
   roscpp
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   humanoid_robot_action_module_msgs
   humanoid_robot_walking_module_msgs
   humanoid_robot_online_walking_module_msgs
   humanoid_robot_tuning_module_msgs
   cmake_modules
   dynamixel_sdk
-  robotis_framework_common
-  robotis_device
-  robotis_controller
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_controller
+  humanoid_robot_math
   humanoid_robot_kinematics_dynamics
   humanoid_robot_balance_control
   open_cr_module
@@ -55,16 +55,16 @@ catkin_package(
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS
   roscpp
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   humanoid_robot_action_module_msgs
   humanoid_robot_walking_module_msgs
   humanoid_robot_online_walking_module_msgs
   cmake_modules
   dynamixel_sdk
-  robotis_framework_common
-  robotis_device
-  robotis_controller
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_controller
+  humanoid_robot_math
   humanoid_robot_kinematics_dynamics
   humanoid_robot_balance_control
   open_cr_module

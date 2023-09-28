@@ -18,7 +18,7 @@
 
 #include "humanoid_robot_tuning_module/tuning_module_state.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 TuningModuleState::TuningModuleState(int via_num) {
   is_moving_ = false;
   is_generating_ = false;
@@ -45,4 +45,4 @@ TuningModuleState::TuningModuleState(int via_num) {
 
 TuningModuleState::~TuningModuleState() {}
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op

@@ -34,7 +34,7 @@
 #include <string>
 #include <vector>
 //#include "humanoid_robot_kinematics_dynamics/humanoid_robot_kinematics_dynamics.h"
-#include "robotis_math/robotis_math.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
 
 enum WALKING_LEG { LEFT_LEG = 0, RIGHT_LEG = 1, LEG_COUNT = 2 };
 
@@ -107,11 +107,11 @@ public:
 protected:
   //  thormang3::KinematicsDynamics *robot_;
 
-  robotis_framework::MinimumJerk *body_trajectory_;
-  robotis_framework::MinimumJerkViaPoint *r_foot_tra_;
-  robotis_framework::MinimumJerkViaPoint *l_foot_tra_;
+  humanoid_robot_framework::MinimumJerk *body_trajectory_;
+  humanoid_robot_framework::MinimumJerkViaPoint *r_foot_tra_;
+  humanoid_robot_framework::MinimumJerkViaPoint *l_foot_tra_;
 
-  robotis_framework::PreviewControl *preview_control_;
+  humanoid_robot_framework::PreviewControl *preview_control_;
 
   double init_time_, fin_time_;
   double control_cycle_;

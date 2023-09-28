@@ -19,7 +19,7 @@
 #ifndef HUMANOID_ROBOT_KINEMATICS_DYNAMICS_DEFINE_H_
 #define HUMANOID_ROBOT_KINEMATICS_DYNAMICS_DEFINE_H_
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 #define MAX_JOINT_ID (20)
 #define ALL_JOINT_ID (31)
 
@@ -42,6 +42,6 @@ namespace robotis_op {
 #define ID_L_LEG_END (30)
 
 #define GRAVITY_ACCELERATION (9.8)
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* HUMANOID_ROBOT_KINEMATICS_DYNAMICS_DEFINE_H_ */

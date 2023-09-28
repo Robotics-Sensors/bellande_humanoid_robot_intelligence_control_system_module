@@ -19,7 +19,7 @@
 #include "humanoid_robot_kinematics_dynamics/humanoid_robot_kinematics_dynamics.h"
 #include <iostream>
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics() {}
 HUMANOID_ROBOTKinematicsDynamics::~HUMANOID_ROBOTKinematicsDynamics() {}
@@ -35,15 +35,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[0]->child_ = 23;
     humanoid_robot_link_data_[0]->mass_ = 0.0;
     humanoid_robot_link_data_[0]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[0]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[0]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[0]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[0]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[0]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     /* ----- passive joint -----*/
 
@@ -53,15 +53,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[23]->child_ = 24;
     humanoid_robot_link_data_[23]->mass_ = 0.0;
     humanoid_robot_link_data_[23]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[23]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[23]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[23]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[23]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[23]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     humanoid_robot_link_data_[24]->name_ = "passive_y";
     humanoid_robot_link_data_[24]->parent_ = 23;
@@ -69,15 +69,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[24]->child_ = 25;
     humanoid_robot_link_data_[24]->mass_ = 0.0;
     humanoid_robot_link_data_[24]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[24]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[24]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[24]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[24]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[24]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     humanoid_robot_link_data_[25]->name_ = "passive_z";
     humanoid_robot_link_data_[25]->parent_ = 24;
@@ -85,15 +85,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[25]->child_ = 26;
     humanoid_robot_link_data_[25]->mass_ = 0.0;
     humanoid_robot_link_data_[25]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.385);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.385);
     humanoid_robot_link_data_[25]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[25]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[25]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[25]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[25]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     humanoid_robot_link_data_[26]->name_ = "passive_roll";
     humanoid_robot_link_data_[26]->parent_ = 25;
@@ -101,15 +101,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[26]->child_ = 27;
     humanoid_robot_link_data_[26]->mass_ = 0.0;
     humanoid_robot_link_data_[26]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[26]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(1.0, 0.0, 0.0);
     humanoid_robot_link_data_[26]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[26]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[26]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[26]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     humanoid_robot_link_data_[27]->name_ = "passive_pitch";
     humanoid_robot_link_data_[27]->parent_ = 26;
@@ -117,15 +117,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[27]->child_ = 28;
     humanoid_robot_link_data_[27]->mass_ = 0.0;
     humanoid_robot_link_data_[27]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[27]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 1.0, 0.0);
     humanoid_robot_link_data_[27]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[27]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[27]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[27]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     humanoid_robot_link_data_[28]->name_ = "passive_yaw";
     humanoid_robot_link_data_[28]->parent_ = 27;
@@ -133,15 +133,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[28]->child_ = 29;
     humanoid_robot_link_data_[28]->mass_ = 0.0;
     humanoid_robot_link_data_[28]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[28]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 1.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 1.0);
     humanoid_robot_link_data_[28]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[28]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[28]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[28]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     /* ----- body -----*/
 
@@ -152,14 +152,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[29]->child_ = 19;
     humanoid_robot_link_data_[29]->mass_ = 6.869;
     humanoid_robot_link_data_[29]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[29]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[29]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.011, 0.000, 0.058);
+        humanoid_robot_framework::getTransitionXYZ(-0.011, 0.000, 0.058);
     humanoid_robot_link_data_[29]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[29]->joint_limit_min_ = -100.0;
-    humanoid_robot_link_data_[29]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[29]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.03603, 0.00000, 0.00016, 0.02210, 0.00000, 0.03830);
 
     /* ----- head -----*/
@@ -171,14 +171,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[19]->child_ = 20;
     humanoid_robot_link_data_[19]->mass_ = 0.087;
     humanoid_robot_link_data_[19]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0205);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0205);
     humanoid_robot_link_data_[19]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 1.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 1.0);
     humanoid_robot_link_data_[19]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.000, -0.002, 0.010);
+        humanoid_robot_framework::getTransitionXYZ(0.000, -0.002, 0.010);
     humanoid_robot_link_data_[19]->joint_limit_max_ = 0.5 * M_PI;
     humanoid_robot_link_data_[19]->joint_limit_min_ = -0.5 * M_PI;
-    humanoid_robot_link_data_[19]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[19]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00011, 0.00000, 0.00000, 0.00003, 0.00000, 0.00012);
 
     // head_tilt
@@ -188,14 +188,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[20]->child_ = -1;
     humanoid_robot_link_data_[20]->mass_ = 0.724;
     humanoid_robot_link_data_[20]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.03);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.03);
     humanoid_robot_link_data_[20]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, -1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -1.0, 0.0);
     humanoid_robot_link_data_[20]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.009, 0.046, 0.022);
+        humanoid_robot_framework::getTransitionXYZ(0.009, 0.046, 0.022);
     humanoid_robot_link_data_[20]->joint_limit_max_ = 0.5 * M_PI;
     humanoid_robot_link_data_[20]->joint_limit_min_ = -0.5 * M_PI;
-    humanoid_robot_link_data_[20]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[20]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00113, 0.00001, -0.00005, 0.00114, 0.00002, 0.00084);
 
     /*----- right arm -----*/
@@ -207,14 +207,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[1]->child_ = 3;
     humanoid_robot_link_data_[1]->mass_ = 0.194;
     humanoid_robot_link_data_[1]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, -0.0575, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -0.0575, 0.0);
     humanoid_robot_link_data_[1]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, -1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -1.0, 0.0);
     humanoid_robot_link_data_[1]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.003, -0.020, -0.005);
+        humanoid_robot_framework::getTransitionXYZ(-0.003, -0.020, -0.005);
     humanoid_robot_link_data_[1]->joint_limit_max_ = 0.5 * M_PI;
     humanoid_robot_link_data_[1]->joint_limit_min_ = -0.5 * M_PI;
-    humanoid_robot_link_data_[1]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[1]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00018, 0.0, 0.0, 0.00058, -0.00004, 0.00057);
 
     // right arm shoulder roll
@@ -224,14 +224,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[3]->child_ = 5;
     humanoid_robot_link_data_[3]->mass_ = 0.875;
     humanoid_robot_link_data_[3]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, -0.0245, -0.016);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -0.0245, -0.016);
     humanoid_robot_link_data_[3]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(-1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(-1.0, 0.0, 0.0);
     humanoid_robot_link_data_[3]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.060, -0.002, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(-0.060, -0.002, 0.000);
     humanoid_robot_link_data_[3]->joint_limit_max_ = 0.3 * M_PI;
     humanoid_robot_link_data_[3]->joint_limit_min_ = -0.5 * M_PI;
-    humanoid_robot_link_data_[3]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[3]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00043, 0.00000, 0.00000, 0.00112, 0.00000, 0.00113);
 
     // right arm elbow
@@ -241,14 +241,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[5]->child_ = 21;
     humanoid_robot_link_data_[5]->mass_ = 1.122;
     humanoid_robot_link_data_[5]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, -0.09, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -0.09, 0.0);
     humanoid_robot_link_data_[5]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(1.0, 0.0, 0.0);
     humanoid_robot_link_data_[5]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.000, -0.073, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(0.000, -0.073, 0.000);
     humanoid_robot_link_data_[5]->joint_limit_max_ = 0.5 * M_PI;
     humanoid_robot_link_data_[5]->joint_limit_min_ = -0.5 * M_PI;
-    humanoid_robot_link_data_[5]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[5]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00277, 0.00002, -0.00001, 0.00090, 0.00004, 0.00255);
 
     // right arm end effector
@@ -258,15 +258,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[21]->child_ = -1;
     humanoid_robot_link_data_[21]->mass_ = 0.0;
     humanoid_robot_link_data_[21]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, -0.15, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -0.15, 0.0);
     humanoid_robot_link_data_[21]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[21]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[21]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[21]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[21]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     /*----- left arm -----*/
 
@@ -277,14 +277,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[2]->child_ = 4;
     humanoid_robot_link_data_[2]->mass_ = 0.194;
     humanoid_robot_link_data_[2]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0575, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0575, 0.0);
     humanoid_robot_link_data_[2]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 1.0, 0.0);
     humanoid_robot_link_data_[2]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.003, 0.020, -0.005);
+        humanoid_robot_framework::getTransitionXYZ(-0.003, 0.020, -0.005);
     humanoid_robot_link_data_[2]->joint_limit_max_ = 0.5 * M_PI;
     humanoid_robot_link_data_[2]->joint_limit_min_ = -0.5 * M_PI;
-    humanoid_robot_link_data_[2]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[2]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00018, 0.00000, 0.00000, 0.00058, 0.00004, 0.00057);
 
     // left arm shoulder roll
@@ -294,14 +294,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[4]->child_ = 6;
     humanoid_robot_link_data_[4]->mass_ = 0.875;
     humanoid_robot_link_data_[4]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0245, -0.016);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0245, -0.016);
     humanoid_robot_link_data_[4]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(-1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(-1.0, 0.0, 0.0);
     humanoid_robot_link_data_[4]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.060, 0.002, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(-0.060, 0.002, 0.000);
     humanoid_robot_link_data_[4]->joint_limit_max_ = 0.5 * M_PI;
     humanoid_robot_link_data_[4]->joint_limit_min_ = -0.3 * M_PI;
-    humanoid_robot_link_data_[4]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[4]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00043, 0.00000, 0.00000, 0.00112, 0.00000, 0.00113);
 
     // left arm elbow
@@ -311,14 +311,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[6]->child_ = 22;
     humanoid_robot_link_data_[6]->mass_ = 1.122;
     humanoid_robot_link_data_[6]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.09, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.09, 0.0);
     humanoid_robot_link_data_[6]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(1.0, 0.0, 0.0);
     humanoid_robot_link_data_[6]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.073, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.073, 0.000);
     humanoid_robot_link_data_[6]->joint_limit_max_ = 0.5 * M_PI;
     humanoid_robot_link_data_[6]->joint_limit_min_ = -0.5 * M_PI;
-    humanoid_robot_link_data_[6]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[6]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00277, -0.00002, -0.00001, 0.00090, -0.00004, 0.00255);
 
     // left arm end effector
@@ -328,15 +328,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[22]->child_ = -1;
     humanoid_robot_link_data_[22]->mass_ = 0.0;
     humanoid_robot_link_data_[22]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.15, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.15, 0.0);
     humanoid_robot_link_data_[22]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[22]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[22]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[22]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[22]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     /* ----- right leg -----*/
 
@@ -347,14 +347,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[7]->child_ = 9;
     humanoid_robot_link_data_[7]->mass_ = 0.243;
     humanoid_robot_link_data_[7]->relative_position_ =
-        robotis_framework::getTransitionXYZ(-0.005, -0.035, -0.0907);
+        humanoid_robot_framework::getTransitionXYZ(-0.005, -0.035, -0.0907);
     humanoid_robot_link_data_[7]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, -1.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, -1.0);
     humanoid_robot_link_data_[7]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.012, 0.000, -0.025);
+        humanoid_robot_framework::getTransitionXYZ(-0.012, 0.000, -0.025);
     humanoid_robot_link_data_[7]->joint_limit_max_ = 0.45 * M_PI;
     humanoid_robot_link_data_[7]->joint_limit_min_ = -0.45 * M_PI;
-    humanoid_robot_link_data_[7]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[7]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00024, 0.00000, 0.00000, 0.00101, 0.00000, 0.00092);
 
     // right leg hip roll
@@ -364,14 +364,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[9]->child_ = 11;
     humanoid_robot_link_data_[9]->mass_ = 1.045;
     humanoid_robot_link_data_[9]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.000, -0.0285);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.000, -0.0285);
     humanoid_robot_link_data_[9]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(-1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(-1.0, 0.0, 0.0);
     humanoid_robot_link_data_[9]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.068, 0.000, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(-0.068, 0.000, 0.000);
     humanoid_robot_link_data_[9]->joint_limit_max_ = 0.3 * M_PI;
     humanoid_robot_link_data_[9]->joint_limit_min_ = -0.3 * M_PI;
-    humanoid_robot_link_data_[9]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[9]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00056, 0.00000, 0.00000, 0.00168, 0.00000, 0.00171);
 
     // right leg hip pitch
@@ -381,14 +381,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[11]->child_ = 13;
     humanoid_robot_link_data_[11]->mass_ = 3.095;
     humanoid_robot_link_data_[11]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.000, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.000, 0.000);
     humanoid_robot_link_data_[11]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, -1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -1.0, 0.0);
     humanoid_robot_link_data_[11]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.022, 0.007, -0.168);
+        humanoid_robot_framework::getTransitionXYZ(0.022, 0.007, -0.168);
     humanoid_robot_link_data_[11]->joint_limit_max_ = 0.4 * M_PI;
     humanoid_robot_link_data_[11]->joint_limit_min_ = -0.4 * M_PI;
-    humanoid_robot_link_data_[11]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[11]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.04329, -0.00027, 0.00286, 0.04042, 0.00203, 0.00560);
 
     // right leg knee
@@ -398,14 +398,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[13]->child_ = 15;
     humanoid_robot_link_data_[13]->mass_ = 2.401;
     humanoid_robot_link_data_[13]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.000, -0.110);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.000, -0.110);
     humanoid_robot_link_data_[13]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, -1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -1.0, 0.0);
     humanoid_robot_link_data_[13]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.002, 0.066, -0.183);
+        humanoid_robot_framework::getTransitionXYZ(-0.002, 0.066, -0.183);
     humanoid_robot_link_data_[13]->joint_limit_max_ = 0.1 * M_PI;
     humanoid_robot_link_data_[13]->joint_limit_min_ = -0.7 * M_PI;
-    humanoid_robot_link_data_[13]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[13]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.01971, -0.00031, -0.00294, 0.01687, -0.00140, 0.00574);
 
     // right leg ankle pitch
@@ -415,14 +415,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[15]->child_ = 17;
     humanoid_robot_link_data_[15]->mass_ = 1.045;
     humanoid_robot_link_data_[15]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.000, -0.110);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.000, -0.110);
     humanoid_robot_link_data_[15]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 1.0, 0.0);
     humanoid_robot_link_data_[15]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.011, 0.033, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(-0.011, 0.033, 0.000);
     humanoid_robot_link_data_[15]->joint_limit_max_ = 0.45 * M_PI;
     humanoid_robot_link_data_[15]->joint_limit_min_ = -0.45 * M_PI;
-    humanoid_robot_link_data_[15]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[15]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00056, 0.00000, 0.00000, 0.00168, 0.00000, 0.00171);
 
     // right leg ankle roll
@@ -432,14 +432,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[17]->child_ = 31;
     humanoid_robot_link_data_[17]->mass_ = 0.223;
     humanoid_robot_link_data_[17]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.000, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.000, 0.000);
     humanoid_robot_link_data_[17]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(1.0, 0.0, 0.0);
     humanoid_robot_link_data_[17]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.070, 0.000, -0.048);
+        humanoid_robot_framework::getTransitionXYZ(-0.070, 0.000, -0.048);
     humanoid_robot_link_data_[17]->joint_limit_max_ = 0.45 * M_PI;
     humanoid_robot_link_data_[17]->joint_limit_min_ = -0.45 * M_PI;
-    humanoid_robot_link_data_[17]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[17]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00022, 0.00000, -0.00001, 0.00099, 0.00000, 0.00091);
 
     // right leg end
@@ -449,15 +449,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[31]->child_ = -1;
     humanoid_robot_link_data_[31]->mass_ = 0.0;
     humanoid_robot_link_data_[31]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, -0.0305);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, -0.0305);
     humanoid_robot_link_data_[31]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[31]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[31]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[31]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[31]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     /* ----- left leg -----*/
 
@@ -468,14 +468,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[8]->child_ = 10;
     humanoid_robot_link_data_[8]->mass_ = 0.243;
     humanoid_robot_link_data_[8]->relative_position_ =
-        robotis_framework::getTransitionXYZ(-0.005, 0.035, -0.0907);
+        humanoid_robot_framework::getTransitionXYZ(-0.005, 0.035, -0.0907);
     humanoid_robot_link_data_[8]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, -1.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, -1.0);
     humanoid_robot_link_data_[8]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.012, 0.000, -0.025);
+        humanoid_robot_framework::getTransitionXYZ(0.012, 0.000, -0.025);
     humanoid_robot_link_data_[8]->joint_limit_max_ = 0.45 * M_PI;
     humanoid_robot_link_data_[8]->joint_limit_min_ = -0.45 * M_PI;
-    humanoid_robot_link_data_[8]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[8]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00024, 0.00000, 0.00000, 0.00101, 0.00000, 0.00092);
 
     // left leg hip roll
@@ -485,14 +485,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[10]->child_ = 12;
     humanoid_robot_link_data_[10]->mass_ = 1.045;
     humanoid_robot_link_data_[10]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, -0.0285);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, -0.0285);
     humanoid_robot_link_data_[10]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(-1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(-1.0, 0.0, 0.0);
     humanoid_robot_link_data_[10]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.068, 0.000, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(-0.068, 0.000, 0.000);
     humanoid_robot_link_data_[10]->joint_limit_max_ = 0.3 * M_PI;
     humanoid_robot_link_data_[10]->joint_limit_min_ = -0.3 * M_PI;
-    humanoid_robot_link_data_[10]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[10]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00056, 0.00000, 0.00000, 0.00168, 0.00000, 0.00171);
 
     // left leg hip pitch
@@ -502,14 +502,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[12]->child_ = 14;
     humanoid_robot_link_data_[12]->mass_ = 3.095;
     humanoid_robot_link_data_[12]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[12]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 1.0, 0.0);
     humanoid_robot_link_data_[12]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.022, -0.007, -0.168);
+        humanoid_robot_framework::getTransitionXYZ(0.022, -0.007, -0.168);
     humanoid_robot_link_data_[12]->joint_limit_max_ = 0.4 * M_PI;
     humanoid_robot_link_data_[12]->joint_limit_min_ = -0.4 * M_PI;
-    humanoid_robot_link_data_[12]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[12]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.04328, 0.00028, 0.00288, 0.04042, -0.00202, 0.00560);
 
     // left leg knee pitch
@@ -519,14 +519,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[14]->child_ = 16;
     humanoid_robot_link_data_[14]->mass_ = 2.401;
     humanoid_robot_link_data_[14]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.000, -0.110);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.000, -0.110);
     humanoid_robot_link_data_[14]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 1.0, 0.0);
     humanoid_robot_link_data_[14]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.002, -0.066, -0.183);
+        humanoid_robot_framework::getTransitionXYZ(-0.002, -0.066, -0.183);
     humanoid_robot_link_data_[14]->joint_limit_max_ = 0.7 * M_PI;
     humanoid_robot_link_data_[14]->joint_limit_min_ = -0.1 * M_PI;
-    humanoid_robot_link_data_[14]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[14]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.01971, 0.00031, -0.00294, 0.01687, 0.00140, 0.00574);
 
     // left leg ankle pitch
@@ -536,14 +536,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[16]->child_ = 18;
     humanoid_robot_link_data_[16]->mass_ = 1.045;
     humanoid_robot_link_data_[16]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.000, -0.110);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.000, -0.110);
     humanoid_robot_link_data_[16]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, -1.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, -1.0, 0.0);
     humanoid_robot_link_data_[16]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.011, -0.033, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(-0.011, -0.033, 0.000);
     humanoid_robot_link_data_[16]->joint_limit_max_ = 0.45 * M_PI;
     humanoid_robot_link_data_[16]->joint_limit_min_ = -0.45 * M_PI;
-    humanoid_robot_link_data_[16]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[16]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00056, 0.00000, 0.00000, 0.00168, 0.00000, 0.00171);
 
     // left leg ankle roll
@@ -553,14 +553,14 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[18]->child_ = 30;
     humanoid_robot_link_data_[18]->mass_ = 0.223;
     humanoid_robot_link_data_[18]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.000, 0.000, 0.000);
+        humanoid_robot_framework::getTransitionXYZ(0.000, 0.000, 0.000);
     humanoid_robot_link_data_[18]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(1.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(1.0, 0.0, 0.0);
     humanoid_robot_link_data_[18]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(-0.070, 0.000, -0.048);
+        humanoid_robot_framework::getTransitionXYZ(-0.070, 0.000, -0.048);
     humanoid_robot_link_data_[18]->joint_limit_max_ = 0.45 * M_PI;
     humanoid_robot_link_data_[18]->joint_limit_min_ = -0.45 * M_PI;
-    humanoid_robot_link_data_[18]->inertia_ = robotis_framework::getInertiaXYZ(
+    humanoid_robot_link_data_[18]->inertia_ = humanoid_robot_framework::getInertiaXYZ(
         0.00022, 0.00000, -0.00001, 0.00099, 0.00000, 0.00091);
 
     // left leg end
@@ -570,15 +570,15 @@ HUMANOID_ROBOTKinematicsDynamics::HUMANOID_ROBOTKinematicsDynamics(TreeSelect tr
     humanoid_robot_link_data_[30]->child_ = -1;
     humanoid_robot_link_data_[30]->mass_ = 0.0;
     humanoid_robot_link_data_[30]->relative_position_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, -0.0305);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, -0.0305);
     humanoid_robot_link_data_[30]->joint_axis_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[30]->center_of_mass_ =
-        robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+        humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
     humanoid_robot_link_data_[30]->joint_limit_max_ = 100.0;
     humanoid_robot_link_data_[30]->joint_limit_min_ = -100.0;
     humanoid_robot_link_data_[30]->inertia_ =
-        robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
   }
 
   thigh_length_m_ = std::fabs(
@@ -670,8 +670,8 @@ void HUMANOID_ROBOTKinematicsDynamics::calcForwardKinematics(int joint_id) {
 
   if (joint_id == 0) {
     humanoid_robot_link_data_[0]->position_ = Eigen::MatrixXd::Zero(3, 1);
-    humanoid_robot_link_data_[0]->orientation_ = robotis_framework::calcRodrigues(
-        robotis_framework::calcHatto(humanoid_robot_link_data_[0]->joint_axis_),
+    humanoid_robot_link_data_[0]->orientation_ = humanoid_robot_framework::calcRodrigues(
+        humanoid_robot_framework::calcHatto(humanoid_robot_link_data_[0]->joint_axis_),
         humanoid_robot_link_data_[0]->joint_angle_);
   }
 
@@ -684,8 +684,8 @@ void HUMANOID_ROBOTKinematicsDynamics::calcForwardKinematics(int joint_id) {
         humanoid_robot_link_data_[parent]->position_;
     humanoid_robot_link_data_[joint_id]->orientation_ =
         humanoid_robot_link_data_[parent]->orientation_ *
-        robotis_framework::calcRodrigues(
-            robotis_framework::calcHatto(humanoid_robot_link_data_[joint_id]->joint_axis_),
+        humanoid_robot_framework::calcRodrigues(
+            humanoid_robot_framework::calcHatto(humanoid_robot_link_data_[joint_id]->joint_axis_),
             humanoid_robot_link_data_[joint_id]->joint_angle_);
 
     humanoid_robot_link_data_[joint_id]->transformation_.block<3, 1>(0, 3) =
@@ -711,7 +711,7 @@ Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcJacobian(std::vector<int> 
     Eigen::MatrixXd tar_orientation = humanoid_robot_link_data_[curr_id]->orientation_ *
                                       humanoid_robot_link_data_[curr_id]->joint_axis_;
 
-    jacobian.block(0, id, 3, 1) = robotis_framework::calcCross(
+    jacobian.block(0, id, 3, 1) = humanoid_robot_framework::calcCross(
         tar_orientation, tar_position - humanoid_robot_link_data_[curr_id]->position_);
     jacobian.block(3, id, 3, 1) = tar_orientation;
   }
@@ -736,7 +736,7 @@ Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcJacobianCOM(std::vector<in
                                       humanoid_robot_link_data_[curr_id]->joint_axis_;
 
     jacobian_com.block(0, id, 3, 1) =
-        robotis_framework::calcCross(tar_orientation, og);
+        humanoid_robot_framework::calcCross(tar_orientation, og);
     jacobian_com.block(3, id, 3, 1) = tar_orientation;
   }
 
@@ -749,7 +749,7 @@ Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcVWerr(
   Eigen::MatrixXd pos_err = tar_position - curr_position;
   Eigen::MatrixXd ori_err = curr_orientation.transpose() * tar_orientation;
   Eigen::MatrixXd ori_err_dash =
-      curr_orientation * robotis_framework::convertRotToOmega(ori_err);
+      curr_orientation * humanoid_robot_framework::convertRotToOmega(ori_err);
 
   Eigen::MatrixXd err = Eigen::MatrixXd::Zero(6, 1);
   err.block<3, 1>(0, 0) = pos_err;
@@ -1051,7 +1051,7 @@ bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematicsForLeg(double *out, 
   double ankle_length = ankle_length_m_;
 
   trans_ad =
-      robotis_framework::getTransformationXYZRPY(x, y, z, roll, pitch, yaw);
+      humanoid_robot_framework::getTransformationXYZRPY(x, y, z, roll, pitch, yaw);
 
   vec.coeffRef(0) = trans_ad.coeff(0, 3) + trans_ad.coeff(0, 2) * ankle_length;
   vec.coeffRef(1) = trans_ad.coeff(1, 3) + trans_ad.coeff(1, 2) * ankle_length;
@@ -1093,7 +1093,7 @@ bool HUMANOID_ROBOTKinematicsDynamics::calcInverseKinematicsForLeg(double *out, 
     *(out + 5) = arc_cos;
 
   // Get Hip Yaw
-  trans_cd = robotis_framework::getTransformationXYZRPY(0, 0, -ankle_length,
+  trans_cd = humanoid_robot_framework::getTransformationXYZRPY(0, 0, -ankle_length,
                                                         *(out + 5), 0, 0);
   trans_cd.computeInverseWithCheck(trans_dc, invertible);
   if (invertible == false)
@@ -1284,4 +1284,4 @@ Eigen::MatrixXd HUMANOID_ROBOTKinematicsDynamics::calcPreviewParam(double previe
   return f_;
 }
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op

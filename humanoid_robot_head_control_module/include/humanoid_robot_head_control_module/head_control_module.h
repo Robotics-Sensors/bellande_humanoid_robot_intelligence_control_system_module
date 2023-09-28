@@ -30,22 +30,22 @@
 #include <std_msgs/Empty.h>
 #include <std_msgs/String.h>
 
-#include "robotis_controller_msgs/StatusMsg.h"
-#include "robotis_framework_common/motion_module.h"
-#include "robotis_math/robotis_math.h"
+#include "humanoid_robot_controller_msgs/StatusMsg.h"
+#include "humanoid_robot_framework_common/motion_module.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 class HeadControlModule
-    : public robotis_framework::MotionModule,
-      public robotis_framework::Singleton<HeadControlModule> {
+    : public humanoid_robot_framework::MotionModule,
+      public humanoid_robot_framework::Singleton<HeadControlModule> {
 public:
   HeadControlModule();
   virtual ~HeadControlModule();
 
   void initialize(const int control_cycle_msec,
-                  robotis_framework::Robot *robot);
-  void process(std::map<std::string, robotis_framework::Dynamixel *> dxls,
+                  humanoid_robot_framework::Robot *robot);
+  void process(std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
                std::map<std::string, double> sensors);
 
   void stop();
@@ -118,6 +118,6 @@ private:
   std::string last_msg_;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* HEAD_CONTROL_MODULE_H_ */

@@ -10,7 +10,7 @@ project(humanoid_robot_kinematics_dynamics)
 find_package(
   catkin REQUIRED COMPONENTS
   roscpp
-  robotis_math
+  humanoid_robot_math
   cmake_modules
 )
 
@@ -36,7 +36,7 @@ catkin_package(
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS
   roscpp
-  robotis_math
+  humanoid_robot_math
   cmake_modules
   DEPENDS EIGEN3
 )

@@ -19,14 +19,14 @@
 #include "humanoid_robot_base_module/base_module.h"
 #include <stdio.h>
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 BaseModule::BaseModule()
     : control_cycle_msec_(0), has_goal_joints_(false), ini_pose_only_(false),
       init_pose_file_path_("") {
   enable_ = false;
   module_name_ = "base_module";
-  control_mode_ = robotis_framework::PositionControl;
+  control_mode_ = humanoid_robot_framework::PositionControl;
 
   base_module_state_ = new BaseModuleState();
   joint_state_ = new BaseJointState();
@@ -35,19 +35,19 @@ BaseModule::BaseModule()
 BaseModule::~BaseModule() { queue_thread_.join(); }
 
 void BaseModule::initialize(const int control_cycle_msec,
-                            robotis_framework::Robot *robot) {
+                            humanoid_robot_framework::Robot *robot) {
   control_cycle_msec_ = control_cycle_msec;
   queue_thread_ = boost::thread(boost::bind(&BaseModule::queueThread, this));
 
   // init result, joint_id_table
-  for (std::map<std::string, robotis_framework::Dynamixel *>::iterator it =
+  for (std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator it =
            robot->dxls_.begin();
        it != robot->dxls_.end(); it++) {
     std::string joint_name = it->first;
-    robotis_framework::Dynamixel *dxl_info = it->second;
+    humanoid_robot_framework::Dynamixel *dxl_info = it->second;
 
     joint_name_to_id_[joint_name] = dxl_info->id_;
-    result_[joint_name] = new robotis_framework::DynamixelState();
+    result_[joint_name] = new humanoid_robot_framework::DynamixelState();
     result_[joint_name]->goal_position_ = dxl_info->dxl_state_->goal_position_;
   }
 
@@ -59,10 +59,10 @@ void BaseModule::initialize(const int control_cycle_msec,
                                   "/data/ini_pose.yaml");
 
   /* publish topics */
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>(
-      "/robotis/status", 1);
+  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
+      "/humanoid_robot/status", 1);
   set_ctrl_module_pub_ =
-      ros_node.advertise<std_msgs::String>("/robotis/enable_ctrl_module", 1);
+      ros_node.advertise<std_msgs::String>("/humanoid_robot/enable_ctrl_module", 1);
 }
 
 void BaseModule::parseInitPoseData(const std::string &path) {
@@ -145,10 +145,10 @@ void BaseModule::queueThread() {
 
   /* subscribe topics */
   ros::Subscriber ini_pose_msg_sub = ros_node.subscribe(
-      "/robotis/base/ini_pose", 5, &BaseModule::initPoseMsgCallback, this);
+      "/humanoid_robot/base/ini_pose", 5, &BaseModule::initPoseMsgCallback, this);
   set_module_client_ =
-      ros_node.serviceClient<robotis_controller_msgs::SetModule>(
-          "/robotis/set_present_ctrl_modules");
+      ros_node.serviceClient<humanoid_robot_controller_msgs::SetModule>(
+          "/humanoid_robot/set_present_ctrl_modules");
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
   while (ros_node.ok())
@@ -187,7 +187,7 @@ void BaseModule::initPoseTrajGenerateProc() {
     Eigen::MatrixXd tra;
 
     if (base_module_state_->via_num_ == 0) {
-      tra = robotis_framework::calcMinimumJerkTra(
+      tra = humanoid_robot_framework::calcMinimumJerkTra(
           ini_value, 0.0, 0.0, tar_value, 0.0, 0.0,
           base_module_state_->smp_time_, base_module_state_->mov_time_);
     } else {
@@ -197,7 +197,7 @@ void BaseModule::initPoseTrajGenerateProc() {
       Eigen::MatrixXd dd_via_value =
           base_module_state_->joint_via_ddpose_.col(id);
 
-      tra = robotis_framework::calcMinimumJerkTraWithViaPoints(
+      tra = humanoid_robot_framework::calcMinimumJerkTraWithViaPoints(
           base_module_state_->via_num_, ini_value, 0.0, 0.0, via_value,
           d_via_value, dd_via_value, tar_value, 0.0, 0.0,
           base_module_state_->smp_time_, base_module_state_->via_time_,
@@ -235,7 +235,7 @@ void BaseModule::poseGenerateProc(Eigen::MatrixXd joint_angle_pose) {
     ROS_INFO_STREAM("[ID : " << id << "] ini_value : " << ini_value
                              << "  tar_value : " << tar_value);
 
-    Eigen::MatrixXd tra = robotis_framework::calcMinimumJerkTra(
+    Eigen::MatrixXd tra = humanoid_robot_framework::calcMinimumJerkTra(
         ini_value, 0.0, 0.0, tar_value, 0.0, 0.0, base_module_state_->smp_time_,
         base_module_state_->mov_time_);
 
@@ -287,7 +287,7 @@ void BaseModule::poseGenerateProc(
     ROS_INFO_STREAM("[ID : " << id << "] ini_value : " << ini_value
                              << "  tar_value : " << tar_value);
 
-    Eigen::MatrixXd tra = robotis_framework::calcMinimumJerkTra(
+    Eigen::MatrixXd tra = humanoid_robot_framework::calcMinimumJerkTra(
         ini_value, 0.0, 0.0, tar_value, 0.0, 0.0, base_module_state_->smp_time_,
         base_module_state_->mov_time_);
 
@@ -304,19 +304,19 @@ void BaseModule::poseGenerateProc(
 bool BaseModule::isRunning() { return base_module_state_->is_moving_; }
 
 void BaseModule::process(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls,
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
     std::map<std::string, double> sensors) {
   if (enable_ == false)
     return;
 
   /*----- write curr position -----*/
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_iter = result_.begin();
        state_iter != result_.end(); state_iter++) {
     std::string joint_name = state_iter->first;
 
-    robotis_framework::Dynamixel *dxl = NULL;
-    std::map<std::string, robotis_framework::Dynamixel *>::iterator dxl_it =
+    humanoid_robot_framework::Dynamixel *dxl = NULL;
+    std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator dxl_it =
         dxls.find(joint_name);
     if (dxl_it != dxls.end())
       dxl = dxl_it->second;
@@ -337,7 +337,7 @@ void BaseModule::process(
   /* ----- send trajectory ----- */
   if (base_module_state_->is_moving_ == true) {
     if (base_module_state_->cnt_ == 1)
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+      publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                        "Start Init Pose");
 
     for (int id = 1; id <= MAX_JOINT_ID; id++)
@@ -348,7 +348,7 @@ void BaseModule::process(
   }
 
   /*----- set joint data -----*/
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_iter = result_.begin();
        state_iter != result_.end(); state_iter++) {
     std::string joint_name = state_iter->first;
@@ -364,7 +364,7 @@ void BaseModule::process(
       (base_module_state_->is_moving_ == true)) {
     ROS_INFO("[end] send trajectory");
 
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                      "Finish Init Pose");
 
     base_module_state_->is_moving_ = false;
@@ -392,7 +392,7 @@ void BaseModule::setCtrlModule(std::string module) {
 }
 
 void BaseModule::callServiceSettingModule(const std::string &module_name) {
-  robotis_controller_msgs::SetModule set_module_srv;
+  humanoid_robot_controller_msgs::SetModule set_module_srv;
   set_module_srv.request.module_name = module_name;
 
   if (set_module_client_.call(set_module_srv) == false) {
@@ -404,7 +404,7 @@ void BaseModule::callServiceSettingModule(const std::string &module_name) {
 }
 
 void BaseModule::publishStatusMsg(unsigned int type, std::string msg) {
-  robotis_controller_msgs::StatusMsg status_msg;
+  humanoid_robot_controller_msgs::StatusMsg status_msg;
   status_msg.header.stamp = ros::Time::now();
   status_msg.type = type;
   status_msg.module_name = "Base";
@@ -412,4 +412,4 @@ void BaseModule::publishStatusMsg(unsigned int type, std::string msg) {
 
   status_msg_pub_.publish(status_msg);
 }
-} // namespace robotis_op
+} // namespace humanoid_robot_op

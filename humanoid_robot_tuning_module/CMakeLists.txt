@@ -16,12 +16,12 @@ find_package(
   roslib
   std_msgs
   geometry_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   humanoid_robot_tuning_module_msgs
   cmake_modules
-  robotis_framework_common
-  robotis_device
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_math
   humanoid_robot_kinematics_dynamics
 )
 
@@ -71,11 +71,11 @@ catkin_package(
   roslib
   std_msgs
   geometry_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   cmake_modules
-  robotis_framework_common
-  robotis_device
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_math
   humanoid_robot_kinematics_dynamics
   humanoid_robot_tuning_module_msgs
   DEPENDS Boost EIGEN3

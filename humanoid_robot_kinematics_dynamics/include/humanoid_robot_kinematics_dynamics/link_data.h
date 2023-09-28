@@ -21,9 +21,9 @@
 
 #include <eigen3/Eigen/Eigen>
 
-#include "robotis_math/robotis_math.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 class LinkData {
 public:
@@ -55,6 +55,6 @@ public:
   Eigen::MatrixXd transformation_;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* LINK_DATA_H_ */

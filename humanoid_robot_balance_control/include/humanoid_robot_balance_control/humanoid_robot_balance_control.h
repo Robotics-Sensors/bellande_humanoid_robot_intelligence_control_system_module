@@ -21,9 +21,9 @@
 
 #include <eigen3/Eigen/Eigen>
 
-#include "robotis_math/robotis_math.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 class BalanceControlError {
 public:
@@ -427,6 +427,6 @@ private:
   double foot_yaw_adjustment_abs_max_rad_;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif

@@ -18,7 +18,7 @@ notifications:
       - ronaldsonbellande@gmail.com
 env:
   matrix:
-    - ROS_DISTRO=noetic ROS_REPO=ros-shadow-fixed UPSTREAM_WORKSPACE=file   OS_NAME=ubuntu OS_CODE_NAME=focal $ROSINSTALL_FILENAME=".robotis_humanoid_robot.rosinstall"
+    - ROS_DISTRO=noetic ROS_REPO=ros-shadow-fixed UPSTREAM_WORKSPACE=file   OS_NAME=ubuntu OS_CODE_NAME=focal $ROSINSTALL_FILENAME=".humanoid_robot.rosinstall"
 branches:
   only:
     - master

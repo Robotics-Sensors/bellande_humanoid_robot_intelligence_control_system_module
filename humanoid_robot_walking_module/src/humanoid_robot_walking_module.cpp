@@ -18,12 +18,12 @@
 
 #include "humanoid_robot_walking_module/humanoid_robot_walking_module.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 WalkingModule::WalkingModule() : control_cycle_msec_(8), DEBUG(false) {
   enable_ = false;
   module_name_ = "walking_module";
-  control_mode_ = robotis_framework::PositionControl;
+  control_mode_ = humanoid_robot_framework::PositionControl;
 
   init_pose_count_ = 0;
   walking_state_ = WalkingReady;
@@ -32,22 +32,22 @@ WalkingModule::WalkingModule() : control_cycle_msec_(8), DEBUG(false) {
   humanoid_robot_kd_ = new HUMANOID_ROBOTKinematicsDynamics(WholeBody);
 
   // result
-  result_["r_hip_yaw"] = new robotis_framework::DynamixelState();
-  result_["r_hip_roll"] = new robotis_framework::DynamixelState();
-  result_["r_hip_pitch"] = new robotis_framework::DynamixelState();
-  result_["r_knee"] = new robotis_framework::DynamixelState();
-  result_["r_ank_pitch"] = new robotis_framework::DynamixelState();
-  result_["r_ank_roll"] = new robotis_framework::DynamixelState();
+  result_["r_hip_yaw"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_hip_roll"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_hip_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_knee"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_ank_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_ank_roll"] = new humanoid_robot_framework::DynamixelState();
 
-  result_["l_hip_yaw"] = new robotis_framework::DynamixelState();
-  result_["l_hip_roll"] = new robotis_framework::DynamixelState();
-  result_["l_hip_pitch"] = new robotis_framework::DynamixelState();
-  result_["l_knee"] = new robotis_framework::DynamixelState();
-  result_["l_ank_pitch"] = new robotis_framework::DynamixelState();
-  result_["l_ank_roll"] = new robotis_framework::DynamixelState();
+  result_["l_hip_yaw"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_hip_roll"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_hip_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_knee"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_ank_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_ank_roll"] = new humanoid_robot_framework::DynamixelState();
 
-  result_["r_sho_pitch"] = new robotis_framework::DynamixelState();
-  result_["l_sho_pitch"] = new robotis_framework::DynamixelState();
+  result_["r_sho_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_sho_pitch"] = new humanoid_robot_framework::DynamixelState();
 
   // joint table
   joint_table_["r_hip_yaw"] = 0;
@@ -76,7 +76,7 @@ WalkingModule::WalkingModule() : control_cycle_msec_(8), DEBUG(false) {
 WalkingModule::~WalkingModule() { queue_thread_.join(); }
 
 void WalkingModule::initialize(const int control_cycle_msec,
-                               robotis_framework::Robot *robot) {
+                               humanoid_robot_framework::Robot *robot) {
   queue_thread_ = boost::thread(boost::bind(&WalkingModule::queueThread, this));
   control_cycle_msec_ = control_cycle_msec;
 
@@ -157,20 +157,20 @@ void WalkingModule::queueThread() {
   ros_node.setCallbackQueue(&callback_queue);
 
   /* publish topics */
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>(
-      "robotis/status", 1);
+  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
+      "humanoid_robot/status", 1);
 
   /* ROS Service Callback Functions */
   ros::ServiceServer get_walking_param_server = ros_node.advertiseService(
-      "/robotis/walking/get_params", &WalkingModule::getWalkigParameterCallback,
+      "/humanoid_robot/walking/get_params", &WalkingModule::getWalkigParameterCallback,
       this);
 
   /* sensor topic subscribe */
   ros::Subscriber walking_command_sub =
-      ros_node.subscribe("/robotis/walking/command", 0,
+      ros_node.subscribe("/humanoid_robot/walking/command", 0,
                          &WalkingModule::walkingCommandCallback, this);
   ros::Subscriber walking_param_sub =
-      ros_node.subscribe("/robotis/walking/set_params", 0,
+      ros_node.subscribe("/humanoid_robot/walking/set_params", 0,
                          &WalkingModule::walkingParameterCallback, this);
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
@@ -179,7 +179,7 @@ void WalkingModule::queueThread() {
 }
 
 void WalkingModule::publishStatusMsg(unsigned int type, std::string msg) {
-  robotis_controller_msgs::StatusMsg status_msg;
+  humanoid_robot_controller_msgs::StatusMsg status_msg;
   status_msg.header.stamp = ros::Time::now();
   status_msg.type = type;
   status_msg.module_name = "Walking";
@@ -244,7 +244,7 @@ bool WalkingModule::computeIK(double *out, double pos_x, double pos_y,
       value_s, value_c, theta;
 
   // make transform matrix
-  transformation_ad = robotis_framework::getTransformationXYZRPY(
+  transformation_ad = humanoid_robot_framework::getTransformationXYZRPY(
       pos_x, pos_y, pos_z, ori_roll, ori_pitch, ori_yaw);
 
   vector << pos_x + transformation_ad.coeff(0, 2) * ankle_length,
@@ -262,7 +262,7 @@ bool WalkingModule::computeIK(double *out, double pos_x, double pos_y,
 
   // Get Ankle Roll
   transformation_da =
-      robotis_framework::getInverseTransformation(transformation_ad);
+      humanoid_robot_framework::getInverseTransformation(transformation_ad);
   double tda_y = transformation_da.coeff(1, 3);
   double tda_z = transformation_da.coeff(2, 3);
   value_k = sqrt(tda_y * tda_y + tda_z * tda_z);
@@ -284,10 +284,10 @@ bool WalkingModule::computeIK(double *out, double pos_x, double pos_y,
     *(out + 5) = acos_value;
 
   // Get Hip Yaw
-  transformation_cd = robotis_framework::getTransformationXYZRPY(
+  transformation_cd = humanoid_robot_framework::getTransformationXYZRPY(
       0.0, 0.0, -ankle_length, *(out + 5), 0.0, 0.0);
   transformation_dc =
-      robotis_framework::getInverseTransformation(transformation_cd);
+      humanoid_robot_framework::getInverseTransformation(transformation_cd);
   transformation_ac = transformation_ad * transformation_dc;
   atan_value =
       atan2(-transformation_ac.coeff(0, 1), transformation_ac.coeff(1, 1));
@@ -412,13 +412,13 @@ void WalkingModule::startWalking() {
   ctrl_running_ = true;
   real_running_ = true;
 
-  publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+  publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                    "Start walking");
 }
 
 void WalkingModule::stop() {
   ctrl_running_ = false;
-  publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+  publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                    "Stop walking");
 }
 
@@ -428,7 +428,7 @@ bool WalkingModule::isRunning() {
 
 // default [angle : radian, length : m]
 void WalkingModule::process(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls,
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
     std::map<std::string, double> sensors) {
   if (enable_ == false)
     return;
@@ -458,14 +458,14 @@ void WalkingModule::process(
   } else if (walking_state_ == WalkingReady ||
              walking_state_ == WalkingEnable) {
     // present angle
-    for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+    for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
              state_iter = result_.begin();
          state_iter != result_.end(); state_iter++) {
       std::string _joint_name = state_iter->first;
       int joint_index = joint_table_[_joint_name];
 
-      robotis_framework::Dynamixel *dxl = NULL;
-      std::map<std::string, robotis_framework::Dynamixel *>::iterator dxl_it =
+      humanoid_robot_framework::Dynamixel *dxl = NULL;
+      std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator dxl_it =
           dxls.find(_joint_name);
       if (dxl_it != dxls.end())
         dxl = dxl_it->second;
@@ -571,7 +571,7 @@ void WalkingModule::process(
   }
 
   // set result
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_it = result_.begin();
        state_it != result_.end(); state_it++) {
     std::string joint_name = state_it->first;
@@ -1150,7 +1150,7 @@ void WalkingModule::iniPoseTraGene(double mov_time) {
 
     Eigen::MatrixXd tra;
 
-    tra = robotis_framework::calcMinimumJerkTra(ini_value, 0.0, 0.0, tar_value,
+    tra = humanoid_robot_framework::calcMinimumJerkTra(ini_value, 0.0, 0.0, tar_value,
                                                 0.0, 0.0, smp_time, mov_time);
 
     calc_joint_tra_.block(0, id, all_time_steps, 1) = tra;
@@ -1162,4 +1162,4 @@ void WalkingModule::iniPoseTraGene(double mov_time) {
 
   init_pose_count_ = 0;
 }
-} // namespace robotis_op
+} // namespace humanoid_robot_op

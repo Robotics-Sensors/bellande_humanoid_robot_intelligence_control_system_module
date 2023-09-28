@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "humanoid_robot_localization");
 
   // create ros wrapper object
-  robotis_op::HUMANOID_ROBOTLocalization humanoid_robot_localization;
+  humanoid_robot_op::HUMANOID_ROBOTLocalization humanoid_robot_localization;
 
   // set node loop rate
   ros::Rate loop_rate(10);

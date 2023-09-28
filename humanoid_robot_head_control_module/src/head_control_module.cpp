@@ -19,7 +19,7 @@
 #include "humanoid_robot_head_control_module/head_control_module.h"
 #include <stdio.h>
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 HeadControlModule::HeadControlModule()
     : control_cycle_msec_(0), stop_process_(false), is_moving_(false),
@@ -28,10 +28,10 @@ HeadControlModule::HeadControlModule()
       DEBUG(false) {
   enable_ = false;
   module_name_ = "head_control_module";
-  control_mode_ = robotis_framework::PositionControl;
+  control_mode_ = humanoid_robot_framework::PositionControl;
 
-  result_["head_pan"] = new robotis_framework::DynamixelState();
-  result_["head_tilt"] = new robotis_framework::DynamixelState();
+  result_["head_pan"] = new humanoid_robot_framework::DynamixelState();
+  result_["head_tilt"] = new humanoid_robot_framework::DynamixelState();
 
   using_joint_name_["head_pan"] = 0;
   using_joint_name_["head_tilt"] = 1;
@@ -53,7 +53,7 @@ HeadControlModule::HeadControlModule()
 HeadControlModule::~HeadControlModule() { queue_thread_.join(); }
 
 void HeadControlModule::initialize(const int control_cycle_msec,
-                                   robotis_framework::Robot *robot) {
+                                   humanoid_robot_framework::Robot *robot) {
   ros::NodeHandle param_nh("~");
   angle_unit_ = param_nh.param("angle_unit", 35.0);
 
@@ -67,8 +67,8 @@ void HeadControlModule::initialize(const int control_cycle_msec,
   ros::NodeHandle ros_node;
 
   /* publish topics */
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>(
-      "/robotis/status", 0);
+  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
+      "/humanoid_robot/status", 0);
 }
 
 void HeadControlModule::queueThread() {
@@ -79,13 +79,13 @@ void HeadControlModule::queueThread() {
 
   /* subscribe topics */
   ros::Subscriber set_head_joint_sub =
-      ros_node.subscribe("/robotis/head_control/set_joint_states", 1,
+      ros_node.subscribe("/humanoid_robot/head_control/set_joint_states", 1,
                          &HeadControlModule::setHeadJointCallback, this);
   ros::Subscriber set_head_joint_offset_sub =
-      ros_node.subscribe("/robotis/head_control/set_joint_states_offset", 1,
+      ros_node.subscribe("/humanoid_robot/head_control/set_joint_states_offset", 1,
                          &HeadControlModule::setHeadJointOffsetCallback, this);
   ros::Subscriber set_head_scan_sub =
-      ros_node.subscribe("/robotis/head_control/scan_command", 1,
+      ros_node.subscribe("/humanoid_robot/head_control/scan_command", 1,
                          &HeadControlModule::setHeadScanCallback, this);
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
@@ -107,7 +107,7 @@ void HeadControlModule::setHeadJoint(
     const sensor_msgs::JointState::ConstPtr &msg, bool is_offset) {
   if (enable_ == false) {
     ROS_INFO_THROTTLE(1, "Head module is not enable.");
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      "Not Enable");
     return;
   }
@@ -222,7 +222,7 @@ bool HeadControlModule::checkAngleLimit(const int joint_index,
 }
 
 void HeadControlModule::process(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls,
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
     std::map<std::string, double> sensors) {
   if (enable_ == false)
     return;
@@ -230,14 +230,14 @@ void HeadControlModule::process(
   tra_lock_.lock();
 
   // get joint data
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_it = result_.begin();
        state_it != result_.end(); state_it++) {
     std::string joint_name = state_it->first;
     int index = using_joint_name_[joint_name];
 
-    robotis_framework::Dynamixel *_dxl = NULL;
-    std::map<std::string, robotis_framework::Dynamixel *>::iterator dxl_it =
+    humanoid_robot_framework::Dynamixel *_dxl = NULL;
+    std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator dxl_it =
         dxls.find(joint_name);
     if (dxl_it != dxls.end())
       _dxl = dxl_it->second;
@@ -280,7 +280,7 @@ void HeadControlModule::process(
   tra_lock_.unlock();
 
   // set joint data
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_it = result_.begin();
        state_it != result_.end(); state_it++) {
     std::string joint_name = state_it->first;
@@ -342,7 +342,7 @@ void HeadControlModule::finishMoving() {
   goal_acceleration_ = Eigen::MatrixXd::Zero(1, result_.size());
 
   // log
-  publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+  publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                    "Head movement is finished.");
 
   if (DEBUG)
@@ -388,7 +388,7 @@ void HeadControlModule::stopMoving() {
   goal_acceleration_ = Eigen::MatrixXd::Zero(1, result_.size());
 
   // log
-  publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_WARN,
+  publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_WARN,
                    "Stop Module.");
 }
 
@@ -433,7 +433,7 @@ void HeadControlModule::generateScanTra(const int head_direction) {
   // set moving time
   moving_time_ = 0.5; // default : 0.5 sec
 
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_it = result_.begin();
        state_it != result_.end(); state_it++) {
     std::string joint_name = state_it->first;
@@ -474,14 +474,14 @@ Eigen::MatrixXd HeadControlModule::calcMinimumJerkTraPVA(
   Eigen::MatrixXd poly_matrix(3, 3);
   Eigen::MatrixXd poly_vector(3, 1);
 
-  poly_matrix << robotis_framework::powDI(mov_time, 3),
-      robotis_framework::powDI(mov_time, 4),
-      robotis_framework::powDI(mov_time, 5),
-      3 * robotis_framework::powDI(mov_time, 2),
-      4 * robotis_framework::powDI(mov_time, 3),
-      5 * robotis_framework::powDI(mov_time, 4), 6 * mov_time,
-      12 * robotis_framework::powDI(mov_time, 2),
-      20 * robotis_framework::powDI(mov_time, 3);
+  poly_matrix << humanoid_robot_framework::powDI(mov_time, 3),
+      humanoid_robot_framework::powDI(mov_time, 4),
+      humanoid_robot_framework::powDI(mov_time, 5),
+      3 * humanoid_robot_framework::powDI(mov_time, 2),
+      4 * humanoid_robot_framework::powDI(mov_time, 3),
+      5 * humanoid_robot_framework::powDI(mov_time, 4), 6 * mov_time,
+      12 * humanoid_robot_framework::powDI(mov_time, 2),
+      20 * humanoid_robot_framework::powDI(mov_time, 3);
 
   poly_vector << pos_end - pos_start - vel_start * mov_time -
                      accel_start * pow(mov_time, 2) / 2,
@@ -501,29 +501,29 @@ Eigen::MatrixXd HeadControlModule::calcMinimumJerkTraPVA(
     // position
     minimum_jer_tra.coeffRef(step, 0) =
         pos_start + vel_start * time.coeff(step, 0) +
-        0.5 * accel_start * robotis_framework::powDI(time.coeff(step, 0), 2) +
+        0.5 * accel_start * humanoid_robot_framework::powDI(time.coeff(step, 0), 2) +
         poly_coeff.coeff(0, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 3) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 3) +
         poly_coeff.coeff(1, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 4) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 4) +
         poly_coeff.coeff(2, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 5);
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 5);
     // velocity
     minimum_jer_tra.coeffRef(step, 1) =
         vel_start + accel_start * time.coeff(step, 0) +
         3 * poly_coeff.coeff(0, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 2) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 2) +
         4 * poly_coeff.coeff(1, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 3) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 3) +
         5 * poly_coeff.coeff(2, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 4);
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 4);
     // accel
     minimum_jer_tra.coeffRef(step, 2) =
         accel_start + 6 * poly_coeff.coeff(0, 0) * time.coeff(step, 0) +
         12 * poly_coeff.coeff(1, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 2) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 2) +
         20 * poly_coeff.coeff(2, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 3);
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 3);
   }
 
   return minimum_jer_tra;
@@ -546,7 +546,7 @@ void HeadControlModule::jointTraGeneThread() {
     throw;
   }
 
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_it = result_.begin();
        state_it != result_.end(); state_it++) {
     std::string joint_name = state_it->first;
@@ -588,7 +588,7 @@ void HeadControlModule::publishStatusMsg(unsigned int type, std::string msg) {
       return;
   }
 
-  robotis_controller_msgs::StatusMsg status_msg;
+  humanoid_robot_controller_msgs::StatusMsg status_msg;
   status_msg.header.stamp = now;
   status_msg.type = type;
   status_msg.module_name = "Head Control";
@@ -599,4 +599,4 @@ void HeadControlModule::publishStatusMsg(unsigned int type, std::string msg) {
   last_msg_ = msg;
   last_msg_time_ = now;
 }
-} // namespace robotis_op
+} // namespace humanoid_robot_op

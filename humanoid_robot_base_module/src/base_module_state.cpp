@@ -18,7 +18,7 @@
 
 #include "humanoid_robot_base_module/base_module_state.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 BaseModuleState::BaseModuleState() {
   is_moving_ = false;
@@ -45,4 +45,4 @@ BaseModuleState::BaseModuleState() {
 
 BaseModuleState::~BaseModuleState() {}
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op

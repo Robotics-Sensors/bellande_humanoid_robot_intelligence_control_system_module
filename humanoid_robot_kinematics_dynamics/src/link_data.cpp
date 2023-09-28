@@ -18,7 +18,7 @@
 
 #include "humanoid_robot_kinematics_dynamics/link_data.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 LinkData::LinkData() {
   name_ = "";
@@ -29,10 +29,10 @@ LinkData::LinkData() {
 
   mass_ = 0.0;
 
-  relative_position_ = robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
-  joint_axis_ = robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
-  center_of_mass_ = robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
-  inertia_ = robotis_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+  relative_position_ = humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+  joint_axis_ = humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+  center_of_mass_ = humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+  inertia_ = humanoid_robot_framework::getInertiaXYZ(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
   joint_limit_max_ = 100.0;
   joint_limit_min_ = -100.0;
@@ -41,12 +41,12 @@ LinkData::LinkData() {
   joint_velocity_ = 0.0;
   joint_acceleration_ = 0.0;
 
-  position_ = robotis_framework::getTransitionXYZ(0.0, 0.0, 0.0);
-  orientation_ = robotis_framework::convertRPYToRotation(0.0, 0.0, 0.0);
+  position_ = humanoid_robot_framework::getTransitionXYZ(0.0, 0.0, 0.0);
+  orientation_ = humanoid_robot_framework::convertRPYToRotation(0.0, 0.0, 0.0);
   transformation_ =
-      robotis_framework::getTransformationXYZRPY(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+      humanoid_robot_framework::getTransformationXYZRPY(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 }
 
 LinkData::~LinkData() {}
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op

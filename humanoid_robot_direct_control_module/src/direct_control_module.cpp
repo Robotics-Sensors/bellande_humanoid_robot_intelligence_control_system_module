@@ -19,7 +19,7 @@
 #include "humanoid_robot_direct_control_module/direct_control_module.h"
 #include <stdio.h>
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 DirectControlModule::DirectControlModule()
     : control_cycle_msec_(0), stop_process_(false), is_moving_(false),
@@ -31,7 +31,7 @@ DirectControlModule::DirectControlModule()
       DEBUG(false) {
   enable_ = false;
   module_name_ = "direct_control_module";
-  control_mode_ = robotis_framework::PositionControl;
+  control_mode_ = humanoid_robot_framework::PositionControl;
 
   last_msg_time_ = ros::Time::now();
 }
@@ -39,18 +39,18 @@ DirectControlModule::DirectControlModule()
 DirectControlModule::~DirectControlModule() { queue_thread_.join(); }
 
 void DirectControlModule::initialize(const int control_cycle_msec,
-                                     robotis_framework::Robot *robot) {
+                                     humanoid_robot_framework::Robot *robot) {
   humanoid_robot_kinematics_ = new HUMANOID_ROBOTKinematicsDynamics(WholeBody);
 
   // init result, joint_id_table
   int joint_index = 0;
-  for (std::map<std::string, robotis_framework::Dynamixel *>::iterator it =
+  for (std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator it =
            robot->dxls_.begin();
        it != robot->dxls_.end(); it++) {
     std::string joint_name = it->first;
-    robotis_framework::Dynamixel *dxl_info = it->second;
+    humanoid_robot_framework::Dynamixel *dxl_info = it->second;
 
-    result_[joint_name] = new robotis_framework::DynamixelState();
+    result_[joint_name] = new humanoid_robot_framework::DynamixelState();
     result_[joint_name]->goal_position_ = dxl_info->dxl_state_->goal_position_;
 
     collision_[joint_name] = false;
@@ -73,16 +73,16 @@ void DirectControlModule::initialize(const int control_cycle_msec,
   ros::NodeHandle ros_node;
 
   /* get Param */
-  ros_node.param<double>("/robotis/direct_control/default_moving_time",
+  ros_node.param<double>("/humanoid_robot/direct_control/default_moving_time",
                          default_moving_time_, default_moving_time_);
-  ros_node.param<double>("/robotis/direct_control/default_moving_angle",
+  ros_node.param<double>("/humanoid_robot/direct_control/default_moving_angle",
                          default_moving_angle_, default_moving_angle_);
-  ros_node.param<bool>("/robotis/direct_control/check_collision",
+  ros_node.param<bool>("/humanoid_robot/direct_control/check_collision",
                        check_collision_, check_collision_);
 
   /* publish topics */
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>(
-      "/robotis/status", 0);
+  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
+      "/humanoid_robot/status", 0);
 }
 
 void DirectControlModule::queueThread() {
@@ -93,7 +93,7 @@ void DirectControlModule::queueThread() {
 
   /* subscribe topics */
   ros::Subscriber set_head_joint_sub =
-      ros_node.subscribe("/robotis/direct_control/set_joint_states", 1,
+      ros_node.subscribe("/humanoid_robot/direct_control/set_joint_states", 1,
                          &DirectControlModule::setJointCallback, this);
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
@@ -105,7 +105,7 @@ void DirectControlModule::setJointCallback(
     const sensor_msgs::JointState::ConstPtr &msg) {
   if (enable_ == false) {
     ROS_INFO_THROTTLE(1, "Direct control module is not enable.");
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      "Not Enable");
     return;
   }
@@ -216,7 +216,7 @@ void DirectControlModule::setJointCallback(
 }
 
 void DirectControlModule::process(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls,
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
     std::map<std::string, double> sensors) {
   if (enable_ == false)
     return;
@@ -224,14 +224,14 @@ void DirectControlModule::process(
   tra_lock_.lock();
 
   // get joint data from robot
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_it = result_.begin();
        state_it != result_.end(); state_it++) {
     std::string joint_name = state_it->first;
     int index = using_joint_name_[joint_name];
 
-    robotis_framework::Dynamixel *_dxl = NULL;
-    std::map<std::string, robotis_framework::Dynamixel *>::iterator dxl_it =
+    humanoid_robot_framework::Dynamixel *_dxl = NULL;
+    std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator dxl_it =
         dxls.find(joint_name);
     if (dxl_it != dxls.end())
       _dxl = dxl_it->second;
@@ -272,7 +272,7 @@ void DirectControlModule::process(
 
   if (check_collision_ == true) {
     // set goal angle and run forward kinematics
-    for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+    for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
              state_it = result_.begin();
          state_it != result_.end(); state_it++) {
       std::string joint_name = state_it->first;
@@ -291,7 +291,7 @@ void DirectControlModule::process(
   }
 
   // set joint data to robot
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_it = result_.begin();
        state_it != result_.end(); state_it++) {
     std::string joint_name = state_it->first;
@@ -339,7 +339,7 @@ void DirectControlModule::finishMoving() {
   is_moving_ = false;
 
   // log
-  publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+  publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                    "Head movement is finished.");
 
   if (DEBUG)
@@ -355,7 +355,7 @@ void DirectControlModule::stopMoving() {
   stop_process_ = false;
 
   // log
-  publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_WARN,
+  publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_WARN,
                    "Stop Module.");
 }
 
@@ -380,14 +380,14 @@ Eigen::MatrixXd DirectControlModule::calcMinimumJerkTraPVA(
   Eigen::MatrixXd poly_matrix(3, 3);
   Eigen::MatrixXd poly_vector(3, 1);
 
-  poly_matrix << robotis_framework::powDI(mov_time, 3),
-      robotis_framework::powDI(mov_time, 4),
-      robotis_framework::powDI(mov_time, 5),
-      3 * robotis_framework::powDI(mov_time, 2),
-      4 * robotis_framework::powDI(mov_time, 3),
-      5 * robotis_framework::powDI(mov_time, 4), 6 * mov_time,
-      12 * robotis_framework::powDI(mov_time, 2),
-      20 * robotis_framework::powDI(mov_time, 3);
+  poly_matrix << humanoid_robot_framework::powDI(mov_time, 3),
+      humanoid_robot_framework::powDI(mov_time, 4),
+      humanoid_robot_framework::powDI(mov_time, 5),
+      3 * humanoid_robot_framework::powDI(mov_time, 2),
+      4 * humanoid_robot_framework::powDI(mov_time, 3),
+      5 * humanoid_robot_framework::powDI(mov_time, 4), 6 * mov_time,
+      12 * humanoid_robot_framework::powDI(mov_time, 2),
+      20 * humanoid_robot_framework::powDI(mov_time, 3);
 
   poly_vector << pos_end - pos_start - vel_start * mov_time -
                      accel_start * pow(mov_time, 2) / 2,
@@ -407,29 +407,29 @@ Eigen::MatrixXd DirectControlModule::calcMinimumJerkTraPVA(
     // position
     minimum_jer_tra.coeffRef(step, 0) =
         pos_start + vel_start * time.coeff(step, 0) +
-        0.5 * accel_start * robotis_framework::powDI(time.coeff(step, 0), 2) +
+        0.5 * accel_start * humanoid_robot_framework::powDI(time.coeff(step, 0), 2) +
         poly_coeff.coeff(0, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 3) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 3) +
         poly_coeff.coeff(1, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 4) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 4) +
         poly_coeff.coeff(2, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 5);
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 5);
     // velocity
     minimum_jer_tra.coeffRef(step, 1) =
         vel_start + accel_start * time.coeff(step, 0) +
         3 * poly_coeff.coeff(0, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 2) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 2) +
         4 * poly_coeff.coeff(1, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 3) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 3) +
         5 * poly_coeff.coeff(2, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 4);
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 4);
     // accel
     minimum_jer_tra.coeffRef(step, 2) =
         accel_start + 6 * poly_coeff.coeff(0, 0) * time.coeff(step, 0) +
         12 * poly_coeff.coeff(1, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 2) +
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 2) +
         20 * poly_coeff.coeff(2, 0) *
-            robotis_framework::powDI(time.coeff(step, 0), 3);
+            humanoid_robot_framework::powDI(time.coeff(step, 0), 3);
   }
 
   return minimum_jer_tra;
@@ -562,7 +562,7 @@ void DirectControlModule::jointTraGeneThread() {
     throw;
   }
 
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_it = result_.begin();
        state_it != result_.end(); state_it++) {
     std::string joint_name = state_it->first;
@@ -604,7 +604,7 @@ void DirectControlModule::publishStatusMsg(unsigned int type, std::string msg) {
       return;
   }
 
-  robotis_controller_msgs::StatusMsg status_msg;
+  humanoid_robot_controller_msgs::StatusMsg status_msg;
   status_msg.header.stamp = now;
   status_msg.type = type;
   status_msg.module_name = "Direct Control";
@@ -615,4 +615,4 @@ void DirectControlModule::publishStatusMsg(unsigned int type, std::string msg) {
   last_msg_ = msg;
   last_msg_time_ = now;
 }
-} // namespace robotis_op
+} // namespace humanoid_robot_op

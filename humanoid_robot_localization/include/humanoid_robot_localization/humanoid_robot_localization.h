@@ -38,9 +38,9 @@
 // boost
 #include <boost/thread.hpp>
 
-#include "robotis_math/robotis_math.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 class HUMANOID_ROBOTLocalization {
 
@@ -91,6 +91,6 @@ public:
   void process();
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif // THORMANG3_LOCALIZATION_H_

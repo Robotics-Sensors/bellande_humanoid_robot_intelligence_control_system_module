@@ -18,7 +18,7 @@
 
 #include "humanoid_robot_tuning_module/tuning_data.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 TuningData::TuningData() {}
 
@@ -36,4 +36,4 @@ void TuningData::clearData() {
   d_gain_.clear();
 }
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op

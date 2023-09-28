@@ -25,7 +25,7 @@
 #include "link_data.h"
 #include "humanoid_robot_kinematics_dynamics_define.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 enum TreeSelect { Manipulation, Walking, WholeBody };
 
@@ -94,6 +94,6 @@ public:
   double leg_side_offset_m_;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* HUMANOID_ROBOT_KINEMATICS_DYNAMICS_H_ */

@@ -32,20 +32,20 @@
 #include "action_file_define.h"
 #include "humanoid_robot_action_module_msgs/IsRunning.h"
 #include "humanoid_robot_action_module_msgs/StartAction.h"
-#include "robotis_controller_msgs/StatusMsg.h"
-#include "robotis_framework_common/motion_module.h"
+#include "humanoid_robot_controller_msgs/StatusMsg.h"
+#include "humanoid_robot_framework_common/motion_module.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
-class ActionModule : public robotis_framework::MotionModule,
-                     public robotis_framework::Singleton<ActionModule> {
+class ActionModule : public humanoid_robot_framework::MotionModule,
+                     public humanoid_robot_framework::Singleton<ActionModule> {
 public:
   ActionModule();
   virtual ~ActionModule();
 
   void initialize(const int control_cycle_msec,
-                  robotis_framework::Robot *robot);
-  void process(std::map<std::string, robotis_framework::Dynamixel *> dxls,
+                  humanoid_robot_framework::Robot *robot);
+  void process(std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
                std::map<std::string, double> sensors);
 
   void stop();
@@ -69,7 +69,7 @@ public:
 
   void enableAllJoints();
   void
-  actionPlayProcess(std::map<std::string, robotis_framework::Dynamixel *> dxls);
+  actionPlayProcess(std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls);
 
 private:
   const int PRE_SECTION;
@@ -101,7 +101,7 @@ private:
   std::string convertIntToString(int n);
 
   std::map<std::string, bool> action_joints_enable_;
-  std::map<std::string, robotis_framework::DynamixelState *> action_result_;
+  std::map<std::string, humanoid_robot_framework::DynamixelState *> action_result_;
   int control_cycle_msec_;
   boost::thread queue_thread_;
 
@@ -129,6 +129,6 @@ private:
   bool present_running_;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* HUMANOID_ROBOT_ACTION_MOTION_MODULE_H_ */

@@ -13,13 +13,13 @@
   <build_depend>std_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
-  <build_depend>robotis_controller_msgs</build_depend>
+  <build_depend>humanoid_robot_controller_msgs</build_depend>
   <build_depend>humanoid_robot_online_walking_module_msgs</build_depend>
   <build_depend>cmake_modules</build_depend>
   <build_depend>orocos_kdl</build_depend>
-  <build_depend>robotis_framework_common</build_depend>
-  <build_depend>robotis_device</build_depend>
-  <build_depend>robotis_math</build_depend>
+  <build_depend>humanoid_robot_framework_common</build_depend>
+  <build_depend>humanoid_robot_device</build_depend>
+  <build_depend>humanoid_robot_math</build_depend>
   <build_depend>humanoid_robot_balance_control</build_depend>
   <build_depend>boost</build_depend>
   <build_depend>eigen</build_depend>
@@ -30,13 +30,13 @@
   <build_export_depend>std_msgs</build_export_depend>
   <build_export_depend>sensor_msgs</build_export_depend>
   <build_export_depend>geometry_msgs</build_export_depend>
-  <build_export_depend>robotis_controller_msgs</build_export_depend>
+  <build_export_depend>humanoid_robot_controller_msgs</build_export_depend>
   <build_export_depend>humanoid_robot_online_walking_module_msgs</build_export_depend>
   <build_export_depend>cmake_modules</build_export_depend>
   <build_export_depend>orocos_kdl</build_export_depend>
-  <build_export_depend>robotis_framework_common</build_export_depend>
-  <build_export_depend>robotis_device</build_export_depend>
-  <build_export_depend>robotis_math</build_export_depend>
+  <build_export_depend>humanoid_robot_framework_common</build_export_depend>
+  <build_export_depend>humanoid_robot_device</build_export_depend>
+  <build_export_depend>humanoid_robot_math</build_export_depend>
   <build_export_depend>humanoid_robot_balance_control</build_export_depend>
   <build_export_depend>boost</build_export_depend>
   <build_export_depend>eigen</build_export_depend>
@@ -47,13 +47,13 @@
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>robotis_controller_msgs</exec_depend>
+  <exec_depend>humanoid_robot_controller_msgs</exec_depend>
   <exec_depend>humanoid_robot_online_walking_module_msgs</exec_depend>
   <exec_depend>cmake_modules</exec_depend>
   <exec_depend>orocos_kdl</exec_depend>
-  <exec_depend>robotis_framework_common</exec_depend>
-  <exec_depend>robotis_device</exec_depend>
-  <exec_depend>robotis_math</exec_depend>
+  <exec_depend>humanoid_robot_framework_common</exec_depend>
+  <exec_depend>humanoid_robot_device</exec_depend>
+  <exec_depend>humanoid_robot_math</exec_depend>
   <exec_depend>humanoid_robot_balance_control</exec_depend>
   <exec_depend>boost</exec_depend>
   <exec_depend>eigen</exec_depend>

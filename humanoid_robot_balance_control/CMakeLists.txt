@@ -14,7 +14,7 @@ find_package(
   catkin REQUIRED COMPONENTS
   roscpp
   cmake_modules
-  robotis_math
+  humanoid_robot_math
 )
 
 find_package(Eigen3 REQUIRED)
@@ -40,7 +40,7 @@ catkin_package(
   CATKIN_DEPENDS
   roscpp
   cmake_modules
-  robotis_math
+  humanoid_robot_math
   DEPENDS EIGEN3
 )
 

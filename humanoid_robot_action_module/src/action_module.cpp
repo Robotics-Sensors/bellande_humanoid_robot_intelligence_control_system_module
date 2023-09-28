@@ -20,7 +20,7 @@
 #include <sstream>
 #include <stdio.h>
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 std::string ActionModule::convertIntToString(int n) {
   std::ostringstream ostr;
@@ -44,7 +44,7 @@ ActionModule::ActionModule()
 
   enable_ = false;
   module_name_ = "action_module"; // set unique module name
-  control_mode_ = robotis_framework::PositionControl;
+  control_mode_ = humanoid_robot_framework::PositionControl;
 
   //////////////////////////////////
   action_file_ = 0;
@@ -69,23 +69,23 @@ ActionModule::~ActionModule() {
 }
 
 void ActionModule::initialize(const int control_cycle_msec,
-                              robotis_framework::Robot *robot) {
+                              humanoid_robot_framework::Robot *robot) {
   control_cycle_msec_ = control_cycle_msec;
   queue_thread_ = boost::thread(boost::bind(&ActionModule::queueThread, this));
 
   // init result, joint_id_table
-  for (std::map<std::string, robotis_framework::Dynamixel *>::iterator it =
+  for (std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator it =
            robot->dxls_.begin();
        it != robot->dxls_.end(); it++) {
     std::string joint_name = it->first;
-    robotis_framework::Dynamixel *dxl_info = it->second;
+    humanoid_robot_framework::Dynamixel *dxl_info = it->second;
 
     joint_name_to_id_[joint_name] = dxl_info->id_;
     joint_id_to_name_[dxl_info->id_] = joint_name;
-    action_result_[joint_name] = new robotis_framework::DynamixelState();
+    action_result_[joint_name] = new humanoid_robot_framework::DynamixelState();
     action_result_[joint_name]->goal_position_ =
         dxl_info->dxl_state_->goal_position_;
-    result_[joint_name] = new robotis_framework::DynamixelState();
+    result_[joint_name] = new humanoid_robot_framework::DynamixelState();
     result_[joint_name]->goal_position_ = dxl_info->dxl_state_->goal_position_;
     action_joints_enable_[joint_name] = false;
   }
@@ -109,21 +109,21 @@ void ActionModule::queueThread() {
   ros_node.setCallbackQueue(&callback_queue);
 
   /* publisher */
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>(
-      "/robotis/status", 0);
+  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
+      "/humanoid_robot/status", 0);
   done_msg_pub_ =
-      ros_node.advertise<std_msgs::String>("/robotis/movement_done", 1);
+      ros_node.advertise<std_msgs::String>("/humanoid_robot/movement_done", 1);
 
   /* subscriber */
   ros::Subscriber action_page_sub = ros_node.subscribe(
-      "/robotis/action/page_num", 0, &ActionModule::pageNumberCallback, this);
+      "/humanoid_robot/action/page_num", 0, &ActionModule::pageNumberCallback, this);
   ros::Subscriber start_action_sub =
-      ros_node.subscribe("/robotis/action/start_action", 0,
+      ros_node.subscribe("/humanoid_robot/action/start_action", 0,
                          &ActionModule::startActionCallback, this);
 
   /* ROS Service Callback Functions */
   ros::ServiceServer is_running_server =
-      ros_node.advertiseService("/robotis/action/is_running",
+      ros_node.advertiseService("/humanoid_robot/action/is_running",
                                 &ActionModule::isRunningServiceCallback, this);
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
@@ -142,7 +142,7 @@ void ActionModule::pageNumberCallback(const std_msgs::Int32::ConstPtr &msg) {
   if (enable_ == false) {
     std::string status_msg = "Action Module is not enabled";
     ROS_INFO_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return;
   }
@@ -161,13 +161,13 @@ void ActionModule::pageNumberCallback(const std_msgs::Int32::ConstPtr &msg) {
       std::string status_msg =
           "Succeed to start page " + convertIntToString(msg->data);
       ROS_INFO_STREAM(status_msg);
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+      publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                        status_msg);
     } else {
       std::string status_msg =
           "Failed to start page " + convertIntToString(msg->data);
       ROS_ERROR_STREAM(status_msg);
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+      publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                        status_msg);
       publishDoneMsg("action_failed");
     }
@@ -179,7 +179,7 @@ void ActionModule::startActionCallback(
   if (enable_ == false) {
     std::string status_msg = "Action Module is not enabled";
     ROS_INFO_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return;
   }
@@ -204,7 +204,7 @@ void ActionModule::startActionCallback(
         std::string status_msg =
             "Invalid Joint Name : " + msg->joint_name_array[joint_idx];
         ROS_INFO_STREAM(status_msg);
-        publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+        publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                          status_msg);
         publishDoneMsg("action_failed");
         return;
@@ -217,13 +217,13 @@ void ActionModule::startActionCallback(
       std::string status_msg =
           "Succeed to start page " + convertIntToString(msg->page_num);
       ROS_INFO_STREAM(status_msg);
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+      publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                        status_msg);
     } else {
       std::string status_msg =
           "Failed to start page " + convertIntToString(msg->page_num);
       ROS_ERROR_STREAM(status_msg);
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+      publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                        status_msg);
       publishDoneMsg("action_failed");
     }
@@ -231,18 +231,18 @@ void ActionModule::startActionCallback(
 }
 
 void ActionModule::process(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls,
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
     std::map<std::string, double> sensors) {
   if (enable_ == false)
     return;
 
   if (action_module_enabled_ == true) {
-    for (std::map<std::string, robotis_framework::Dynamixel *>::iterator
+    for (std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator
              dxls_it = dxls.begin();
          dxls_it != dxls.end(); dxls_it++) {
       std::string joint_name = dxls_it->first;
 
-      std::map<std::string, robotis_framework::DynamixelState *>::iterator
+      std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
           result_it = result_.find(joint_name);
       if (result_it == result_.end())
         continue;
@@ -273,10 +273,10 @@ void ActionModule::process(
     if (present_running_ == true) {
       std::string status_msg = "Action_Start";
       // ROS_INFO_STREAM(status_msg);
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+      publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                        status_msg);
     } else {
-      for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+      for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
                action_result_it = action_result_.begin();
            action_result_it != action_result_.end(); action_result_it++)
         action_result_it->second->goal_position_ =
@@ -284,7 +284,7 @@ void ActionModule::process(
 
       std::string status_msg = "Action_Finish";
       // ROS_INFO_STREAM(status_msg);
-      publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+      publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                        status_msg);
       publishDoneMsg("action");
     }
@@ -344,7 +344,7 @@ bool ActionModule::loadFile(std::string file_name) {
   if (action == 0) {
     std::string status_msg = "Can not open Action file!";
     ROS_ERROR_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return false;
   }
@@ -354,7 +354,7 @@ bool ActionModule::loadFile(std::string file_name) {
                               action_file_define::MAXNUM_PAGE)) {
     std::string status_msg = "It's not an Action file!";
     ROS_ERROR_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     fclose(action);
     return false;
@@ -372,7 +372,7 @@ bool ActionModule::createFile(std::string file_name) {
   if (action == 0) {
     std::string status_msg = "Can not create Action file!";
     ROS_ERROR_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return false;
   }
@@ -398,7 +398,7 @@ bool ActionModule::start(int page_number) {
                              convertIntToString(page_number) +
                              " is invalid index)";
     ROS_ERROR_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return false;
   }
@@ -427,7 +427,7 @@ bool ActionModule::start(std::string page_name) {
     std::string status_msg =
         "Can not play page.(" + str_name_page + " is invalid name)\n";
     ROS_ERROR_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return false;
   } else
@@ -438,7 +438,7 @@ bool ActionModule::start(int page_number, action_file_define::Page *page) {
   if (enable_ == false) {
     std::string status_msg = "Action Module is disabled";
     ROS_ERROR_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return false;
   }
@@ -447,7 +447,7 @@ bool ActionModule::start(int page_number, action_file_define::Page *page) {
     std::string status_msg = "Can not play page " +
                              convertIntToString(page_number) + ".(Now playing)";
     ROS_ERROR_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return false;
   }
@@ -458,7 +458,7 @@ bool ActionModule::start(int page_number, action_file_define::Page *page) {
     std::string status_msg =
         "Page " + convertIntToString(page_number) + " has no action\n";
     ROS_ERROR_STREAM(status_msg);
-    publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR,
+    publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_ERROR,
                      status_msg);
     return false;
   }
@@ -553,7 +553,7 @@ void ActionModule::enableAllJoints() {
 }
 
 void ActionModule::actionPlayProcess(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls) {
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls) {
   //////////////////// local Variable
   uint8_t id;
   uint32_t total_time_256t;
@@ -618,12 +618,12 @@ void ActionModule::actionPlayProcess(
    ***************************************/
 
   if (playing_ == false) {
-    for (std::map<std::string, robotis_framework::Dynamixel *>::iterator
+    for (std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator
              dxls_it = dxls.begin();
          dxls_it != dxls.end(); dxls_it++) {
       std::string joint_name = dxls_it->first;
 
-      std::map<std::string, robotis_framework::DynamixelState *>::iterator
+      std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
           result_it = action_result_.find(joint_name);
       if (result_it == result_.end())
         continue;
@@ -660,7 +660,7 @@ void ActionModule::actionPlayProcess(
       else
         joint_name = id_to_name_it->second;
 
-      std::map<std::string, robotis_framework::Dynamixel *>::iterator dxls_it =
+      std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator dxls_it =
           dxls.find(joint_name);
       if (dxls_it == dxls.end())
         continue;
@@ -692,7 +692,7 @@ void ActionModule::actionPlayProcess(
         else
           joint_name = id_to_name_it->second;
 
-        std::map<std::string, robotis_framework::Dynamixel *>::iterator
+        std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator
             dxls_it = dxls.find(joint_name);
         if (dxls_it == dxls.end()) {
           continue;
@@ -776,7 +776,7 @@ void ActionModule::actionPlayProcess(
       else
         joint_name = id_to_name_it->second;
 
-      std::map<std::string, robotis_framework::Dynamixel *>::iterator dxls_it =
+      std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator dxls_it =
           dxls.find(joint_name);
       if (dxls_it == dxls.end())
         continue;
@@ -1051,7 +1051,7 @@ void ActionModule::actionPlayProcess(
 }
 
 void ActionModule::publishStatusMsg(unsigned int type, std::string msg) {
-  robotis_controller_msgs::StatusMsg status;
+  humanoid_robot_controller_msgs::StatusMsg status;
   status.header.stamp = ros::Time::now();
   status.type = type;
   status.module_name = "Action";
@@ -1066,4 +1066,4 @@ void ActionModule::publishDoneMsg(std::string msg) {
 
   done_msg_pub_.publish(done_msg);
 }
-} // namespace robotis_op
+} // namespace humanoid_robot_op

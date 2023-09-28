@@ -20,7 +20,7 @@
 
 #include <iostream>
 
-using namespace robotis_op;
+using namespace humanoid_robot_op;
 
 DampingController::DampingController() {
   desired_ = 0.0;
@@ -306,7 +306,7 @@ void BalanceControlUsingDampingConroller::process(
                                 current_orientation_pitch_rad_);
 
   Eigen::MatrixXd mat_orientation_adjustment_by_imu =
-      robotis_framework::getRotation4d(
+      humanoid_robot_framework::getRotation4d(
           foot_roll_adjustment_by_gyro_roll_ +
               foot_roll_adjustment_by_orientation_roll_,
           foot_pitch_adjustment_by_gyro_pitch_ +
@@ -507,17 +507,17 @@ void BalanceControlUsingDampingConroller::process(
   pose_left_foot_adjustment_.coeffRef(5) = 0;
 
   Eigen::MatrixXd cob_rotation_adj =
-      robotis_framework::getRotationZ(pose_cob_adjustment_.coeff(5)) *
-      robotis_framework::getRotationY(pose_cob_adjustment_.coeff(4)) *
-      robotis_framework::getRotationX(pose_cob_adjustment_.coeff(3));
+      humanoid_robot_framework::getRotationZ(pose_cob_adjustment_.coeff(5)) *
+      humanoid_robot_framework::getRotationY(pose_cob_adjustment_.coeff(4)) *
+      humanoid_robot_framework::getRotationX(pose_cob_adjustment_.coeff(3));
   Eigen::MatrixXd rf_rotation_adj =
-      robotis_framework::getRotationZ(pose_right_foot_adjustment_.coeff(5)) *
-      robotis_framework::getRotationY(pose_right_foot_adjustment_.coeff(4)) *
-      robotis_framework::getRotationX(pose_right_foot_adjustment_.coeff(3));
+      humanoid_robot_framework::getRotationZ(pose_right_foot_adjustment_.coeff(5)) *
+      humanoid_robot_framework::getRotationY(pose_right_foot_adjustment_.coeff(4)) *
+      humanoid_robot_framework::getRotationX(pose_right_foot_adjustment_.coeff(3));
   Eigen::MatrixXd lf_rotation_adj =
-      robotis_framework::getRotationZ(pose_left_foot_adjustment_.coeff(5)) *
-      robotis_framework::getRotationY(pose_left_foot_adjustment_.coeff(4)) *
-      robotis_framework::getRotationX(pose_left_foot_adjustment_.coeff(3));
+      humanoid_robot_framework::getRotationZ(pose_left_foot_adjustment_.coeff(5)) *
+      humanoid_robot_framework::getRotationY(pose_left_foot_adjustment_.coeff(4)) *
+      humanoid_robot_framework::getRotationX(pose_left_foot_adjustment_.coeff(3));
   mat_robot_to_cob_modified_.block<3, 3>(0, 0) =
       cob_rotation_adj * desired_robot_to_cob_.block<3, 3>(0, 0);
   mat_robot_to_right_foot_modified_.block<3, 3>(0, 0) =
@@ -873,7 +873,7 @@ void BalanceControlUsingPDController::process(
       foot_pitch_angle_ctrl_.getFeedBack(pitch_angle_filtered);
 
   Eigen::MatrixXd mat_orientation_adjustment_by_imu =
-      robotis_framework::getRotation4d(
+      humanoid_robot_framework::getRotation4d(
           foot_roll_adjustment_by_gyro_roll_ +
               foot_roll_adjustment_by_orientation_roll_,
           foot_pitch_adjustment_by_gyro_pitch_ +
@@ -1061,17 +1061,17 @@ void BalanceControlUsingPDController::process(
   pose_left_foot_adjustment_.coeffRef(5) = 0;
 
   Eigen::MatrixXd cob_rotation_adj =
-      robotis_framework::getRotationZ(pose_cob_adjustment_.coeff(5)) *
-      robotis_framework::getRotationY(pose_cob_adjustment_.coeff(4)) *
-      robotis_framework::getRotationX(pose_cob_adjustment_.coeff(3));
+      humanoid_robot_framework::getRotationZ(pose_cob_adjustment_.coeff(5)) *
+      humanoid_robot_framework::getRotationY(pose_cob_adjustment_.coeff(4)) *
+      humanoid_robot_framework::getRotationX(pose_cob_adjustment_.coeff(3));
   Eigen::MatrixXd rf_rotation_adj =
-      robotis_framework::getRotationZ(pose_right_foot_adjustment_.coeff(5)) *
-      robotis_framework::getRotationY(pose_right_foot_adjustment_.coeff(4)) *
-      robotis_framework::getRotationX(pose_right_foot_adjustment_.coeff(3));
+      humanoid_robot_framework::getRotationZ(pose_right_foot_adjustment_.coeff(5)) *
+      humanoid_robot_framework::getRotationY(pose_right_foot_adjustment_.coeff(4)) *
+      humanoid_robot_framework::getRotationX(pose_right_foot_adjustment_.coeff(3));
   Eigen::MatrixXd lf_rotation_adj =
-      robotis_framework::getRotationZ(pose_left_foot_adjustment_.coeff(5)) *
-      robotis_framework::getRotationY(pose_left_foot_adjustment_.coeff(4)) *
-      robotis_framework::getRotationX(pose_left_foot_adjustment_.coeff(3));
+      humanoid_robot_framework::getRotationZ(pose_left_foot_adjustment_.coeff(5)) *
+      humanoid_robot_framework::getRotationY(pose_left_foot_adjustment_.coeff(4)) *
+      humanoid_robot_framework::getRotationX(pose_left_foot_adjustment_.coeff(3));
   mat_robot_to_cob_modified_.block<3, 3>(0, 0) =
       cob_rotation_adj * desired_robot_to_cob_.block<3, 3>(0, 0);
   mat_robot_to_right_foot_modified_.block<3, 3>(0, 0) =

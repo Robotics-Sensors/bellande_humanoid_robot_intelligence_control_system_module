@@ -21,7 +21,7 @@
 #include <std_msgs/String.h>
 
 /* ROBOTIS Controller Header */
-#include "robotis_controller/robotis_controller.h"
+#include "humanoid_robot_controller/humanoid_robot_controller.h"
 
 /* Sensor Module Header */
 #include "open_cr_module/open_cr_module.h"
@@ -35,9 +35,9 @@
 #include "humanoid_robot_online_walking_module/online_walking_module.h"
 #include "humanoid_robot_tuning_module/tuning_module.h"
 
-using namespace robotis_framework;
+using namespace humanoid_robot_framework;
 using namespace dynamixel;
-using namespace robotis_op;
+using namespace humanoid_robot_op;
 
 const int BAUD_RATE = 2000000;
 const double PROTOCOL_VERSION = 2.0;
@@ -156,9 +156,9 @@ int main(int argc, char **argv)
   nh.param<std::string>("device_name", g_device_name, SUB_CONTROLLER_DEVICE);
   nh.param<int>("baud_rate", g_baudrate, BAUD_RATE);
 
-  ros::Subscriber button_sub = nh.subscribe("/robotis/open_cr/button", 1, buttonHandlerCallback);
-  ros::Subscriber dxl_torque_sub = nh.subscribe("/robotis/dxl_torque", 1, dxlTorqueCheckCallback);
-  g_init_pose_pub = nh.advertise<std_msgs::String>("/robotis/base/ini_pose", 0);
+  ros::Subscriber button_sub = nh.subscribe("/humanoid_robot/open_cr/button", 1, buttonHandlerCallback);
+  ros::Subscriber dxl_torque_sub = nh.subscribe("/humanoid_robot/dxl_torque", 1, dxlTorqueCheckCallback);
+  g_init_pose_pub = nh.advertise<std_msgs::String>("/humanoid_robot/base/ini_pose", 0);
   g_demo_command_pub = nh.advertise<std_msgs::String>("/ball_tracker/command", 0);
 
   nh.param<bool>("gazebo", controller->gazebo_mode_, false);

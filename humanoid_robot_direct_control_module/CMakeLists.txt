@@ -12,11 +12,11 @@ find_package(
   roscpp
   std_msgs
   sensor_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   cmake_modules
-  robotis_framework_common
-  robotis_device
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_math
   humanoid_robot_kinematics_dynamics
 )
 
@@ -45,11 +45,11 @@ catkin_package(
   roscpp
   std_msgs
   sensor_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   cmake_modules
-  robotis_framework_common
-  robotis_device
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_math
   humanoid_robot_kinematics_dynamics
   DEPENDS Boost EIGEN3
 )

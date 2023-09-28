@@ -38,14 +38,14 @@
 #include "humanoid_robot_walking_module_msgs/GetWalkingParam.h"
 #include "humanoid_robot_walking_module_msgs/SetWalkingParam.h"
 #include "humanoid_robot_walking_module_msgs/WalkingParam.h"
-#include "robotis_controller_msgs/StatusMsg.h"
+#include "humanoid_robot_controller_msgs/StatusMsg.h"
 
 #include "humanoid_robot_kinematics_dynamics/humanoid_robot_kinematics_dynamics.h"
-#include "robotis_framework_common/motion_module.h"
-#include "robotis_math/robotis_math.h"
-#include "robotis_math/robotis_trajectory_calculator.h"
+#include "humanoid_robot_framework_common/motion_module.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
+#include "humanoid_robot_math/humanoid_robot_trajectory_calculator.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 typedef struct {
   double x, y, z;
@@ -55,8 +55,8 @@ typedef struct {
   double x, y, z, roll, pitch, yaw;
 } Pose3D;
 
-class WalkingModule : public robotis_framework::MotionModule,
-                      public robotis_framework::Singleton<WalkingModule> {
+class WalkingModule : public humanoid_robot_framework::MotionModule,
+                      public humanoid_robot_framework::Singleton<WalkingModule> {
 
 public:
   enum { PHASE0 = 0, PHASE1 = 1, PHASE2 = 2, PHASE3 = 3 };
@@ -65,8 +65,8 @@ public:
   virtual ~WalkingModule();
 
   void initialize(const int control_cycle_msec,
-                  robotis_framework::Robot *robot);
-  void process(std::map<std::string, robotis_framework::Dynamixel *> dxls,
+                  humanoid_robot_framework::Robot *robot);
+  void process(std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
                std::map<std::string, double> sensors);
   void stop();
   bool isRunning();
@@ -202,6 +202,6 @@ private:
   double body_swing_z;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* HUMANOID_ROBOT_WALKING_MODULE_H_ */

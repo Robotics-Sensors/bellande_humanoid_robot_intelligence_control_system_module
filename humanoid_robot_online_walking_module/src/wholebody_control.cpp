@@ -107,17 +107,17 @@ void WholebodyControl::initialize(std::vector<double_t> init_body_pos,
   des_r_foot_Q_ = r_foot_Q;
 
   if (control_group_ == "body") {
-    task_trajectory_ = new robotis_framework::MinimumJerk(
+    task_trajectory_ = new humanoid_robot_framework::MinimumJerk(
         init_time_, fin_time_, init_body_pos_, init_body_vel_, init_body_accel_,
         goal_task_pos_, goal_task_vel_, goal_task_accel_);
     init_task_Q_ = body_Q;
   } else if (control_group_ == "right_leg") {
-    task_trajectory_ = new robotis_framework::MinimumJerk(
+    task_trajectory_ = new humanoid_robot_framework::MinimumJerk(
         init_time_, fin_time_, init_r_foot_pos_, init_r_foot_vel_,
         init_r_foot_accel_, goal_task_pos_, goal_task_vel_, goal_task_accel_);
     init_task_Q_ = r_foot_Q;
   } else if (control_group_ == "left_leg") {
-    task_trajectory_ = new robotis_framework::MinimumJerk(
+    task_trajectory_ = new humanoid_robot_framework::MinimumJerk(
         init_time_, fin_time_, init_l_foot_pos_, init_l_foot_vel_,
         init_l_foot_accel_, goal_task_pos_, goal_task_vel_, goal_task_accel_);
     init_task_Q_ = l_foot_Q;

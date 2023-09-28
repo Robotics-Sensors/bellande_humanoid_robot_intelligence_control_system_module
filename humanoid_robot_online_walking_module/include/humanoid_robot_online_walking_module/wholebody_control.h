@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "robotis_math/robotis_math.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
 #include <eigen3/Eigen/Eigen>
 #include <geometry_msgs/Pose.h>
 #include <map>
@@ -63,7 +63,7 @@ public:
   void getGroupPose(std::string name, geometry_msgs::Pose *msg);
 
 private:
-  robotis_framework::MinimumJerk *task_trajectory_;
+  humanoid_robot_framework::MinimumJerk *task_trajectory_;
 
   std::string control_group_;
   int end_link_;

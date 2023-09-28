@@ -18,7 +18,7 @@
 
 #include "humanoid_robot_localization/humanoid_robot_localization.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 HUMANOID_ROBOTLocalization::HUMANOID_ROBOTLocalization()
     : ros_node_(), transform_tolerance_(0.0), err_tol_(0.2),
@@ -57,14 +57,14 @@ HUMANOID_ROBOTLocalization::~HUMANOID_ROBOTLocalization() {}
 void HUMANOID_ROBOTLocalization::initialize() {
   // subscriber
   pelvis_pose_msg_sub_ = ros_node_.subscribe(
-      "/robotis/pelvis_pose", 5, &HUMANOID_ROBOTLocalization::pelvisPoseCallback, this);
+      "/humanoid_robot/pelvis_pose", 5, &HUMANOID_ROBOTLocalization::pelvisPoseCallback, this);
   //  pelvis_base_walking_msg_sub_ =
-  //  ros_node_.subscribe("/robotis/pelvis_pose_base_walking", 5,
+  //  ros_node_.subscribe("/humanoid_robot/pelvis_pose_base_walking", 5,
   //                                                               &HUMANOID_ROBOTLocalization::pelvisPoseBaseWalkingCallback,
   //                                                               this);
 
   pelvis_reset_msg_sub_ =
-      ros_node_.subscribe("/robotis/pelvis_pose_reset", 5,
+      ros_node_.subscribe("/humanoid_robot/pelvis_pose_reset", 5,
                           &HUMANOID_ROBOTLocalization::pelvisPoseResetCallback, this);
 }
 
@@ -86,7 +86,7 @@ void HUMANOID_ROBOTLocalization::pelvisPoseCallback(
 //  Eigen::Quaterniond msg_q;
 //  tf::quaternionMsgToEigen(msg->pose.orientation, msg_q);
 
-//  Eigen::MatrixXd rpy = robotis_framework::convertQuaternionToRPY(msg_q);
+//  Eigen::MatrixXd rpy = humanoid_robot_framework::convertQuaternionToRPY(msg_q);
 //  double yaw = rpy.coeff(2,0);
 
 //  if ( fabs(msg->pose.position.x) <= 1e-3 &&
@@ -201,7 +201,7 @@ void HUMANOID_ROBOTLocalization::update() {
   position_offset.coeffRef(1, 0) = pelvis_pose_offset_.pose.position.y;
 
   Eigen::MatrixXd orientation =
-      robotis_framework::convertQuaternionToRotation(pose_old_quaternion);
+      humanoid_robot_framework::convertQuaternionToRotation(pose_old_quaternion);
   //  Eigen::MatrixXd position_walking_new = orientation * position_walking;
   Eigen::MatrixXd position_offset_new = orientation * position_offset;
 
@@ -230,4 +230,4 @@ void HUMANOID_ROBOTLocalization::update() {
   mutex_.unlock();
 }
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op

@@ -40,10 +40,10 @@
 #include "walking_control.h"
 #include "wholebody_control.h"
 
-#include "robotis_controller_msgs/JointCtrlModule.h"
-#include "robotis_controller_msgs/StatusMsg.h"
-#include "robotis_framework_common/motion_module.h"
-#include "robotis_math/robotis_math.h"
+#include "humanoid_robot_controller_msgs/JointCtrlModule.h"
+#include "humanoid_robot_controller_msgs/StatusMsg.h"
+#include "humanoid_robot_framework_common/motion_module.h"
+#include "humanoid_robot_math/humanoid_robot_math.h"
 
 //#include "humanoid_robot_kinematics_dynamics/humanoid_robot_kinematics_dynamics.h"
 #include "humanoid_robot_balance_control/humanoid_robot_balance_control.h"
@@ -62,7 +62,7 @@
 #include "humanoid_robot_online_walking_module_msgs/Step2D.h"
 #include "humanoid_robot_online_walking_module_msgs/Step2DArray.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 enum CONTROL_TYPE {
   JOINT_CONTROL,
@@ -75,8 +75,8 @@ enum CONTROL_TYPE {
 enum BALANCE_TYPE { ON, OFF };
 
 class OnlineWalkingModule
-    : public robotis_framework::MotionModule,
-      public robotis_framework::Singleton<OnlineWalkingModule> {
+    : public humanoid_robot_framework::MotionModule,
+      public humanoid_robot_framework::Singleton<OnlineWalkingModule> {
 public:
   OnlineWalkingModule();
   virtual ~OnlineWalkingModule();
@@ -117,8 +117,8 @@ public:
 
   /* ROS Framework Functions */
   void initialize(const int control_cycle_msec,
-                  robotis_framework::Robot *robot);
-  void process(std::map<std::string, robotis_framework::Dynamixel *> dxls,
+                  humanoid_robot_framework::Robot *robot);
+  void process(std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
                std::map<std::string, double> sensors);
   void stop();
   bool isRunning();
@@ -197,10 +197,10 @@ private:
   int walking_leg_, walking_phase_;
   int walking_size_, walking_step_;
 
-  robotis_framework::MinimumJerk *joint_tra_;
-  robotis_framework::MinimumJerk *balance_tra_;
-  robotis_framework::MinimumJerk *body_offset_tra_;
-  robotis_framework::MinimumJerkViaPoint *feed_forward_tra_;
+  humanoid_robot_framework::MinimumJerk *joint_tra_;
+  humanoid_robot_framework::MinimumJerk *balance_tra_;
+  humanoid_robot_framework::MinimumJerk *body_offset_tra_;
+  humanoid_robot_framework::MinimumJerkViaPoint *feed_forward_tra_;
 
   size_t number_of_joints_;
   std::vector<std::string> joint_name_;
@@ -336,6 +336,6 @@ private:
   double total_mass_;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif

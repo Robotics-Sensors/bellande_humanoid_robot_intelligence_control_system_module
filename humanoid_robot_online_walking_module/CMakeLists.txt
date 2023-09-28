@@ -14,12 +14,12 @@ find_package(
   std_msgs
   sensor_msgs
   geometry_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   humanoid_robot_online_walking_module_msgs
   cmake_modules
-  robotis_framework_common
-  robotis_device
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_math
   humanoid_robot_balance_control
 )
 
@@ -71,12 +71,12 @@ catkin_package(
   std_msgs
   sensor_msgs
   geometry_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   humanoid_robot_online_walking_module_msgs
   cmake_modules
-  robotis_framework_common
-  robotis_device
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_math
   humanoid_robot_balance_control
   DEPENDS Boost EIGEN3 orocos_kdl
 )

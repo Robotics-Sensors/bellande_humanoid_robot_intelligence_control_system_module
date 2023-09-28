@@ -18,7 +18,7 @@
 
 #include "humanoid_robot_online_walking_module/online_walking_module.h"
 
-using namespace robotis_op;
+using namespace humanoid_robot_op;
 
 OnlineWalkingModule::OnlineWalkingModule()
     : control_cycle_sec_(0.008), is_moving_(false), is_balancing_(false),
@@ -29,25 +29,25 @@ OnlineWalkingModule::OnlineWalkingModule()
       total_mass_(3.5), foot_distance_(0.07) {
   enable_ = false;
   module_name_ = "online_walking_module";
-  control_mode_ = robotis_framework::PositionControl;
+  control_mode_ = humanoid_robot_framework::PositionControl;
   control_type_ = NONE;
   balance_type_ = OFF;
 
   humanoid_robot_kdl_ = new HUMANOID_ROBOTKinematics();
 
   /* leg */
-  result_["r_hip_yaw"] = new robotis_framework::DynamixelState();
-  result_["r_hip_roll"] = new robotis_framework::DynamixelState();
-  result_["r_hip_pitch"] = new robotis_framework::DynamixelState();
-  result_["r_knee"] = new robotis_framework::DynamixelState();
-  result_["r_ank_pitch"] = new robotis_framework::DynamixelState();
-  result_["r_ank_roll"] = new robotis_framework::DynamixelState();
-  result_["l_hip_yaw"] = new robotis_framework::DynamixelState();
-  result_["l_hip_roll"] = new robotis_framework::DynamixelState();
-  result_["l_hip_pitch"] = new robotis_framework::DynamixelState();
-  result_["l_knee"] = new robotis_framework::DynamixelState();
-  result_["l_ank_pitch"] = new robotis_framework::DynamixelState();
-  result_["l_ank_roll"] = new robotis_framework::DynamixelState();
+  result_["r_hip_yaw"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_hip_roll"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_hip_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_knee"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_ank_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["r_ank_roll"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_hip_yaw"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_hip_roll"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_hip_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_knee"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_ank_pitch"] = new humanoid_robot_framework::DynamixelState();
+  result_["l_ank_roll"] = new humanoid_robot_framework::DynamixelState();
 
   /* leg */
   joint_name_to_id_["r_hip_yaw"] = 1;
@@ -159,7 +159,7 @@ OnlineWalkingModule::OnlineWalkingModule()
 OnlineWalkingModule::~OnlineWalkingModule() { queue_thread_.join(); }
 
 void OnlineWalkingModule::initialize(const int control_cycle_msec,
-                                     robotis_framework::Robot *robot) {
+                                     humanoid_robot_framework::Robot *robot) {
   control_cycle_sec_ = control_cycle_msec * 0.001;
   queue_thread_ =
       boost::thread(boost::bind(&OnlineWalkingModule::queueThread, this));
@@ -167,18 +167,18 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec,
   ros::NodeHandle ros_node;
 
   // Publisher
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>(
-      "/robotis/status", 1);
+  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
+      "/humanoid_robot/status", 1);
   movement_done_pub_ =
-      ros_node.advertise<std_msgs::String>("/robotis/movement_done", 1);
+      ros_node.advertise<std_msgs::String>("/humanoid_robot/movement_done", 1);
   goal_joint_state_pub_ = ros_node.advertise<sensor_msgs::JointState>(
-      "/robotis/online_walking/goal_joint_states", 1);
+      "/humanoid_robot/online_walking/goal_joint_states", 1);
   pelvis_pose_pub_ =
-      ros_node.advertise<geometry_msgs::PoseStamped>("/robotis/pelvis_pose", 1);
+      ros_node.advertise<geometry_msgs::PoseStamped>("/humanoid_robot/pelvis_pose", 1);
 
   // Service
   //  get_preview_matrix_client_ =
-  //  ros_node.serviceClient<humanoid_robot_online_walking_module_msgs::GetPreviewMatrix>("/robotis/online_walking/get_preview_matrix",
+  //  ros_node.serviceClient<humanoid_robot_online_walking_module_msgs::GetPreviewMatrix>("/humanoid_robot/online_walking/get_preview_matrix",
   //  0);
 }
 
@@ -190,53 +190,53 @@ void OnlineWalkingModule::queueThread() {
 
   // Subscriber
   ros::Subscriber reset_body_sub_ =
-      ros_node.subscribe("/robotis/online_walking/reset_body", 5,
+      ros_node.subscribe("/humanoid_robot/online_walking/reset_body", 5,
                          &OnlineWalkingModule::setResetBodyCallback, this);
   ros::Subscriber joint_pose_sub_ =
-      ros_node.subscribe("/robotis/online_walking/goal_joint_pose", 5,
+      ros_node.subscribe("/humanoid_robot/online_walking/goal_joint_pose", 5,
                          &OnlineWalkingModule::goalJointPoseCallback, this);
   ros::Subscriber kinematics_pose_sub_ = ros_node.subscribe(
-      "/robotis/online_walking/goal_kinematics_pose", 5,
+      "/humanoid_robot/online_walking/goal_kinematics_pose", 5,
       &OnlineWalkingModule::goalKinematicsPoseCallback, this);
   ros::Subscriber foot_step_command_sub_ =
-      ros_node.subscribe("/robotis/online_walking/foot_step_command", 5,
+      ros_node.subscribe("/humanoid_robot/online_walking/foot_step_command", 5,
                          &OnlineWalkingModule::footStepCommandCallback, this);
   ros::Subscriber walking_param_sub_ =
-      ros_node.subscribe("/robotis/online_walking/walking_param", 5,
+      ros_node.subscribe("/humanoid_robot/online_walking/walking_param", 5,
                          &OnlineWalkingModule::walkingParamCallback, this);
   ros::Subscriber wholebody_balance_msg_sub = ros_node.subscribe(
-      "/robotis/online_walking/wholebody_balance_msg", 5,
+      "/humanoid_robot/online_walking/wholebody_balance_msg", 5,
       &OnlineWalkingModule::setWholebodyBalanceMsgCallback, this);
   ros::Subscriber body_offset_msg_sub =
-      ros_node.subscribe("/robotis/online_walking/body_offset", 5,
+      ros_node.subscribe("/humanoid_robot/online_walking/body_offset", 5,
                          &OnlineWalkingModule::setBodyOffsetCallback, this);
   ros::Subscriber foot_distance_msg_sub =
-      ros_node.subscribe("/robotis/online_walking/foot_distance", 5,
+      ros_node.subscribe("/humanoid_robot/online_walking/foot_distance", 5,
                          &OnlineWalkingModule::setFootDistanceCallback, this);
 
   ros::Subscriber footsteps_sub =
-      ros_node.subscribe("/robotis/online_walking/footsteps_2d", 5,
+      ros_node.subscribe("/humanoid_robot/online_walking/footsteps_2d", 5,
                          &OnlineWalkingModule::footStep2DCallback, this);
 
   //  ros::Subscriber imu_data_sub =
-  //  ros_node.subscribe("/robotis/sensor/imu/imu", 5,
+  //  ros_node.subscribe("/humanoid_robot/sensor/imu/imu", 5,
   //                                                    &OnlineWalkingModule::imuDataCallback,
   //                                                    this);
   //  ros::Subscriber l_foot_ft_sub =
-  //  ros_node.subscribe("/robotis/sensor/l_foot_ft", 3,
+  //  ros_node.subscribe("/humanoid_robot/sensor/l_foot_ft", 3,
   //                                                     &OnlineWalkingModule::leftFootForceTorqueOutputCallback,
   //                                                     this);
   //  ros::Subscriber r_foot_ft_sub =
-  //  ros_node.subscribe("/robotis/sensor/r_foot_ft", 3,
+  //  ros_node.subscribe("/humanoid_robot/sensor/r_foot_ft", 3,
   //                                                     &OnlineWalkingModule::rightFootForceTorqueOutputCallback,
   //                                                     this);
 
   // Service
   ros::ServiceServer get_joint_pose_server = ros_node.advertiseService(
-      "/robotis/online_walking/get_joint_pose",
+      "/humanoid_robot/online_walking/get_joint_pose",
       &OnlineWalkingModule::getJointPoseCallback, this);
   ros::ServiceServer get_kinematics_pose_server = ros_node.advertiseService(
-      "/robotis/online_walking/get_kinematics_pose",
+      "/humanoid_robot/online_walking/get_kinematics_pose",
       &OnlineWalkingModule::getKinematicsPoseCallback, this);
 
   ros::WallDuration duration(control_cycle_sec_);
@@ -489,7 +489,7 @@ void OnlineWalkingModule::initBalanceControl() {
   std::vector<double_t> balance_zero;
   balance_zero.resize(1, 0.0);
 
-  balance_tra_ = new robotis_framework::MinimumJerk(
+  balance_tra_ = new humanoid_robot_framework::MinimumJerk(
       ini_time, mov_time, des_balance_gain_ratio_, balance_zero, balance_zero,
       goal_balance_gain_ratio_, balance_zero, balance_zero);
 
@@ -546,11 +546,11 @@ void OnlineWalkingModule::leftFootForceTorqueOutputCallback(
   torque.coeffRef(1, 0) = msg->wrench.torque.y;
   torque.coeffRef(2, 0) = msg->wrench.torque.z;
 
-  Eigen::MatrixXd force_new = robotis_framework::getRotationX(M_PI) *
-                              robotis_framework::getRotationZ(-0.5 * M_PI) *
+  Eigen::MatrixXd force_new = humanoid_robot_framework::getRotationX(M_PI) *
+                              humanoid_robot_framework::getRotationZ(-0.5 * M_PI) *
                               force;
-  Eigen::MatrixXd torque_new = robotis_framework::getRotationX(M_PI) *
-                               robotis_framework::getRotationZ(-0.5 * M_PI) *
+  Eigen::MatrixXd torque_new = humanoid_robot_framework::getRotationX(M_PI) *
+                               humanoid_robot_framework::getRotationZ(-0.5 * M_PI) *
                                torque;
 
   double l_foot_fx_N = force_new.coeff(0, 0);
@@ -561,17 +561,17 @@ void OnlineWalkingModule::leftFootForceTorqueOutputCallback(
   double l_foot_Tz_Nm = torque_new.coeff(2, 0);
 
   l_foot_fx_N =
-      robotis_framework::sign(l_foot_fx_N) * fmin(fabs(l_foot_fx_N), 2000.0);
+      humanoid_robot_framework::sign(l_foot_fx_N) * fmin(fabs(l_foot_fx_N), 2000.0);
   l_foot_fy_N =
-      robotis_framework::sign(l_foot_fy_N) * fmin(fabs(l_foot_fy_N), 2000.0);
+      humanoid_robot_framework::sign(l_foot_fy_N) * fmin(fabs(l_foot_fy_N), 2000.0);
   l_foot_fz_N =
-      robotis_framework::sign(l_foot_fz_N) * fmin(fabs(l_foot_fz_N), 2000.0);
+      humanoid_robot_framework::sign(l_foot_fz_N) * fmin(fabs(l_foot_fz_N), 2000.0);
   l_foot_Tx_Nm =
-      robotis_framework::sign(l_foot_Tx_Nm) * fmin(fabs(l_foot_Tx_Nm), 300.0);
+      humanoid_robot_framework::sign(l_foot_Tx_Nm) * fmin(fabs(l_foot_Tx_Nm), 300.0);
   l_foot_Ty_Nm =
-      robotis_framework::sign(l_foot_Ty_Nm) * fmin(fabs(l_foot_Ty_Nm), 300.0);
+      humanoid_robot_framework::sign(l_foot_Ty_Nm) * fmin(fabs(l_foot_Ty_Nm), 300.0);
   l_foot_Tz_Nm =
-      robotis_framework::sign(l_foot_Tz_Nm) * fmin(fabs(l_foot_Tz_Nm), 300.0);
+      humanoid_robot_framework::sign(l_foot_Tz_Nm) * fmin(fabs(l_foot_Tz_Nm), 300.0);
 
   l_foot_ft_data_msg_.force.x = l_foot_fx_N;
   l_foot_ft_data_msg_.force.y = l_foot_fy_N;
@@ -593,11 +593,11 @@ void OnlineWalkingModule::rightFootForceTorqueOutputCallback(
   torque.coeffRef(1, 0) = msg->wrench.torque.y;
   torque.coeffRef(2, 0) = msg->wrench.torque.z;
 
-  Eigen::MatrixXd force_new = robotis_framework::getRotationX(M_PI) *
-                              robotis_framework::getRotationZ(-0.5 * M_PI) *
+  Eigen::MatrixXd force_new = humanoid_robot_framework::getRotationX(M_PI) *
+                              humanoid_robot_framework::getRotationZ(-0.5 * M_PI) *
                               force;
-  Eigen::MatrixXd torque_new = robotis_framework::getRotationX(M_PI) *
-                               robotis_framework::getRotationZ(-0.5 * M_PI) *
+  Eigen::MatrixXd torque_new = humanoid_robot_framework::getRotationX(M_PI) *
+                               humanoid_robot_framework::getRotationZ(-0.5 * M_PI) *
                                torque;
 
   double r_foot_fx_N = force_new.coeff(0, 0);
@@ -608,17 +608,17 @@ void OnlineWalkingModule::rightFootForceTorqueOutputCallback(
   double r_foot_Tz_Nm = torque_new.coeff(2, 0);
 
   r_foot_fx_N =
-      robotis_framework::sign(r_foot_fx_N) * fmin(fabs(r_foot_fx_N), 2000.0);
+      humanoid_robot_framework::sign(r_foot_fx_N) * fmin(fabs(r_foot_fx_N), 2000.0);
   r_foot_fy_N =
-      robotis_framework::sign(r_foot_fy_N) * fmin(fabs(r_foot_fy_N), 2000.0);
+      humanoid_robot_framework::sign(r_foot_fy_N) * fmin(fabs(r_foot_fy_N), 2000.0);
   r_foot_fz_N =
-      robotis_framework::sign(r_foot_fz_N) * fmin(fabs(r_foot_fz_N), 2000.0);
+      humanoid_robot_framework::sign(r_foot_fz_N) * fmin(fabs(r_foot_fz_N), 2000.0);
   r_foot_Tx_Nm =
-      robotis_framework::sign(r_foot_Tx_Nm) * fmin(fabs(r_foot_Tx_Nm), 300.0);
+      humanoid_robot_framework::sign(r_foot_Tx_Nm) * fmin(fabs(r_foot_Tx_Nm), 300.0);
   r_foot_Ty_Nm =
-      robotis_framework::sign(r_foot_Ty_Nm) * fmin(fabs(r_foot_Ty_Nm), 300.0);
+      humanoid_robot_framework::sign(r_foot_Ty_Nm) * fmin(fabs(r_foot_Ty_Nm), 300.0);
   r_foot_Tz_Nm =
-      robotis_framework::sign(r_foot_Tz_Nm) * fmin(fabs(r_foot_Tz_Nm), 300.0);
+      humanoid_robot_framework::sign(r_foot_Tz_Nm) * fmin(fabs(r_foot_Tz_Nm), 300.0);
 
   r_foot_ft_data_msg_.force.x = r_foot_fx_N;
   r_foot_ft_data_msg_.force.y = r_foot_fy_N;
@@ -679,7 +679,7 @@ void OnlineWalkingModule::initJointControl() {
   mov_step_ = 0;
   mov_size_ = (int)(mov_time / control_cycle_sec_) + 1;
 
-  joint_tra_ = new robotis_framework::MinimumJerk(
+  joint_tra_ = new humanoid_robot_framework::MinimumJerk(
       ini_time, mov_time, des_joint_pos_, des_joint_vel_, des_joint_accel_,
       goal_joint_pos_, goal_joint_vel_, goal_joint_accel_);
   if (is_moving_ == true)
@@ -761,7 +761,7 @@ void OnlineWalkingModule::initOffsetControl() {
   std::vector<double_t> offset_zero;
   offset_zero.resize(3, 0.0);
 
-  body_offset_tra_ = new robotis_framework::MinimumJerk(
+  body_offset_tra_ = new humanoid_robot_framework::MinimumJerk(
       ini_time, mov_time, des_body_offset_, offset_zero, offset_zero,
       goal_body_offset_, offset_zero, offset_zero);
 
@@ -886,8 +886,8 @@ void OnlineWalkingModule::footStep2DCallback(
   Eigen::Quaterniond body_Q(des_body_Q_[3], des_body_Q_[0], des_body_Q_[1],
                             des_body_Q_[2]);
   Eigen::MatrixXd body_R =
-      robotis_framework::convertQuaternionToRotation(body_Q);
-  Eigen::MatrixXd body_rpy = robotis_framework::convertQuaternionToRPY(body_Q);
+      humanoid_robot_framework::convertQuaternionToRotation(body_Q);
+  Eigen::MatrixXd body_rpy = humanoid_robot_framework::convertQuaternionToRPY(body_Q);
   Eigen::MatrixXd body_T = Eigen::MatrixXd::Identity(4, 4);
   body_T.block(0, 0, 3, 3) = body_R;
   body_T.coeffRef(0, 3) = des_body_pos_[0];
@@ -932,7 +932,7 @@ void OnlineWalkingModule::footStep2DCallback(
       humanoid_robot_online_walking_module_msgs::Step2D step_msg = msg.footsteps_2d[i];
       step_msg.moving_foot -= 1;
 
-      Eigen::MatrixXd step_R = robotis_framework::convertRPYToRotation(
+      Eigen::MatrixXd step_R = humanoid_robot_framework::convertRPYToRotation(
           0.0, 0.0, step_msg.step2d.theta);
       Eigen::MatrixXd step_T = Eigen::MatrixXd::Identity(4, 4);
       step_T.block(0, 0, 3, 3) = step_R;
@@ -945,7 +945,7 @@ void OnlineWalkingModule::footStep2DCallback(
       double step_new_x = step_T_new.coeff(0, 3);
       double step_new_y = step_T_new.coeff(1, 3);
       Eigen::MatrixXd step_new_rpy =
-          robotis_framework::convertRotationToRPY(step_R_new);
+          humanoid_robot_framework::convertRotationToRPY(step_R_new);
       double step_new_theta = step_new_rpy.coeff(2, 0);
 
       step_msg.step2d.x = step_new_x;
@@ -1121,7 +1121,7 @@ void OnlineWalkingModule::initFeedforwardControl() {
   double via_time = 0.5 * (init_time + fin_time);
   double dsp_ratio = walking_param_.dsp_ratio;
 
-  feed_forward_tra_ = new robotis_framework::MinimumJerkViaPoint(
+  feed_forward_tra_ = new humanoid_robot_framework::MinimumJerkViaPoint(
       init_time, fin_time, via_time, dsp_ratio, zero_vector, zero_vector,
       zero_vector, zero_vector, zero_vector, zero_vector, via_pos, zero_vector,
       zero_vector);
@@ -1136,7 +1136,7 @@ void OnlineWalkingModule::calcRobotPose() {
   Eigen::Quaterniond des_body_Q(des_body_Q_[3], des_body_Q_[0], des_body_Q_[1],
                                 des_body_Q_[2]);
   Eigen::MatrixXd des_body_rot =
-      robotis_framework::convertQuaternionToRotation(des_body_Q);
+      humanoid_robot_framework::convertQuaternionToRotation(des_body_Q);
 
   // Forward Kinematics
   humanoid_robot_kdl_->initialize(des_body_pos, des_body_rot);
@@ -1174,7 +1174,7 @@ void OnlineWalkingModule::calcRobotPose() {
   Eigen::Quaterniond curr_r_leg_Q(r_leg_Q[3], r_leg_Q[0], r_leg_Q[1],
                                   r_leg_Q[2]);
   Eigen::MatrixXd curr_r_leg_rot =
-      robotis_framework::convertQuaternionToRotation(curr_r_leg_Q);
+      humanoid_robot_framework::convertQuaternionToRotation(curr_r_leg_Q);
 
   Eigen::MatrixXd g_to_r_leg = Eigen::MatrixXd::Identity(4, 4);
   g_to_r_leg.block(0, 0, 3, 3) = curr_r_leg_rot;
@@ -1185,7 +1185,7 @@ void OnlineWalkingModule::calcRobotPose() {
   Eigen::Quaterniond curr_l_leg_Q(l_leg_Q[3], l_leg_Q[0], l_leg_Q[1],
                                   l_leg_Q[2]);
   Eigen::MatrixXd curr_l_leg_rot =
-      robotis_framework::convertQuaternionToRotation(curr_l_leg_Q);
+      humanoid_robot_framework::convertQuaternionToRotation(curr_l_leg_Q);
 
   Eigen::MatrixXd g_to_l_leg = Eigen::MatrixXd::Identity(4, 4);
   g_to_l_leg.block(0, 0, 3, 3) = curr_l_leg_rot;
@@ -1347,9 +1347,9 @@ bool OnlineWalkingModule::setBalanceControl() {
   Eigen::Quaterniond des_body_Q(des_body_Q_[3], des_body_Q_[0], des_body_Q_[1],
                                 des_body_Q_[2]);
   Eigen::MatrixXd des_body_rot =
-      robotis_framework::convertQuaternionToRotation(des_body_Q);
+      humanoid_robot_framework::convertQuaternionToRotation(des_body_Q);
   Eigen::MatrixXd des_body_rpy =
-      robotis_framework::convertQuaternionToRPY(des_body_Q);
+      humanoid_robot_framework::convertQuaternionToRPY(des_body_Q);
 
   // Right Leg Pose
   Eigen::MatrixXd des_r_foot_pos = Eigen::MatrixXd::Zero(3, 1);
@@ -1360,7 +1360,7 @@ bool OnlineWalkingModule::setBalanceControl() {
   Eigen::Quaterniond des_r_foot_Q(des_r_leg_Q_[3], des_r_leg_Q_[0],
                                   des_r_leg_Q_[1], des_r_leg_Q_[2]);
   Eigen::MatrixXd des_r_foot_rot =
-      robotis_framework::convertQuaternionToRotation(des_r_foot_Q);
+      humanoid_robot_framework::convertQuaternionToRotation(des_r_foot_Q);
 
   // Left Leg Pose
   Eigen::MatrixXd des_l_foot_pos = Eigen::MatrixXd::Zero(3, 1);
@@ -1371,7 +1371,7 @@ bool OnlineWalkingModule::setBalanceControl() {
   Eigen::Quaterniond des_l_foot_Q(des_l_leg_Q_[3], des_l_leg_Q_[0],
                                   des_l_leg_Q_[1], des_l_leg_Q_[2]);
   Eigen::MatrixXd des_l_foot_rot =
-      robotis_framework::convertQuaternionToRotation(des_l_foot_Q);
+      humanoid_robot_framework::convertQuaternionToRotation(des_l_foot_Q);
 
   // Set Desired Value for Balance Control
   Eigen::MatrixXd body_pose = Eigen::MatrixXd::Identity(4, 4);
@@ -1401,39 +1401,39 @@ bool OnlineWalkingModule::setBalanceControl() {
   Eigen::Quaterniond imu_quaternion(
       imu_data_msg_.orientation.w, imu_data_msg_.orientation.x,
       imu_data_msg_.orientation.y, imu_data_msg_.orientation.z);
-  Eigen::MatrixXd imu_rpy = robotis_framework::convertRotationToRPY(
-      robotis_framework::getRotationX(M_PI) *
+  Eigen::MatrixXd imu_rpy = humanoid_robot_framework::convertRotationToRPY(
+      humanoid_robot_framework::getRotationX(M_PI) *
       imu_quaternion.toRotationMatrix() *
-      robotis_framework::getRotationZ(M_PI));
+      humanoid_robot_framework::getRotationZ(M_PI));
 
   imu_data_mutex_lock_.unlock();
 
   // Set FT
   Eigen::MatrixXd robot_to_r_foot_force =
       robot_to_r_foot.block(0, 0, 3, 3) *
-      robotis_framework::getRotationX(M_PI) *
-      robotis_framework::getTransitionXYZ(r_foot_ft_data_msg_.force.x,
+      humanoid_robot_framework::getRotationX(M_PI) *
+      humanoid_robot_framework::getTransitionXYZ(r_foot_ft_data_msg_.force.x,
                                           r_foot_ft_data_msg_.force.y,
                                           r_foot_ft_data_msg_.force.z);
 
   Eigen::MatrixXd robot_to_r_foot_torque =
       robot_to_r_foot.block(0, 0, 3, 3) *
-      robotis_framework::getRotationX(M_PI) *
-      robotis_framework::getTransitionXYZ(r_foot_ft_data_msg_.torque.x,
+      humanoid_robot_framework::getRotationX(M_PI) *
+      humanoid_robot_framework::getTransitionXYZ(r_foot_ft_data_msg_.torque.x,
                                           r_foot_ft_data_msg_.torque.y,
                                           r_foot_ft_data_msg_.torque.z);
 
   Eigen::MatrixXd robot_to_l_foot_force =
       robot_to_l_foot.block(0, 0, 3, 3) *
-      robotis_framework::getRotationX(M_PI) *
-      robotis_framework::getTransitionXYZ(l_foot_ft_data_msg_.force.x,
+      humanoid_robot_framework::getRotationX(M_PI) *
+      humanoid_robot_framework::getTransitionXYZ(l_foot_ft_data_msg_.force.x,
                                           l_foot_ft_data_msg_.force.y,
                                           l_foot_ft_data_msg_.force.z);
 
   Eigen::MatrixXd robot_to_l_foot_torque =
       robot_to_l_foot.block(0, 0, 3, 3) *
-      robotis_framework::getRotationX(M_PI) *
-      robotis_framework::getTransitionXYZ(l_foot_ft_data_msg_.torque.x,
+      humanoid_robot_framework::getRotationX(M_PI) *
+      humanoid_robot_framework::getTransitionXYZ(l_foot_ft_data_msg_.torque.x,
                                           l_foot_ft_data_msg_.torque.y,
                                           l_foot_ft_data_msg_.torque.z);
 
@@ -1509,9 +1509,9 @@ bool OnlineWalkingModule::setBalanceControl() {
   std::vector<double_t> r_leg_output, l_leg_output;
 
   Eigen::Quaterniond des_r_foot_Q_mod =
-      robotis_framework::convertRotationToQuaternion(des_r_foot_rot_mod);
+      humanoid_robot_framework::convertRotationToQuaternion(des_r_foot_rot_mod);
   Eigen::Quaterniond des_l_foot_Q_mod =
-      robotis_framework::convertRotationToQuaternion(des_l_foot_rot_mod);
+      humanoid_robot_framework::convertRotationToQuaternion(des_l_foot_rot_mod);
 
   ik_success = humanoid_robot_kdl_->solveInverseKinematics(
       r_leg_output, des_r_foot_pos_mod, des_r_foot_Q_mod, l_leg_output,
@@ -1628,7 +1628,7 @@ void OnlineWalkingModule::sensoryFeedback(const double &rlGyroErr,
 }
 
 void OnlineWalkingModule::process(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls,
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
     std::map<std::string, double> sensors) {
   if (enable_ == false)
     return;
@@ -1644,13 +1644,13 @@ void OnlineWalkingModule::process(
   sensoryFeedback(rl_gyro_err, fb_gyro_err, balance_angle);
 
   /*----- write curr position -----*/
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_iter = result_.begin();
        state_iter != result_.end(); state_iter++) {
     std::string joint_name = state_iter->first;
 
-    robotis_framework::Dynamixel *dxl = NULL;
-    std::map<std::string, robotis_framework::Dynamixel *>::iterator dxl_it =
+    humanoid_robot_framework::Dynamixel *dxl = NULL;
+    std::map<std::string, humanoid_robot_framework::Dynamixel *>::iterator dxl_it =
         dxls.find(joint_name);
     if (dxl_it != dxls.end())
       dxl = dxl_it->second;
@@ -1733,7 +1733,7 @@ void OnlineWalkingModule::process(
   pelvis_pose_msg.pose.orientation.w = des_body_Q_[3];
 
   /*----- set joint data -----*/
-  for (std::map<std::string, robotis_framework::DynamixelState *>::iterator
+  for (std::map<std::string, humanoid_robot_framework::DynamixelState *>::iterator
            state_iter = result_.begin();
        state_iter != result_.end(); state_iter++) {
     std::string joint_name = state_iter->first;
@@ -1776,7 +1776,7 @@ void OnlineWalkingModule::stop() {
 bool OnlineWalkingModule::isRunning() { return is_moving_; }
 
 void OnlineWalkingModule::publishStatusMsg(unsigned int type, std::string msg) {
-  robotis_controller_msgs::StatusMsg status;
+  humanoid_robot_controller_msgs::StatusMsg status;
   status.header.stamp = ros::Time::now();
   status.type = type;
   status.module_name = "Wholebody";

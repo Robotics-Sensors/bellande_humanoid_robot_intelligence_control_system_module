@@ -120,7 +120,7 @@ void WalkingControl::initialize(
   des_body_Q_ = body_Q;
 
   Eigen::MatrixXd init_body_rpy =
-      robotis_framework::convertQuaternionToRPY(init_body_Q_);
+      humanoid_robot_framework::convertQuaternionToRPY(init_body_Q_);
   init_body_yaw_angle_ = init_body_rpy.coeff(2, 0);
 
   init_r_foot_pos_ = init_r_foot_pos;
@@ -169,7 +169,7 @@ void WalkingControl::initialize(
   des_body_Q_ = body_Q;
 
   Eigen::MatrixXd init_body_rpy =
-      robotis_framework::convertQuaternionToRPY(init_body_Q_);
+      humanoid_robot_framework::convertQuaternionToRPY(init_body_Q_);
   init_body_yaw_angle_ = init_body_rpy.coeff(2, 0);
 
   init_r_foot_pos_ = init_r_foot_pos;
@@ -452,16 +452,16 @@ void WalkingControl::transformFootStep2D() {
 
 void WalkingControl::calcFootTrajectory(int step) {
   Eigen::MatrixXd body_rot =
-      robotis_framework::convertQuaternionToRotation(des_body_Q_);
+      humanoid_robot_framework::convertQuaternionToRotation(des_body_Q_);
   Eigen::MatrixXd left_foot_rot =
-      robotis_framework::convertQuaternionToRotation(des_l_foot_Q_);
+      humanoid_robot_framework::convertQuaternionToRotation(des_l_foot_Q_);
   Eigen::MatrixXd r_foot_rot =
-      robotis_framework::convertQuaternionToRotation(des_r_foot_Q_);
+      humanoid_robot_framework::convertQuaternionToRotation(des_r_foot_Q_);
 
-  init_body_Q_ = robotis_framework::convertRotationToQuaternion(body_rot);
+  init_body_Q_ = humanoid_robot_framework::convertRotationToQuaternion(body_rot);
   init_l_foot_Q_ =
-      robotis_framework::convertRotationToQuaternion(left_foot_rot);
-  init_r_foot_Q_ = robotis_framework::convertRotationToQuaternion(r_foot_rot);
+      humanoid_robot_framework::convertRotationToQuaternion(left_foot_rot);
+  init_r_foot_Q_ = humanoid_robot_framework::convertRotationToQuaternion(r_foot_rot);
 
   if (foot_step_param_.moving_foot[step] == LEFT_LEG) {
     double angle = foot_step_param_.data[step].theta;
@@ -471,12 +471,12 @@ void WalkingControl::calcFootTrajectory(int step) {
     goal_l_foot_pos_[1] = goal_l_foot_pos_buffer_.coeff(step, 1);
     goal_l_foot_pos_[2] = init_r_foot_pos_[2];
 
-    goal_l_foot_Q_ = robotis_framework::convertRPYToQuaternion(0.0, 0.0, angle);
+    goal_l_foot_Q_ = humanoid_robot_framework::convertRPYToQuaternion(0.0, 0.0, angle);
 
     goal_r_foot_pos_ = init_r_foot_pos_;
     goal_r_foot_Q_ = init_r_foot_Q_;
 
-    goal_body_Q_ = robotis_framework::convertRPYToQuaternion(0.0, 0.0, angle);
+    goal_body_Q_ = humanoid_robot_framework::convertRPYToQuaternion(0.0, 0.0, angle);
 
     // Via point
     double via_time = 0.5 * (init_time_ + fin_time_);
@@ -497,7 +497,7 @@ void WalkingControl::calcFootTrajectory(int step) {
       via_l_foot_pos[2] = 0.0;
 
     // Trajectory
-    l_foot_tra_ = new robotis_framework::MinimumJerkViaPoint(
+    l_foot_tra_ = new humanoid_robot_framework::MinimumJerkViaPoint(
         init_time_, fin_time_, via_time, dsp_ratio_, init_l_foot_pos_,
         init_l_foot_vel_, init_l_foot_accel_, goal_l_foot_pos_,
         goal_l_foot_vel_, goal_l_foot_accel_, via_l_foot_pos, via_l_foot_vel,
@@ -511,12 +511,12 @@ void WalkingControl::calcFootTrajectory(int step) {
     goal_r_foot_pos_[0] = goal_r_foot_pos_buffer_.coeff(step, 0);
     goal_r_foot_pos_[1] = goal_r_foot_pos_buffer_.coeff(step, 1);
 
-    goal_r_foot_Q_ = robotis_framework::convertRPYToQuaternion(0.0, 0.0, angle);
+    goal_r_foot_Q_ = humanoid_robot_framework::convertRPYToQuaternion(0.0, 0.0, angle);
 
     goal_l_foot_pos_ = init_l_foot_pos_;
     goal_l_foot_Q_ = init_l_foot_Q_;
 
-    goal_body_Q_ = robotis_framework::convertRPYToQuaternion(0.0, 0.0, angle);
+    goal_body_Q_ = humanoid_robot_framework::convertRPYToQuaternion(0.0, 0.0, angle);
 
     // Via point
     double via_time = 0.5 * (init_time_ + fin_time_);
@@ -537,7 +537,7 @@ void WalkingControl::calcFootTrajectory(int step) {
       via_r_foot_pos[2] = 0.0;
 
     // Trajectory
-    r_foot_tra_ = new robotis_framework::MinimumJerkViaPoint(
+    r_foot_tra_ = new humanoid_robot_framework::MinimumJerkViaPoint(
         init_time_, fin_time_, via_time, dsp_ratio_, init_r_foot_pos_,
         init_r_foot_vel_, init_r_foot_accel_, goal_r_foot_pos_,
         goal_r_foot_vel_, goal_r_foot_accel_, via_r_foot_pos, via_r_foot_vel,
@@ -725,7 +725,7 @@ void WalkingControl::calcPreviewParam(std::vector<double_t> K, int K_row,
   k_x_.resize(1, 3);
   k_x_ << K_.coeff(0, 1), K_.coeff(0, 2), K_.coeff(0, 3);
 
-  preview_control_ = new robotis_framework::PreviewControl();
+  preview_control_ = new humanoid_robot_framework::PreviewControl();
 
   f_ = preview_control_->calcPreviewParam(preview_time_, control_cycle_,
                                           lipm_height_, K_, P_);

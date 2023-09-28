@@ -21,7 +21,7 @@
 
 #include <string>
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 template <typename T> class JointElement {
 public:
@@ -92,6 +92,6 @@ public:
 
   ~JointOffsetData() {}
 };
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
 #endif /* TuningData_H_ */
