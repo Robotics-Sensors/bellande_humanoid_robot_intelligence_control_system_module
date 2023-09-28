@@ -20,7 +20,7 @@
 
 #include "open_cr_module/open_cr_module.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
 OpenCRModule::OpenCRModule()
     : control_cycle_msec_(8), DEBUG_PRINT(false), present_volt_(0.0) {
@@ -65,7 +65,7 @@ OpenCRModule::OpenCRModule()
 OpenCRModule::~OpenCRModule() { queue_thread_.join(); }
 
 void OpenCRModule::initialize(const int control_cycle_msec,
-                              robotis_framework::Robot *robot) {
+                              humanoid_robot_framework::Robot *robot) {
   control_cycle_msec_ = control_cycle_msec;
   queue_thread_ = boost::thread(boost::bind(&OpenCRModule::queueThread, this));
 }
@@ -77,14 +77,14 @@ void OpenCRModule::queueThread() {
   ros_node.setCallbackQueue(&callback_queue);
 
   /* publisher */
-  status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>(
-      "/robotis/status", 1);
-  imu_pub_ = ros_node.advertise<sensor_msgs::Imu>("/robotis/open_cr/imu", 1);
+  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
+      "/humanoid_robot/status", 1);
+  imu_pub_ = ros_node.advertise<sensor_msgs::Imu>("/humanoid_robot/open_cr/imu", 1);
   button_pub_ =
-      ros_node.advertise<std_msgs::String>("/robotis/open_cr/button", 1);
+      ros_node.advertise<std_msgs::String>("/humanoid_robot/open_cr/button", 1);
   dxl_power_msg_pub_ =
-      ros_node.advertise<robotis_controller_msgs::SyncWriteItem>(
-          "/robotis/sync_write_item", 0);
+      ros_node.advertise<humanoid_robot_controller_msgs::SyncWriteItem>(
+          "/humanoid_robot/sync_write_item", 0);
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
   while (ros_node.ok())
@@ -92,8 +92,8 @@ void OpenCRModule::queueThread() {
 }
 
 void OpenCRModule::process(
-    std::map<std::string, robotis_framework::Dynamixel *> dxls,
-    std::map<std::string, robotis_framework::Sensor *> sensors) {
+    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
+    std::map<std::string, humanoid_robot_framework::Sensor *> sensors) {
   if (sensors["open-cr"] == NULL)
     return;
 
@@ -208,7 +208,7 @@ void OpenCRModule::publishIMU() {
   double yaw = 0.0;
 
   Eigen::Quaterniond orientation =
-      robotis_framework::convertRPYToQuaternion(roll, pitch, yaw);
+      humanoid_robot_framework::convertRPYToQuaternion(roll, pitch, yaw);
 
   imu_msg_.orientation.x = orientation.x();
   imu_msg_.orientation.y = orientation.y();
@@ -259,7 +259,7 @@ void OpenCRModule::publishButtonMsg(const std::string &button_name) {
   button_msg.data = button_name;
 
   button_pub_.publish(button_msg);
-  publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO,
+  publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
                    "Button : " + button_name);
 }
 
@@ -283,8 +283,8 @@ void OpenCRModule::handleVoltage(double present_volt) {
     std::stringstream log_stream;
     log_stream << "Present Volt : " << present_volt_ << "V";
     publishStatusMsg((present_volt_ < 11
-                          ? robotis_controller_msgs::StatusMsg::STATUS_WARN
-                          : robotis_controller_msgs::StatusMsg::STATUS_INFO),
+                          ? humanoid_robot_controller_msgs::StatusMsg::STATUS_WARN
+                          : humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO),
                      log_stream.str());
     ROS_INFO_COND(DEBUG_PRINT, "Present Volt : %fV, Read Volt : %fV",
                   previous_volt_, result_["present_voltage"]);
@@ -292,7 +292,7 @@ void OpenCRModule::handleVoltage(double present_volt) {
 }
 
 void OpenCRModule::publishStatusMsg(unsigned int type, std::string msg) {
-  robotis_controller_msgs::StatusMsg status_msg;
+  humanoid_robot_controller_msgs::StatusMsg status_msg;
   status_msg.header.stamp = ros::Time::now();
   status_msg.type = type;
   status_msg.module_name = "SENSOR";
@@ -302,7 +302,7 @@ void OpenCRModule::publishStatusMsg(unsigned int type, std::string msg) {
 }
 
 void OpenCRModule::publishDXLPowerMsg(unsigned int value) {
-  robotis_controller_msgs::SyncWriteItem sync_write_msg;
+  humanoid_robot_controller_msgs::SyncWriteItem sync_write_msg;
   sync_write_msg.item_name = "dynamixel_power";
   sync_write_msg.joint_name.push_back("open-cr");
   sync_write_msg.value.push_back(value);
@@ -317,4 +317,4 @@ double OpenCRModule::lowPassFilter(double alpha, double x_new, double &x_old) {
   return filtered_value;
 }
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op

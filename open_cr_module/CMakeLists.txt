@@ -14,11 +14,11 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   sensor_msgs
-  robotis_controller_msgs
+  humanoid_robot_controller_msgs
   cmake_modules
-  robotis_framework_common
-  robotis_device
-  robotis_math
+  humanoid_robot_framework_common
+  humanoid_robot_device
+  humanoid_robot_math
 )
 
 find_package(Boost REQUIRED COMPONENTS thread)
@@ -46,11 +46,11 @@ catkin_package(
   roscpp 
   std_msgs 
   sensor_msgs 
-  robotis_controller_msgs 
+  humanoid_robot_controller_msgs 
   cmake_modules 
-  robotis_framework_common 
-  robotis_device 
-  robotis_math
+  humanoid_robot_framework_common 
+  humanoid_robot_device 
+  humanoid_robot_math
   DEPENDS Boost EIGEN3
 )
 

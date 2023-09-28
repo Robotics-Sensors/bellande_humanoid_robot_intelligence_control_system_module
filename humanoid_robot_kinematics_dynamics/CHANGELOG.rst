@@ -1,6 +1,6 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package open_cr_module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package humanoid_robot_kinematics_dynamics
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.3.1 (2023-09-27)
 ------------------
@@ -23,19 +23,25 @@ Changelog for package open_cr_module
 
 0.2.0 (2018-03-26)
 ------------------
-* refactoring to release
+* added wholebody module
 * changed package.xml to use format v2
-* Contributors: Pyo
+* refactoring to release
+* Contributors: Pyo, SCH
 
 0.1.1 (2017-10-31)
 ------------------
-* fixed missing dependence
+* added to check collision
+* added test code about collision check
+* added direct_control_module
+* fixed wrong index of humanoid_robot kinematics tree
 * changed License from BSD to Apache 2.0
+* changed collision range
 * Contributors: Kayman
 
 0.1.0 (2017-10-27)
 ------------------
-* added new metapackage for ROBOTIS HUMANOID_ROBOT
-* added the function of recovery after reset
-* added function of reset dxl power
+* added walking_module use humanoid_robot_kinematics_dynamics(for IK)
+* applied new leg structure to the walking_module and the kinematicsdynamics
+* applied ROS C++ Coding Style
+* applied ROBOTIS framework
 * Contributors: Kayman

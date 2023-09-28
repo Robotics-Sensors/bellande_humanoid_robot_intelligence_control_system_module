@@ -1,6 +1,6 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package open_cr_module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package humanoid_robot_base_module
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.3.1 (2023-09-27)
 ------------------
@@ -23,19 +23,28 @@ Changelog for package open_cr_module
 
 0.2.0 (2018-03-26)
 ------------------
-* refactoring to release
+* changed method to setting module(msg -> srv)
+* fixed a bug to jump to init pose
+* fixed a bug in head_control_module that wrong init vel or accel is set for generating trajectory in middle of moving
+* changed a method of setting module in base_module
+* added C++11 build option
 * changed package.xml to use format v2
-* Contributors: Pyo
+* refactoring to release
+* Contributors: Kayman, Pyo
 
 0.1.1 (2017-10-31)
 ------------------
 * fixed missing dependence
-* changed License from BSD to Apache 2.0
+* Changed License from BSD to Apache 2.0
 * Contributors: Kayman
 
 0.1.0 (2017-10-27)
 ------------------
-* added new metapackage for ROBOTIS HUMANOID_ROBOT
 * added the function of recovery after reset
-* added function of reset dxl power
+* added Tools
+* changed setting for walking and dxl
+* change directory structure
+* change package name : op2 -> humanoid_robot
+* splited the repository of ROBOTIS-HUMANOID_ROBOT
+* cleaned up the code
 * Contributors: Kayman

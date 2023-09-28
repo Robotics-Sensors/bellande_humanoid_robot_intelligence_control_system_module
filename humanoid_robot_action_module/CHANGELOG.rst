@@ -1,6 +1,6 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package open_cr_module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package humanoid_robot_action_module
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.3.1 (2023-09-27)
 ------------------
@@ -23,19 +23,26 @@ Changelog for package open_cr_module
 
 0.2.0 (2018-03-26)
 ------------------
-* refactoring to release
 * changed package.xml to use format v2
-* Contributors: Pyo
+* refactoring to release
+* Contributors: Kayman, SCH, Pyo
 
 0.1.1 (2017-10-31)
 ------------------
 * fixed missing dependence
+* fixed action_module bug
 * changed License from BSD to Apache 2.0
 * Contributors: Kayman
 
 0.1.0 (2017-10-27)
 ------------------
-* added new metapackage for ROBOTIS HUMANOID_ROBOT
 * added the function of recovery after reset
-* added function of reset dxl power
+* added action, modified dxl init file
+* added Tools
+* fixed actions that move unexpected
+* modified action file
+* modified parameter for release
+* cleanup the code
+* splited the repository of ROBOTIS-HUMANOID_ROBOT
+* change package name : op2 -> humanoid_robot
 * Contributors: Kayman

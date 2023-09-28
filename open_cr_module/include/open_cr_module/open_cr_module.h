@@ -16,8 +16,8 @@
 
 /* Author: Kayman */
 
-#ifndef OP3_OPEN_CR_MODULE_H_
-#define OP3_OPEN_CR_MODULE_H_
+#ifndef HUMANOID_ROBOT_OPEN_CR_MODULE_H_
+#define HUMANOID_ROBOT_OPEN_CR_MODULE_H_
 
 #include <boost/thread.hpp>
 #include <eigen3/Eigen/Eigen>
@@ -26,25 +26,25 @@
 #include <sensor_msgs/Imu.h>
 #include <std_msgs/String.h>
 
-#include "robotis_controller_msgs/StatusMsg.h"
-#include "robotis_controller_msgs/SyncWriteItem.h"
-#include "robotis_framework_common/sensor_module.h"
-#include "robotis_math/robotis_linear_algebra.h"
-#include "robotis_math/robotis_math_base.h"
+#include "humanoid_robot_controller_msgs/StatusMsg.h"
+#include "humanoid_robot_controller_msgs/SyncWriteItem.h"
+#include "humanoid_robot_framework_common/sensor_module.h"
+#include "humanoid_robot_math/humanoid_robot_linear_algebra.h"
+#include "humanoid_robot_math/humanoid_robot_math_base.h"
 
-namespace robotis_op {
+namespace humanoid_robot_op {
 
-class OpenCRModule : public robotis_framework::SensorModule,
-                     public robotis_framework::Singleton<OpenCRModule> {
+class OpenCRModule : public humanoid_robot_framework::SensorModule,
+                     public humanoid_robot_framework::Singleton<OpenCRModule> {
 public:
   OpenCRModule();
   virtual ~OpenCRModule();
 
   /* ROS Topic Callback Functions */
   void initialize(const int control_cycle_msec,
-                  robotis_framework::Robot *robot);
-  void process(std::map<std::string, robotis_framework::Dynamixel *> dxls,
-               std::map<std::string, robotis_framework::Sensor *> sensors);
+                  humanoid_robot_framework::Robot *robot);
+  void process(std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
+               std::map<std::string, humanoid_robot_framework::Sensor *> sensors);
 
 private:
   const double G_ACC = 9.80665;
@@ -84,6 +84,6 @@ private:
   ros::Publisher dxl_power_msg_pub_;
 };
 
-} // namespace robotis_op
+} // namespace humanoid_robot_op
 
-#endif /* OP3_OPEN_CR_MODULE_H_ */
+#endif /* HUMANOID_ROBOT_OPEN_CR_MODULE_H_ */

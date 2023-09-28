@@ -1,6 +1,6 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package open_cr_module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package humanoid_robot_direct_control_module
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.3.1 (2023-09-27)
 ------------------
@@ -29,13 +29,15 @@ Changelog for package open_cr_module
 
 0.1.1 (2017-10-31)
 ------------------
+* added to check collision
+* added test code about collision check
+* added direct_control_module
+* added debuging code
+* applied test code for check the collision
 * fixed missing dependence
+* modified checking collision in direct_control_module
 * changed License from BSD to Apache 2.0
-* Contributors: Kayman
-
-0.1.0 (2017-10-27)
-------------------
-* added new metapackage for ROBOTIS HUMANOID_ROBOT
-* added the function of recovery after reset
-* added function of reset dxl power
+* changed some parameter of direct_control_module
+* changed debug print
+* changed collision range
 * Contributors: Kayman

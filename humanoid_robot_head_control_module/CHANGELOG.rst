@@ -1,6 +1,6 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package open_cr_module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package humanoid_robot_head_control_module
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.3.1 (2023-09-27)
 ------------------
@@ -23,19 +23,24 @@ Changelog for package open_cr_module
 
 0.2.0 (2018-03-26)
 ------------------
-* refactoring to release
+* increased scanning speed
+* fixed bug that the garbage value entered the initial value of velocity/acceleration to generate a trajectory
+* fixed a bug in head_control_module that wrong init vel or accel is set for generating trajectory in middle of moving
+* changed a method of setting module in base_module
 * changed package.xml to use format v2
-* Contributors: Pyo
+* refactoring to release
+* Contributors: Kayman, Pyo
 
 0.1.1 (2017-10-31)
 ------------------
 * fixed missing dependence
-* changed License from BSD to Apache 2.0
+* Changed License from BSD to Apache 2.0
 * Contributors: Kayman
 
 0.1.0 (2017-10-27)
 ------------------
-* added new metapackage for ROBOTIS HUMANOID_ROBOT
 * added the function of recovery after reset
-* added function of reset dxl power
+* reduced moving time and check angle limits
+* cleaned up the code
+* change package name : op2 -> humanoid_robot
 * Contributors: Kayman

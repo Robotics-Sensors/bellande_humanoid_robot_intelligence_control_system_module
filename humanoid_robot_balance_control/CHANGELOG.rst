@@ -1,6 +1,6 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package open_cr_module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package humanoid_robot_balance_control
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.3.1 (2023-09-27)
 ------------------
@@ -11,6 +11,7 @@ Changelog for package open_cr_module
 * Upgrade version of all builds and make it more compatible
 * Update package.xml and CMakeList.txt for to the latest versions
 * Contributors & Maintainer: Ronaldson Bellande
+
 
 0.3.0 (2021-05-03)
 ------------------
@@ -23,19 +24,9 @@ Changelog for package open_cr_module
 
 0.2.0 (2018-03-26)
 ------------------
-* refactoring to release
+* first release of humanoid_robot_balance_control package
+* added wholebody module
+* added C++11 build option
 * changed package.xml to use format v2
-* Contributors: Pyo
-
-0.1.1 (2017-10-31)
-------------------
-* fixed missing dependence
-* changed License from BSD to Apache 2.0
-* Contributors: Kayman
-
-0.1.0 (2017-10-27)
-------------------
-* added new metapackage for ROBOTIS HUMANOID_ROBOT
-* added the function of recovery after reset
-* added function of reset dxl power
-* Contributors: Kayman
+* refactoring to release
+* Contributors: Kayman, SCH, Pyo

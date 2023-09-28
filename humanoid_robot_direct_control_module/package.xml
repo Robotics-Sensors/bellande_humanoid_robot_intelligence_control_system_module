@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>open_cr_module</name>
+  <name>humanoid_robot_direct_control_module</name>
   <version>0.3.0</version>
-  <description>The open_cr_module package</description>
+  <description>The humanoid_robot_direct_control_module package</description>
   <license>Apache 2.0</license>
   <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande</maintainer>
 
@@ -16,6 +16,7 @@
   <build_depend>humanoid_robot_framework_common</build_depend>
   <build_depend>humanoid_robot_device</build_depend>
   <build_depend>humanoid_robot_math</build_depend>
+  <build_depend>humanoid_robot_kinematics_dynamics</build_depend>
   <build_depend>boost</build_depend>
   <build_depend>eigen</build_depend>
 
@@ -27,6 +28,7 @@
   <build_export_depend>humanoid_robot_framework_common</build_export_depend>
   <build_export_depend>humanoid_robot_device</build_export_depend>
   <build_export_depend>humanoid_robot_math</build_export_depend>
+  <build_export_depend>humanoid_robot_kinematics_dynamics</build_export_depend>
   <build_export_depend>boost</build_export_depend>
   <build_export_depend>eigen</build_export_depend>
 
@@ -38,6 +40,7 @@
   <exec_depend>humanoid_robot_framework_common</exec_depend>
   <exec_depend>humanoid_robot_device</exec_depend>
   <exec_depend>humanoid_robot_math</exec_depend>
+  <exec_depend>humanoid_robot_kinematics_dynamics</exec_depend>
   <exec_depend>boost</exec_depend>
   <exec_depend>eigen</exec_depend>
 

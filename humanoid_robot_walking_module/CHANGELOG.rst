@@ -1,6 +1,6 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package open_cr_module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package humanoid_robot_walking_module
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.3.1 (2023-09-27)
 ------------------
@@ -23,19 +23,25 @@ Changelog for package open_cr_module
 
 0.2.0 (2018-03-26)
 ------------------
-* refactoring to release
+* added debug print
 * changed package.xml to use format v2
-* Contributors: Pyo
+* refactoring to release
+* Contributors: Kayman, Pyo
 
 0.1.1 (2017-10-31)
 ------------------
+* added missing package in find_package()
+* added humanoid_robot_walking_module_msgs in find_package() function
 * fixed missing dependence
+* fixed action_module bug
 * changed License from BSD to Apache 2.0
-* Contributors: Kayman
+* Merge branch 'feature_direct_control' of https://github.com/ROBOTIS-GIT/ROBOTIS-HUMANOID_ROBOT into feature_direct_control
+* Contributors: Kayman, Yoshimaru Tanaka, Pyo
 
 0.1.0 (2017-10-27)
 ------------------
-* added new metapackage for ROBOTIS HUMANOID_ROBOT
 * added the function of recovery after reset
-* added function of reset dxl power
+* deleted Hardware materials
+* modified parameter for release
+* changed setting for walking and dxl
 * Contributors: Kayman
