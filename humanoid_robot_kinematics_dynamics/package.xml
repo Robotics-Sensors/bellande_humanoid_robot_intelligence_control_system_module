@@ -9,7 +9,6 @@
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 
-  <!-- ROS1 specific dependencies -->
   <condition if="$ROS_VERSION == 1">
     <build_depend>roscpp</build_depend>
     <build_depend>cmake_modules</build_depend>
@@ -28,7 +27,6 @@
   </condition>
 
 
-  <!-- ROS2 specific dependencies -->
   <condition if="$ROS_VERSION == 2">
     <build_depend>roscpp</build_depend>
     <build_depend>cmake_modules</build_depend>
