@@ -1,45 +1,36 @@
-################################################################################
-# Set minimum required version of cmake, project name and compile options
-################################################################################
 cmake_minimum_required(VERSION 3.8)
 project(humanoid_robot_kinematics_dynamics)
 
-################################################################################
-# Find catkin packages and libraries for catkin and system dependencies
-################################################################################
-find_package(
-  catkin REQUIRED COMPONENTS
-  roscpp
-  humanoid_robot_math
-  cmake_modules
-)
+# Find ROS
+if($ENV{ROS_VERSION} EQUAL 1)
+  find_package(
+    catkin REQUIRED COMPONENTS
+    roscpp
+    humanoid_robot_math
+    cmake_modules
+  )
 
-find_package(Eigen3 REQUIRED)
+  find_package(Eigen3 REQUIRED)
+else()
+  find_package(ament_cmake REQUIRED)
+endif()
 
-################################################################################
-# Setup for python modules and scripts
-################################################################################
 
-################################################################################
-# Declare ROS messages, services and actions
-################################################################################
+# Specify dependencies
+if($ENV{ROS_VERSION} EQUAL 1)
+  catkin_package(
+    INCLUDE_DIRS include
+    LIBRARIES ${PROJECT_NAME}
+    CATKIN_DEPENDS
+    roscpp
+    humanoid_robot_math
+    cmake_modules
+    DEPENDS EIGEN3
+  )
+else()
+  ament_package()
+endif()
 
-################################################################################
-# Declare ROS dynamic reconfigure parameters
-################################################################################
-
-################################################################################
-# Declare catkin specific configuration to be passed to dependent projects
-################################################################################
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS
-  roscpp
-  humanoid_robot_math
-  cmake_modules
-  DEPENDS EIGEN3
-)
 
 ################################################################################
 # Build

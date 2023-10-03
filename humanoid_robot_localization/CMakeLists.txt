@@ -1,56 +1,47 @@
-################################################################################
-# Set minimum required version of cmake, project name and compile options
-################################################################################
 cmake_minimum_required(VERSION 3.8)
 project(humanoid_robot_localization)
 
-################################################################################
-# Find catkin packages and libraries for catkin and system dependencies
-################################################################################
-find_package(
-  catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  sensor_msgs
-  geometry_msgs
-  cmake_modules
-  tf
-  eigen_conversions
-  humanoid_robot_math
-)
+# Find ROS
+if($ENV{ROS_VERSION} EQUAL 1)
+  find_package(
+    catkin REQUIRED COMPONENTS
+    roscpp
+    std_msgs
+    sensor_msgs
+    geometry_msgs
+    cmake_modules
+    tf
+    eigen_conversions
+    humanoid_robot_math
+  )
 
-find_package(Boost REQUIRED COMPONENTS thread)
-find_package(Eigen3 REQUIRED)
+  find_package(Boost REQUIRED COMPONENTS thread)
+  find_package(Eigen3 REQUIRED)
+else()
+  find_package(ament_cmake REQUIRED)
+endif()
 
-################################################################################
-# Setup for python modules and scripts
-################################################################################
 
-################################################################################
-# Declare ROS messages, services and actions
-################################################################################
+# Specify dependencies
+if($ENV{ROS_VERSION} EQUAL 1)
+  catkin_package(
+    INCLUDE_DIRS include
+    LIBRARIES ${PROJECT_NAME}
+    CATKIN_DEPENDS
+    roscpp
+    std_msgs
+    sensor_msgs
+    geometry_msgs
+    cmake_modules
+    tf
+    eigen_conversions
+    humanoid_robot_math
+    DEPENDS Boost EIGEN3
+  )
+else()
+  ament_package()
+endif()
 
-################################################################################
-# Declare ROS dynamic reconfigure parameters
-################################################################################
-
-################################################################################
-# Declare catkin specific configuration to be passed to dependent projects
-################################################################################
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS
-  roscpp
-  std_msgs
-  sensor_msgs
-  geometry_msgs
-  cmake_modules
-  tf
-  eigen_conversions
-  humanoid_robot_math
-  DEPENDS Boost EIGEN3
-)
 
 ################################################################################
 # Build
