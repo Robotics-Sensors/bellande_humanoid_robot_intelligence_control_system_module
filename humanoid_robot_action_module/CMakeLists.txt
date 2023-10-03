@@ -13,15 +13,12 @@ if($ENV{ROS_VERSION} EQUAL 1)
     humanoid_robot_framework_common
     humanoid_robot_device
   )
+
+  find_package(Boost REQUIRED)
 else()
   find_package(ament_cmake REQUIRED)
 endif()
 
-################################################################################
-# Find catkin packages and libraries for catkin and system dependencies
-################################################################################
-
-find_package(Boost REQUIRED)
 
 # Specify dependencies
 if($ENV{ROS_VERSION} EQUAL 1)

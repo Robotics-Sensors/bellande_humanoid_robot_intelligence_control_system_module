@@ -3,9 +3,6 @@ project(humanoid_robot_balance_control)
 
 add_compile_options(-std=c++11)
 
-################################################################################
-# Find catkin packages and libraries for catkin and system dependencies
-################################################################################
 # Find ROS
 if($ENV{ROS_VERSION} EQUAL 1)
   find_package(
@@ -14,17 +11,13 @@ if($ENV{ROS_VERSION} EQUAL 1)
     cmake_modules
     humanoid_robot_math
   )
+
+  find_package(Eigen3 REQUIRED)
 else()
   find_package(ament_cmake REQUIRED)
 endif()
 
 
-
-find_package(Eigen3 REQUIRED)
-
-################################################################################
-# Declare catkin specific configuration to be passed to dependent projects
-################################################################################
 # Specify dependencies
 if($ENV{ROS_VERSION} EQUAL 1)
   catkin_package(
@@ -41,10 +34,6 @@ else()
 endif()
 
 
-
-################################################################################
-# Build
-################################################################################
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
@@ -55,9 +44,6 @@ add_library(${PROJECT_NAME} src/humanoid_robot_balance_control.cpp)
 add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Eigen3_LIBRARIES})
 
-################################################################################
-# Install
-################################################################################
 install(
   TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
