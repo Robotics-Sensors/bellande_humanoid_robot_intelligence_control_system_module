@@ -1,47 +1,90 @@
 <?xml version="1.0"?>
-<package format="2">
+<package format="3">
   <name>humanoid_robot_direct_control_module</name>
   <version>0.3.0</version>
   <description>The humanoid_robot_direct_control_module package</description>
   <license>Apache 2.0</license>
   <maintainer email="ronaldsonbellande@gmail.com">Ronaldson Bellande</maintainer>
 
-  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 
-  <build_depend>roscpp</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <build_depend>humanoid_robot_controller_msgs</build_depend>
-  <build_depend>cmake_modules</build_depend>
-  <build_depend>humanoid_robot_framework_common</build_depend>
-  <build_depend>humanoid_robot_device</build_depend>
-  <build_depend>humanoid_robot_math</build_depend>
-  <build_depend>humanoid_robot_kinematics_dynamics</build_depend>
-  <build_depend>boost</build_depend>
-  <build_depend>eigen</build_depend>
 
-  <build_export_depend>roscpp</build_export_depend>
-  <build_export_depend>std_msgs</build_export_depend>
-  <build_export_depend>sensor_msgs</build_export_depend>
-  <build_export_depend>humanoid_robot_controller_msgs</build_export_depend>
-  <build_export_depend>cmake_modules</build_export_depend>
-  <build_export_depend>humanoid_robot_framework_common</build_export_depend>
-  <build_export_depend>humanoid_robot_device</build_export_depend>
-  <build_export_depend>humanoid_robot_math</build_export_depend>
-  <build_export_depend>humanoid_robot_kinematics_dynamics</build_export_depend>
-  <build_export_depend>boost</build_export_depend>
-  <build_export_depend>eigen</build_export_depend>
+  <condition if="$ROS_VERSION == 1">
+    <build_depend>roscpp</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <build_depend>sensor_msgs</build_depend>
+    <build_depend>humanoid_robot_controller_msgs</build_depend>
+    <build_depend>cmake_modules</build_depend>
+    <build_depend>humanoid_robot_framework_common</build_depend>
+    <build_depend>humanoid_robot_device</build_depend>
+    <build_depend>humanoid_robot_math</build_depend>
+    <build_depend>humanoid_robot_kinematics_dynamics</build_depend>
+    <build_depend>boost</build_depend>
+    <build_depend>eigen</build_depend>
 
-  <exec_depend>roscpp</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
-  <exec_depend>sensor_msgs</exec_depend>
-  <exec_depend>humanoid_robot_controller_msgs</exec_depend>
-  <exec_depend>cmake_modules</exec_depend>
-  <exec_depend>humanoid_robot_framework_common</exec_depend>
-  <exec_depend>humanoid_robot_device</exec_depend>
-  <exec_depend>humanoid_robot_math</exec_depend>
-  <exec_depend>humanoid_robot_kinematics_dynamics</exec_depend>
-  <exec_depend>boost</exec_depend>
-  <exec_depend>eigen</exec_depend>
+    <build_export_depend>roscpp</build_export_depend>
+    <build_export_depend>std_msgs</build_export_depend>
+    <build_export_depend>sensor_msgs</build_export_depend>
+    <build_export_depend>humanoid_robot_controller_msgs</build_export_depend>
+    <build_export_depend>cmake_modules</build_export_depend>
+    <build_export_depend>humanoid_robot_framework_common</build_export_depend>
+    <build_export_depend>humanoid_robot_device</build_export_depend>
+    <build_export_depend>humanoid_robot_math</build_export_depend>
+    <build_export_depend>humanoid_robot_kinematics_dynamics</build_export_depend>
+    <build_export_depend>boost</build_export_depend>
+    <build_export_depend>eigen</build_export_depend>
+
+    <exec_depend>roscpp</exec_depend>
+    <exec_depend>std_msgs</exec_depend>
+    <exec_depend>sensor_msgs</exec_depend>
+    <exec_depend>humanoid_robot_controller_msgs</exec_depend>
+    <exec_depend>cmake_modules</exec_depend>
+    <exec_depend>humanoid_robot_framework_common</exec_depend>
+    <exec_depend>humanoid_robot_device</exec_depend>
+    <exec_depend>humanoid_robot_math</exec_depend>
+    <exec_depend>humanoid_robot_kinematics_dynamics</exec_depend>
+    <exec_depend>boost</exec_depend>
+    <exec_depend>eigen</exec_depend>
+  </condition>
+
+  <condition if="$ROS_VERSION == 2">
+    <build_depend>roscpp</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <build_depend>sensor_msgs</build_depend>
+    <build_depend>humanoid_robot_controller_msgs</build_depend>
+    <build_depend>cmake_modules</build_depend>
+    <build_depend>humanoid_robot_framework_common</build_depend>
+    <build_depend>humanoid_robot_device</build_depend>
+    <build_depend>humanoid_robot_math</build_depend>
+    <build_depend>humanoid_robot_kinematics_dynamics</build_depend>
+    <build_depend>boost</build_depend>
+    <build_depend>eigen</build_depend>
+
+    <build_export_depend>roscpp</build_export_depend>
+    <build_export_depend>std_msgs</build_export_depend>
+    <build_export_depend>sensor_msgs</build_export_depend>
+    <build_export_depend>humanoid_robot_controller_msgs</build_export_depend>
+    <build_export_depend>cmake_modules</build_export_depend>
+    <build_export_depend>humanoid_robot_framework_common</build_export_depend>
+    <build_export_depend>humanoid_robot_device</build_export_depend>
+    <build_export_depend>humanoid_robot_math</build_export_depend>
+    <build_export_depend>humanoid_robot_kinematics_dynamics</build_export_depend>
+    <build_export_depend>boost</build_export_depend>
+    <build_export_depend>eigen</build_export_depend>
+
+    <exec_depend>roscpp</exec_depend>
+    <exec_depend>std_msgs</exec_depend>
+    <exec_depend>sensor_msgs</exec_depend>
+    <exec_depend>humanoid_robot_controller_msgs</exec_depend>
+    <exec_depend>cmake_modules</exec_depend>
+    <exec_depend>humanoid_robot_framework_common</exec_depend>
+    <exec_depend>humanoid_robot_device</exec_depend>
+    <exec_depend>humanoid_robot_math</exec_depend>
+    <exec_depend>humanoid_robot_kinematics_dynamics</exec_depend>
+    <exec_depend>boost</exec_depend>
+    <exec_depend>eigen</exec_depend>
+  </condition>
+
 
 </package>
