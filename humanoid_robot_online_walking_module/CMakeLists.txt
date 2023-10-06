@@ -70,8 +70,6 @@ if($ENV{ROS_VERSION} EQUAL 1)
     humanoid_robot_balance_control
     DEPENDS Boost EIGEN3 orocos_kdl
   )
-else()
-  ament_package()
 endif()
 
 
