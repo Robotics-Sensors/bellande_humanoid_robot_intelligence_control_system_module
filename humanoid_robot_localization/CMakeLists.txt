@@ -38,8 +38,6 @@ if($ENV{ROS_VERSION} EQUAL 1)
     humanoid_robot_math
     DEPENDS Boost EIGEN3
   )
-else()
-  ament_package()
 endif()
 
 

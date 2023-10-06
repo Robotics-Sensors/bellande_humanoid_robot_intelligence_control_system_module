@@ -65,8 +65,6 @@ if($ENV{ROS_VERSION} EQUAL 1)
     humanoid_robot_tuning_module_msgs
     DEPENDS Boost EIGEN3
   )
-else()
-  ament_package()
 endif()
 
 

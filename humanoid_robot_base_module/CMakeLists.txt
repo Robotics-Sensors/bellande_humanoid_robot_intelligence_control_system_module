@@ -58,8 +58,6 @@ if($ENV{ROS_VERSION} EQUAL 1)
     humanoid_robot_kinematics_dynamics
     DEPENDS Boost EIGEN3
   )
-else()
-  ament_package()
 endif()
 
 include_directories(
