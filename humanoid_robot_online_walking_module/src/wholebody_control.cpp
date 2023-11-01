@@ -164,11 +164,23 @@ void WholebodyControl::set(double time) {
   }
 }
 
-std::vector<double_t> WholebodyControl::getJointPosition(double time) {}
+std::vector<double_t> WholebodyControl::getJointPosition(double time) {
+  // Create an empty vector and return it
+  std::vector<double_t> joint_positions;
+  return joint_positions;
+}
 
-std::vector<double_t> WholebodyControl::getJointVelocity(double time) {}
+std::vector<double_t> WholebodyControl::getJointVelocity(double time) {
+  // Create an empty vector and return it
+  std::vector<double_t> joint_velocity;
+  return joint_velocity;
+}
 
-std::vector<double_t> WholebodyControl::getJointAcceleration(double time) {}
+std::vector<double_t> WholebodyControl::getJointAcceleration(double time) {
+  // Create an empty vector and return it
+  std::vector<double_t> joint_acceleration;
+  return joint_acceleration;
+}
 
 void WholebodyControl::getTaskPosition(std::vector<double_t> &l_foot_pos,
                                        std::vector<double_t> &r_foot_pos,
@@ -178,9 +190,17 @@ void WholebodyControl::getTaskPosition(std::vector<double_t> &l_foot_pos,
   body_pos = des_body_pos_;
 }
 
-std::vector<double_t> WholebodyControl::getTaskVelocity(double time) {}
+std::vector<double_t> WholebodyControl::getTaskVelocity(double time) {
+  // Create an empty vector and return it
+  std::vector<double_t> task_velocity;
+  return task_velocity;
+}
 
-std::vector<double_t> WholebodyControl::getTaskAcceleration(double time) {}
+std::vector<double_t> WholebodyControl::getTaskAcceleration(double time) {
+  // Create an empty vector and return it
+  std::vector<double_t> task_acceleration;
+  return task_acceleration;
+}
 
 void WholebodyControl::getTaskOrientation(std::vector<double_t> &l_foot_Q,
                                           std::vector<double_t> &r_foot_Q,
