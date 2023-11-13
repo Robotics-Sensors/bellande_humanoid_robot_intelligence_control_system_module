@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(open_cr_module)
+project(humanoid_robot_intelligence_control_system_open_cr_module)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -52,7 +52,7 @@ include_directories(
   ${EIGEN3_INCLUDE_DIRS}
 )
 
-add_library(${PROJECT_NAME} src/open_cr_module.cpp)
+add_library(${PROJECT_NAME} src/humanoid_robot_intelligence_control_system_open_cr_module.cpp)
 add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${Eigen3_LIBRARIES})
 

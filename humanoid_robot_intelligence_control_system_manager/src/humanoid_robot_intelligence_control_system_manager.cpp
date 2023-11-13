@@ -24,7 +24,7 @@
 #include "humanoid_robot_intelligence_control_system_controller/humanoid_robot_intelligence_control_system_controller.h"
 
 /* Sensor Module Header */
-#include "open_cr_module/open_cr_module.h"
+#include "humanoid_robot_intelligence_control_system_open_cr_module/humanoid_robot_intelligence_control_system_open_cr_module.h"
 
 /* Motion Module Header */
 #include "humanoid_robot_intelligence_control_system_base_module/base_module.h"

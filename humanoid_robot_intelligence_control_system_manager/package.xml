@@ -23,7 +23,7 @@
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_math</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_kinematics_dynamics</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_balance_control</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">open_cr_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_open_cr_module</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_base_module</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_head_control_module</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module</build_depend>
@@ -47,7 +47,7 @@
   <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_math</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_kinematics_dynamics</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_balance_control</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">open_cr_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_open_cr_module</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_base_module</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_head_control_module</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module</build_export_depend>
@@ -71,7 +71,7 @@
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_math</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_kinematics_dynamics</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_balance_control</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">open_cr_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_open_cr_module</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_base_module</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_head_control_module</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module</exec_depend>
@@ -98,7 +98,7 @@
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_math</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_kinematics_dynamics</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_balance_control</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">open_cr_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_open_cr_module</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_base_module</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_head_control_module</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module</build_depend>
@@ -122,7 +122,7 @@
   <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_math</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_kinematics_dynamics</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_balance_control</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">open_cr_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_open_cr_module</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_base_module</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_head_control_module</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module</build_export_depend>
@@ -146,7 +146,7 @@
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_math</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_kinematics_dynamics</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_balance_control</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">open_cr_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_open_cr_module</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_base_module</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_head_control_module</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module</exec_depend>

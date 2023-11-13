@@ -1,5 +1,5 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package open_cr_module
+Changelog for package humanoid_robot_intelligence_control_system_open_cr_module
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 0.3.2 (2023-10-03)

@@ -18,13 +18,13 @@
 
 #include <stdio.h>
 
-#include "open_cr_module/open_cr_module.h"
+#include "humanoid_robot_intelligence_control_system_open_cr_module/humanoid_robot_intelligence_control_system_open_cr_module.h"
 
 namespace humanoid_robot_intelligence_control_system_op {
 
 OpenCRModule::OpenCRModule()
     : control_cycle_msec_(8), DEBUG_PRINT(false), present_volt_(0.0) {
-  module_name_ = "open_cr_module"; // set unique module name
+  module_name_ = "humanoid_robot_intelligence_control_system_open_cr_module"; // set unique module name
 
   result_["gyro_x"] = 0.0;
   result_["gyro_y"] = 0.0;
