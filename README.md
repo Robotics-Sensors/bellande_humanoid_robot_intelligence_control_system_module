@@ -5,28 +5,28 @@
 [![Sponsor](https://img.shields.io/badge/Sponsor-Robotics%20Sensors%20Research-red?style=for-the-badge&logo=github)](https://github.com/sponsors/Robotics-Sensors)
 
 # Stats
-[![GitHub stars](https://img.shields.io/github/stars/Robotics-Sensors/humanoid_robot_module.svg?style=social)](https://github.com/Robotics-Sensors/humanoid_robot_module/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Robotics-Sensors/humanoid_robot_module.svg?style=social)](https://github.com/Robotics-Sensors/humanoid_robot_module/network)
-[![GitHub watchers](https://img.shields.io/github/watchers/Robotics-Sensors/humanoid_robot_module.svg?style=social)](https://github.com/Robotics-Sensors/humanoid_robot_module/watchers)
+[![GitHub stars](https://img.shields.io/github/stars/Robotics-Sensors/humanoid_robot_intelligence_control_system_module.svg?style=social)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Robotics-Sensors/humanoid_robot_intelligence_control_system_module.svg?style=social)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/network)
+[![GitHub watchers](https://img.shields.io/github/watchers/Robotics-Sensors/humanoid_robot_intelligence_control_system_module.svg?style=social)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/watchers)
 
-[![GitHub issues](https://img.shields.io/github/issues/Robotics-Sensors/humanoid_robot_module.svg)](https://github.com/Robotics-Sensors/humanoid_robot_module/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/Robotics-Sensors/humanoid_robot_module.svg)](https://github.com/Robotics-Sensors/humanoid_robot_module/pulls)
-[![GitHub license](https://img.shields.io/github/license/Robotics-Sensors/humanoid_robot_module.svg)](https://github.com/Robotics-Sensors/humanoid_robot_module/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/Robotics-Sensors/humanoid_robot_intelligence_control_system_module.svg)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/Robotics-Sensors/humanoid_robot_intelligence_control_system_module.svg)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/pulls)
+[![GitHub license](https://img.shields.io/github/license/Robotics-Sensors/humanoid_robot_intelligence_control_system_module.svg)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/blob/main/LICENSE)
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/Robotics-Sensors/humanoid_robot_module.svg)](https://github.com/Robotics-Sensors/humanoid_robot_module/commits)
-[![Visitor & Github Clones](https://img.shields.io/badge/dynamic/json?color=2e8b57&label=Visitor%20%26%20GitHub%20Clones&query=$.count&url=https://api.github.com/repos/Robotics-Sensors/humanoid_robot_tools/traffic)](https://github.com/Robotics-Sensors/humanoid_robot_module)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Robotics-Sensors/humanoid_robot_intelligence_control_system_module.svg)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/commits)
+[![Visitor & Github Clones](https://img.shields.io/badge/dynamic/json?color=2e8b57&label=Visitor%20%26%20GitHub%20Clones&query=$.count&url=https://api.github.com/repos/Robotics-Sensors/humanoid_robot_intelligence_control_system_tools/traffic)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module)
 
 --------------------------------------------------------------------------------------------------------
 
 # Repository Website
-https://robotics-sensors.github.io/humanoid_robot_module
+https://robotics-sensors.github.io/humanoid_robot_intelligence_control_system_module
 
 --------------------------------------------------------------------------------------------------------
-Updated Version [humanoid_robot_module](https://github.com/Robotics-Sensors/humanoid_robot_module) readme.
+Updated Version [humanoid_robot_intelligence_control_system_module](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module) readme.
 Old Version/Previous Used for Different Context [ROBOTIS-OP3](https://github.com/ROBOTIS-GIT/ROBOTIS-OP3) readme.
 
 # Release
-[![Latest Release](https://img.shields.io/github/v/release/Robotics-Sensors/humanoid_robot_module?style=for-the-badge&color=yellow)](https://github.com/Robotics-Sensors/humanoid_robot_module/releases/)
+[![Latest Release](https://img.shields.io/github/v/release/Robotics-Sensors/humanoid_robot_intelligence_control_system_module?style=for-the-badge&color=yellow)](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/releases/)
 
 # Contact
 Depeding on the repository, If you are interested in accessing the complete version or other repository related to this repository, we kindly request that you reach out to the organization's director or the company behind this project. We invite you to explore the USE CASE to understand the specific terms and conditions for usage. To utilize this repository, it is imperative that you adhere to the guidelines outlined in the USE CASE. For those interested in showing their support, becoming a sponsor of the organization is an option, and detailed information can be found within the USE CASE and License documents. Furthermore, we encourage you to join our official Discord community, where you can engage with like-minded individuals, contribute to the project, and stay up-to-date with the latest developments. It's worth noting that while a fraction of research is publicly accessible, the majority remains private. To gain insights into the wealth of knowledge held by the Company or the organization's director, we recommend direct contact for more information.
@@ -49,4 +49,4 @@ Latest versions and Maintainer is on organization https://github.com/Robotics-Se
 * Ronaldson Bellande
 
 ## License
-This SDK is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0), see [LICENSE](https://github.com/Robotics-Sensors/humanoid_robot_module/blob/main/LICENSE) and [NOTICE](https://github.com/Robotics-Sensors/humanoid_robot_module/blob/main/LICENSE) for more information.
+This SDK is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0), see [LICENSE](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/blob/main/LICENSE) and [NOTICE](https://github.com/Robotics-Sensors/humanoid_robot_intelligence_control_system_module/blob/main/LICENSE) for more information.
