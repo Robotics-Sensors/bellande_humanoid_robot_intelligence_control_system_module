@@ -10,11 +10,11 @@ if($ENV{ROS_VERSION} EQUAL 1)
     roscpp
     std_msgs
     sensor_msgs
-    humanoid_robot_controller_msgs
+    humanoid_robot_intelligence_control_system_controller_msgs
     cmake_modules
-    humanoid_robot_framework_common
-    humanoid_robot_device
-    humanoid_robot_math
+    humanoid_robot_intelligence_control_system_framework_common
+    humanoid_robot_intelligence_control_system_device
+    humanoid_robot_intelligence_control_system_math
   )
 
   find_package(Boost REQUIRED COMPONENTS thread)
@@ -32,11 +32,11 @@ if($ENV{ROS_VERSION} EQUAL 1)
     roscpp 
     std_msgs 
     sensor_msgs 
-    humanoid_robot_controller_msgs 
+    humanoid_robot_intelligence_control_system_controller_msgs 
     cmake_modules 
-    humanoid_robot_framework_common 
-    humanoid_robot_device 
-    humanoid_robot_math
+    humanoid_robot_intelligence_control_system_framework_common 
+    humanoid_robot_intelligence_control_system_device 
+    humanoid_robot_intelligence_control_system_math
     DEPENDS Boost EIGEN3
   )
 endif()

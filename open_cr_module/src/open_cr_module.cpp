@@ -1,17 +1,17 @@
-/*******************************************************************************
- * Copyright 2017 ROBOTIS CO., LTD.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*******************************************************************************
+ * Copyright 2017 ROBOTIS CO., LTD.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *******************************************************************************/
 
 /* Author: Kayman */
@@ -20,7 +20,7 @@
 
 #include "open_cr_module/open_cr_module.h"
 
-namespace humanoid_robot_op {
+namespace humanoid_robot_intelligence_control_system_op {
 
 OpenCRModule::OpenCRModule()
     : control_cycle_msec_(8), DEBUG_PRINT(false), present_volt_(0.0) {
@@ -64,8 +64,9 @@ OpenCRModule::OpenCRModule()
 
 OpenCRModule::~OpenCRModule() { queue_thread_.join(); }
 
-void OpenCRModule::initialize(const int control_cycle_msec,
-                              humanoid_robot_framework::Robot *robot) {
+void OpenCRModule::initialize(
+    const int control_cycle_msec,
+    humanoid_robot_intelligence_control_system_framework::Robot *robot) {
   control_cycle_msec_ = control_cycle_msec;
   queue_thread_ = boost::thread(boost::bind(&OpenCRModule::queueThread, this));
 }
@@ -77,76 +78,83 @@ void OpenCRModule::queueThread() {
   ros_node.setCallbackQueue(&callback_queue);
 
   /* publisher */
-  status_msg_pub_ = ros_node.advertise<humanoid_robot_controller_msgs::StatusMsg>(
-      "/humanoid_robot/status", 1);
-  imu_pub_ = ros_node.advertise<sensor_msgs::Imu>("/humanoid_robot/open_cr/imu", 1);
-  button_pub_ =
-      ros_node.advertise<std_msgs::String>("/humanoid_robot/open_cr/button", 1);
-  dxl_power_msg_pub_ =
-      ros_node.advertise<humanoid_robot_controller_msgs::SyncWriteItem>(
-          "/humanoid_robot/sync_write_item", 0);
+  status_msg_pub_ = ros_node.advertise<
+      humanoid_robot_intelligence_control_system_controller_msgs::StatusMsg>(
+      "/humanoid_robot_intelligence_control_system/status", 1);
+  imu_pub_ = ros_node.advertise<sensor_msgs::Imu>(
+      "/humanoid_robot_intelligence_control_system/open_cr/imu", 1);
+  button_pub_ = ros_node.advertise<std_msgs::String>(
+      "/humanoid_robot_intelligence_control_system/open_cr/button", 1);
+  dxl_power_msg_pub_ = ros_node.advertise<
+      humanoid_robot_intelligence_control_system_controller_msgs::
+          SyncWriteItem>(
+      "/humanoid_robot_intelligence_control_system/sync_write_item", 0);
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
   while (ros_node.ok())
     callback_queue.callAvailable(duration);
 }
 
-void OpenCRModule::process(
-    std::map<std::string, humanoid_robot_framework::Dynamixel *> dxls,
-    std::map<std::string, humanoid_robot_framework::Sensor *> sensors) {
+void OpenCRModule::process(
+    std::map<std::string,
+             humanoid_robot_intelligence_control_system_framework::Dynamixel *>
+        dxls,
+    std::map<std::string,
+             humanoid_robot_intelligence_control_system_framework::Sensor *>
+        sensors) {
   if (sensors["open-cr"] == NULL)
     return;
 
-  int16_t gyro_x =
+  int16_t gyro_x =
       sensors["open-cr"]->sensor_state_->bulk_read_table_["gyro_x"];
-  int16_t gyro_y =
+  int16_t gyro_y =
       sensors["open-cr"]->sensor_state_->bulk_read_table_["gyro_y"];
-  int16_t gyro_z =
+  int16_t gyro_z =
       sensors["open-cr"]->sensor_state_->bulk_read_table_["gyro_z"];
 
   int16_t acc_x = sensors["open-cr"]->sensor_state_->bulk_read_table_["acc_x"];
   int16_t acc_y = sensors["open-cr"]->sensor_state_->bulk_read_table_["acc_y"];
   int16_t acc_z = sensors["open-cr"]->sensor_state_->bulk_read_table_["acc_z"];
 
-  uint16_t present_volt =
+  uint16_t present_volt =
       sensors["open-cr"]->sensor_state_->bulk_read_table_["present_voltage"];
 
-  result_["gyro_x"] =
+  result_["gyro_x"] =
       lowPassFilter(0.4, -getGyroValue(gyro_x), previous_result_["gyro_x"]);
-  result_["gyro_y"] =
+  result_["gyro_y"] =
       lowPassFilter(0.4, -getGyroValue(gyro_y), previous_result_["gyro_y"]);
-  result_["gyro_z"] =
+  result_["gyro_z"] =
       lowPassFilter(0.4, getGyroValue(gyro_z), previous_result_["gyro_z"]);
 
-  ROS_INFO_COND(DEBUG_PRINT,
+  ROS_INFO_COND(DEBUG_PRINT,
                 " ======================= Gyro ======================== ");
   ROS_INFO_COND(DEBUG_PRINT, "Raw : %d, %d, %d", gyro_x, gyro_y, gyro_z);
-  ROS_INFO_COND(DEBUG_PRINT, "Filtered : %f, %f, %f", result_["gyro_x"],
+  ROS_INFO_COND(DEBUG_PRINT, "Filtered : %f, %f, %f", result_["gyro_x"],
                 result_["gyro_y"], result_["gyro_z"]);
 
   // align axis of Accelerometer to robot and
-  result_["acc_x"] =
+  result_["acc_x"] =
       lowPassFilter(0.4, -getAccValue(acc_x), previous_result_["acc_x"]);
-  result_["acc_y"] =
+  result_["acc_y"] =
       lowPassFilter(0.4, -getAccValue(acc_y), previous_result_["acc_y"]);
-  result_["acc_z"] =
+  result_["acc_z"] =
       lowPassFilter(0.4, getAccValue(acc_z), previous_result_["acc_z"]);
 
-  ROS_INFO_COND(DEBUG_PRINT,
+  ROS_INFO_COND(DEBUG_PRINT,
                 " ======================= Acc ======================== ");
   ROS_INFO_COND(DEBUG_PRINT, "Raw : %d, %d, %d", acc_x, acc_y, acc_z);
-  ROS_INFO_COND(DEBUG_PRINT, "Filtered : %f, %f, %f", result_["acc_x"],
+  ROS_INFO_COND(DEBUG_PRINT, "Filtered : %f, %f, %f", result_["acc_x"],
                 result_["acc_y"], result_["acc_z"]);
 
   ros::Time update_time;
   update_time.sec = sensors["open-cr"]->sensor_state_->update_time_stamp_.sec_;
-  update_time.nsec =
+  update_time.nsec =
       sensors["open-cr"]->sensor_state_->update_time_stamp_.nsec_;
   ros::Duration update_duration = ros::Time::now() - update_time;
   if ((update_duration.sec * 1000000000 + update_duration.nsec) > 100000000)
     publishDXLPowerMsg(1);
 
-  uint8_t button_flag =
+  uint8_t button_flag =
       sensors["open-cr"]->sensor_state_->bulk_read_table_["button"];
   result_["button_mode"] = button_flag & 0x01;
   result_["button_start"] = (button_flag & 0x02) >> 1;
@@ -195,20 +203,21 @@ void OpenCRModule::publishIMU() {
   imu_msg_.linear_acceleration.y = result_["acc_y"] * G_ACC;
   imu_msg_.linear_acceleration.z = result_["acc_z"] * G_ACC;
 
-  // Estimation of roll and pitch based on accelometer data, see
+  // Estimation of roll and pitch based on accelometer data, see
   // http://www.nxp.com/files/sensors/doc/app_note/AN3461.pdf
   double mui = 0.01;
   double sign = copysignf(1.0, result_["acc_z"]);
   double roll = atan2(result_["acc_y"],
-                      sign * sqrt(result_["acc_z"] * result_["acc_z"] +
+                      sign * sqrt(result_["acc_z"] * result_["acc_z"] +
                                   mui * result_["acc_x"] * result_["acc_x"]));
-  double pitch =
-      atan2(-result_["acc_x"], sqrt(result_["acc_y"] * result_["acc_y"] +
+  double pitch =
+      atan2(-result_["acc_x"], sqrt(result_["acc_y"] * result_["acc_y"] +
                                     result_["acc_z"] * result_["acc_z"]));
   double yaw = 0.0;
 
-  Eigen::Quaterniond orientation =
-      humanoid_robot_framework::convertRPYToQuaternion(roll, pitch, yaw);
+  Eigen::Quaterniond orientation =
+      humanoid_robot_intelligence_control_system_framework::
+          convertRPYToQuaternion(roll, pitch, yaw);
 
   imu_msg_.orientation.x = orientation.x();
   imu_msg_.orientation.y = orientation.y();
@@ -227,7 +236,7 @@ void OpenCRModule::handleButton(const std::string &button_name) {
   if (buttons_[button_key] == pushed) {
     if (pushed == true && buttons_[button_published] == false) {
       // check long press
-      ros::Duration button_duration =
+      ros::Duration button_duration =
           ros::Time::now() - buttons_press_time_[button_name];
       if (button_duration.toSec() > 2.0) {
         publishButtonMsg(button_name + "_long");
@@ -242,7 +251,7 @@ void OpenCRModule::handleButton(const std::string &button_name) {
       buttons_press_time_[button_name] = ros::Time::now();
       buttons_[button_published] = false;
     } else {
-      ros::Duration button_duration =
+      ros::Duration button_duration =
           ros::Time::now() - buttons_press_time_[button_name];
 
       if (button_duration.toSec() < 2.0) // short press
@@ -259,15 +268,16 @@ void OpenCRModule::publishButtonMsg(const std::string &button_name) {
   button_msg.data = button_name;
 
   button_pub_.publish(button_msg);
-  publishStatusMsg(humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO,
+  publishStatusMsg(humanoid_robot_intelligence_control_system_controller_msgs::
+                       StatusMsg::STATUS_INFO,
                    "Button : " + button_name);
 }
 
 void OpenCRModule::handleVoltage(double present_volt) {
   double voltage_ratio = 0.4;
   previous_volt_ =
-      (previous_volt_ != 0)
-          ? previous_volt_ * (1 - voltage_ratio) + present_volt * voltage_ratio
+      (previous_volt_ != 0)
+          ? previous_volt_ * (1 - voltage_ratio) + present_volt * voltage_ratio
           : present_volt;
 
   if (fabs(present_volt_ - previous_volt_) >= 0.1) {
@@ -282,17 +292,21 @@ void OpenCRModule::handleVoltage(double present_volt) {
     present_volt_ = previous_volt_;
     std::stringstream log_stream;
     log_stream << "Present Volt : " << present_volt_ << "V";
-    publishStatusMsg((present_volt_ < 11
-                          ? humanoid_robot_controller_msgs::StatusMsg::STATUS_WARN
-                          : humanoid_robot_controller_msgs::StatusMsg::STATUS_INFO),
-                     log_stream.str());
-    ROS_INFO_COND(DEBUG_PRINT, "Present Volt : %fV, Read Volt : %fV",
+    publishStatusMsg(
+        (present_volt_ < 11
+             ? humanoid_robot_intelligence_control_system_controller_msgs::
+                   StatusMsg::STATUS_WARN
+             : humanoid_robot_intelligence_control_system_controller_msgs::
+                   StatusMsg::STATUS_INFO),
+        log_stream.str());
+    ROS_INFO_COND(DEBUG_PRINT, "Present Volt : %fV, Read Volt : %fV",
                   previous_volt_, result_["present_voltage"]);
   }
 }
 
 void OpenCRModule::publishStatusMsg(unsigned int type, std::string msg) {
-  humanoid_robot_controller_msgs::StatusMsg status_msg;
+  humanoid_robot_intelligence_control_system_controller_msgs::StatusMsg
+      status_msg;
   status_msg.header.stamp = ros::Time::now();
   status_msg.type = type;
   status_msg.module_name = "SENSOR";
@@ -302,7 +316,8 @@ void OpenCRModule::publishStatusMsg(unsigned int type, std::string msg) {
 }
 
 void OpenCRModule::publishDXLPowerMsg(unsigned int value) {
-  humanoid_robot_controller_msgs::SyncWriteItem sync_write_msg;
+  humanoid_robot_intelligence_control_system_controller_msgs::SyncWriteItem
+      sync_write_msg;
   sync_write_msg.item_name = "dynamixel_power";
   sync_write_msg.joint_name.push_back("open-cr");
   sync_write_msg.value.push_back(value);
@@ -317,4 +332,4 @@ double OpenCRModule::lowPassFilter(double alpha, double x_new, double &x_old) {
   return filtered_value;
 }
 
-} // namespace humanoid_robot_op
+} // namespace humanoid_robot_intelligence_control_system_op
