@@ -22,7 +22,7 @@ if($ENV{ROS_VERSION} EQUAL 1)
     humanoid_robot_intelligence_control_system_math
     humanoid_robot_intelligence_control_system_kinematics_dynamics
     humanoid_robot_intelligence_control_system_balance_control
-    open_cr_module
+    humanoid_robot_intelligence_control_system_open_cr_module
     humanoid_robot_intelligence_control_system_base_module
     humanoid_robot_intelligence_control_system_head_control_module
     humanoid_robot_intelligence_control_system_walking_module
@@ -54,7 +54,7 @@ if($ENV{ROS_VERSION} EQUAL 1)
     humanoid_robot_intelligence_control_system_math
     humanoid_robot_intelligence_control_system_kinematics_dynamics
     humanoid_robot_intelligence_control_system_balance_control
-    open_cr_module
+    humanoid_robot_intelligence_control_system_open_cr_module
     humanoid_robot_intelligence_control_system_base_module
     humanoid_robot_intelligence_control_system_head_control_module
     humanoid_robot_intelligence_control_system_walking_module
