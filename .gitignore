@@ -9,7 +9,7 @@ qtcreator-build
 *.backup
 *.user
 *.autosave
-/humanoid_robot_manager/config/offset.yaml
+/humanoid_robot_intelligence_control_system_manager/config/offset.yaml
 .vs
 
 # Scripts
