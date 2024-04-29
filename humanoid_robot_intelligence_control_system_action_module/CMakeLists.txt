@@ -15,7 +15,18 @@ if($ENV{ROS_VERSION} EQUAL 1)
   )
   find_package(Boost REQUIRED)
 else()
-  find_package(ament_cmake REQUIRED)
+  find_package(
+    ament_cmake REQUIRED COMPONENTS
+    ament_cmake_ros
+    rclcpp
+    rcpputils
+    std_msgs
+    humanoid_robot_intelligence_control_system_controller_msgs
+    humanoid_robot_intelligence_control_system_action_module_msgs
+    humanoid_robot_intelligence_control_system_framework_common
+    humanoid_robot_intelligence_control_system_device
+  )
+  find_package(Boost REQUIRED)
 endif()
 
 
@@ -69,7 +80,3 @@ install(
   DIRECTORY data
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
-
-################################################################################
-# Test
-################################################################################
