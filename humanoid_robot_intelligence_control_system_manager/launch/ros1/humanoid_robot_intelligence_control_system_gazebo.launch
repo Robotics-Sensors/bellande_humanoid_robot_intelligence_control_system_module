@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+Copyright (C) 2024 Bellande Robotics Sensors Research Innovation Center, Ronaldson Bellande
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+-->
+<launch>
+  <param name="gazebo" value="true" type="bool" />
+  <param name="gazebo_robot_name" value="humanoid_robot_intelligence_control_system" />
+
+  <param name="offset_file_path"
+    value="$(find humanoid_robot_intelligence_control_system_manager)/config/offset.yaml" />
+  <param name="robot_file_path"
+    value="$(find humanoid_robot_intelligence_control_system_manager)/config/HUMANOID_ROBOT.robot" />
+  <param name="init_file_path"
+    value="$(find humanoid_robot_intelligence_control_system_manager)/config/dxl_init_HUMANOID_ROBOT.yaml" />
+  <param name="device_name" value="/dev/ttyUSB0" />
+
+  <node pkg="humanoid_robot_intelligence_control_system_manager"
+    type="humanoid_robot_intelligence_control_system_manager"
+    name="humanoid_robot_intelligence_control_system_manager" output="screen" />
+</launch>
