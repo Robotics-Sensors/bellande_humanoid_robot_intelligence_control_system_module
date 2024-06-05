@@ -1,5 +1,6 @@
+<?xml version="1.0"?>
 <!--
-Copyright (C) <year> Bellande Robotics Sensors Research Innovation Center, Ronaldson Bellande
+Copyright (C) 2024 Bellande Robotics Sensors Research Innovation Center, Ronaldson Bellande
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
 use this file except in compliance with the License. You may obtain a copy of
@@ -14,7 +15,6 @@ License for the specific language governing permissions and limitations under
 the License.
 -->
 
-<?xml version="1.0"?>
 <package format="3">
   <name>humanoid_robot_intelligence_control_system_manager</name>
   <version>0.3.2</version>
@@ -27,150 +27,250 @@ the License.
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
 
   <build_depend condition="$ROS_VERSION == 1">roscpp</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_controller_msgs</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_action_module_msgs</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module_msgs</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_online_walking_module_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_controller_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_action_module_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_walking_module_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_online_walking_module_msgs</build_depend>
   <build_depend condition="$ROS_VERSION == 1">cmake_modules</build_depend>
   <build_depend condition="$ROS_VERSION == 1">dynamixel_sdk</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_framework_common</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_framework_common</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_device</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_controller</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_math</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_kinematics_dynamics</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_balance_control</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_open_cr_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_kinematics_dynamics</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_balance_control</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_open_cr_module</build_depend>
   <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_base_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_head_control_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_action_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_direct_control_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_online_walking_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_tuning_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_tuning_module_msgs</build_depend>
-  <build_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_localization</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_head_control_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_walking_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_action_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_direct_control_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_online_walking_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_tuning_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_tuning_module_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_localization</build_depend>
 
   <build_export_depend condition="$ROS_VERSION == 1">roscpp</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_controller_msgs</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_action_module_msgs</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module_msgs</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_online_walking_module_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_controller_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_action_module_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_walking_module_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_online_walking_module_msgs</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">cmake_modules</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">dynamixel_sdk</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_framework_common</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_device</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_controller</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_framework_common</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_device</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_controller</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_math</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_kinematics_dynamics</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_balance_control</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_open_cr_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_base_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_head_control_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_action_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_direct_control_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_online_walking_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_tuning_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_tuning_module_msgs</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_localization</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_kinematics_dynamics</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_balance_control</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_open_cr_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_base_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_head_control_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_walking_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_action_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_direct_control_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_online_walking_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_tuning_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_tuning_module_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_localization</build_export_depend>
 
   <exec_depend condition="$ROS_VERSION == 1">roscpp</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_controller_msgs</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_action_module_msgs</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module_msgs</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_online_walking_module_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_controller_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_action_module_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_walking_module_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_online_walking_module_msgs</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">cmake_modules</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">dynamixel_sdk</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_framework_common</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_framework_common</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_device</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_controller</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_math</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_kinematics_dynamics</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_balance_control</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_open_cr_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_kinematics_dynamics</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_balance_control</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_open_cr_module</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_base_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_head_control_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_walking_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_action_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_direct_control_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_online_walking_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_tuning_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_tuning_module_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_head_control_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_walking_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_action_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_direct_control_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_online_walking_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_tuning_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">
+    humanoid_robot_intelligence_control_system_tuning_module_msgs</exec_depend>
   <exec_depend condition="$ROS_VERSION == 1">humanoid_robot_intelligence_control_system_localization</exec_depend>
 
 
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 
   <build_depend condition="$ROS_VERSION == 2">roscpp</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_controller_msgs</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_action_module_msgs</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module_msgs</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_online_walking_module_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_controller_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_action_module_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_walking_module_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_online_walking_module_msgs</build_depend>
   <build_depend condition="$ROS_VERSION == 2">cmake_modules</build_depend>
   <build_depend condition="$ROS_VERSION == 2">dynamixel_sdk</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_framework_common</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_framework_common</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_device</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_controller</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_math</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_kinematics_dynamics</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_balance_control</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_open_cr_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_kinematics_dynamics</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_balance_control</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_open_cr_module</build_depend>
   <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_base_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_head_control_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_action_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_direct_control_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_online_walking_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_tuning_module</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_tuning_module_msgs</build_depend>
-  <build_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_localization</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_head_control_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_walking_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_action_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_direct_control_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_online_walking_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_tuning_module</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_tuning_module_msgs</build_depend>
+  <build_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_localization</build_depend>
 
   <build_export_depend condition="$ROS_VERSION == 2">roscpp</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_controller_msgs</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_action_module_msgs</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module_msgs</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_online_walking_module_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_controller_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_action_module_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_walking_module_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_online_walking_module_msgs</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">cmake_modules</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">dynamixel_sdk</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_framework_common</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_device</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_controller</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_framework_common</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_device</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_controller</build_export_depend>
   <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_math</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_kinematics_dynamics</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_balance_control</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_open_cr_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_base_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_head_control_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_action_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_direct_control_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_online_walking_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_tuning_module</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_tuning_module_msgs</build_export_depend>
-  <build_export_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_localization</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_kinematics_dynamics</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_balance_control</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_open_cr_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_base_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_head_control_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_walking_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_action_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_direct_control_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_online_walking_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_tuning_module</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_tuning_module_msgs</build_export_depend>
+  <build_export_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_localization</build_export_depend>
 
   <exec_depend condition="$ROS_VERSION == 2">roscpp</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_controller_msgs</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_action_module_msgs</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module_msgs</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_online_walking_module_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_controller_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_action_module_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_walking_module_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_online_walking_module_msgs</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">cmake_modules</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">dynamixel_sdk</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_framework_common</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_framework_common</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_device</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_controller</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_math</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_kinematics_dynamics</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_balance_control</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_open_cr_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_kinematics_dynamics</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_balance_control</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_open_cr_module</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_base_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_head_control_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_walking_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_action_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_direct_control_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_online_walking_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_tuning_module</exec_depend>
-  <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_tuning_module_msgs</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_head_control_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_walking_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_action_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_direct_control_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_online_walking_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_tuning_module</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">
+    humanoid_robot_intelligence_control_system_tuning_module_msgs</exec_depend>
   <exec_depend condition="$ROS_VERSION == 2">humanoid_robot_intelligence_control_system_localization</exec_depend>
 
 
